@@ -1,80 +1,83 @@
 package edu.duke.ece568.minUPS.handler;
 
 import edu.duke.ece568.minUPS.ConnectionStream;
+import edu.duke.ece568.minUPS.ShipStatus;
+import edu.duke.ece568.minUPS.dao.ShipInfoDao;
 import edu.duke.ece568.minUPS.dao.TruckDao;
+import edu.duke.ece568.minUPS.entity.ShipInfo;
 import edu.duke.ece568.minUPS.entity.Truck;
-import edu.duke.ece568.minUPS.protocol.UPStoWorld.UConnect;
-import edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruck;
+import edu.duke.ece568.minUPS.protocol.UPStoWorld.*;
+import edu.duke.ece568.minUPS.service.WorldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import java.util.concurrent.CyclicBarrier;
 
 @Component
-public class WorldHandler implements Runnable{
-    private final ConnectionStream worldStream;
-    private final AmazonHandler amazonHandler;
-    private long worldId;
+public class WorldHandler implements Runnable {
     private CyclicBarrier barrier;
-    private TruckDao truckDao;
+    private WorldService worldService;
 
-    final int TRUCK_CNT = 10;
-    final int TRUCK_X = 10;
-    final int TRUCK_Y = 10;
+
+
+
     @Autowired
-    public WorldHandler(Socket worldSocket, AmazonHandler amazonHandler, TruckDao truckDao) throws IOException{
-        this.worldStream = new ConnectionStream(worldSocket);
-        this.amazonHandler = amazonHandler;
+    public WorldHandler(Socket worldSocket,WorldService worldService) throws IOException {
+        this.worldService = worldService;
     }
 
     @Override
     public void run() {
         System.out.println("World handler running...");
-        try  {
+        try {
             barrier.await();
-            connectWorld(worldId);
+            connectWorld();
+            receiveConnectedFromWorld();
+            startWorldListener();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
-                worldStream.close();
+                worldService.closeWorldStream();
             } catch (IOException e) {
                 System.err.println("Error closing socket: " + e.getMessage());
             }
         }
     }
 
-    public void setWorldId(long worldId){
-        this.worldId = worldId;
+    private void connectWorld() throws IOException{
+        worldService.connectWorld();
     }
 
-    public void setBarrier(CyclicBarrier barrier){
+
+    public void setBarrier(CyclicBarrier barrier) {
         this.barrier = barrier;
     }
 
-    private void connectWorld(long worldId)throws IOException{
-        UConnect.Builder uConnectBuilder = UConnect.newBuilder();
-        uConnectBuilder.setWorldid(worldId);
-        truckDao.deleteAll();
-        for (int i = 0; i < TRUCK_CNT; ++i) {
-            UInitTruck.Builder uInitBuilder = UInitTruck.newBuilder();
-            uInitBuilder.setId(i).setX(TRUCK_X).setY(TRUCK_Y);
-            uConnectBuilder.addTrucks(uInitBuilder.build());
-            Truck truck = new Truck();
-            truck.setPosX(TRUCK_X);
-            truck.setPosY(TRUCK_Y);
-            truck.setStatus(Truck.Status.IDLE.getText());
-            truck.setId(i);
-            truckDao.save(truck);
-        }
-        uConnectBuilder.setIsAmazon(false);
-        UConnect request = uConnectBuilder.build();
-        request.writeDelimitedTo(worldStream.outputStream);
-        worldStream.outputStream.flush();
-        System.out.println("sent UConnect ..." );
+
+
+    private void receiveConnectedFromWorld() throws IOException {
+       worldService.receiveConnectedFromWorld();
     }
+
+    private void startWorldListener() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    receiveUResponses();
+                } catch (IOException e) {
+                }
+            }
+        }).start();
+    }
+
+    private void receiveUResponses() throws IOException {
+        worldService.receiveUResponses();
+    }
+
 }

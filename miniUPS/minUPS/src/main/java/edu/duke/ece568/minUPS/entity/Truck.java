@@ -48,7 +48,7 @@ public class Truck {
     public enum Status {
         IDLE("idle"),
         TRAVELING("traveling"),
-        ARR_WH("arrive warehouse"),
+        ARRIVE("arrive warehouse"),
         LOADING("loading"),
         DELIVERING("delivering");
 
