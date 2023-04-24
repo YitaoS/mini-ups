@@ -1,5 +1,6 @@
 package edu.duke.ece568.minUPS.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,8 +10,11 @@ import javax.persistence.Table;
 public class User {
     @Id
     private Integer userID;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String email;
 
     public String getEmail() {

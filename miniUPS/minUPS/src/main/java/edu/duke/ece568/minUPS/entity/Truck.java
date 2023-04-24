@@ -1,5 +1,6 @@
 package edu.duke.ece568.minUPS.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,9 +9,12 @@ import javax.persistence.Table;
 @Table
 public class Truck {
     @Id
-    private Integer id;
+    private Integer truckID;
+    @Column(nullable = false)
     private String status;
+    @Column(nullable = false)
     private Integer posX;
+    @Column(nullable = false)
     private Integer posY;
 
     public String getStatus() {
@@ -37,12 +41,12 @@ public class Truck {
         this.posY = posY;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getTruckID() {
+        return truckID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTruckID(Integer id) {
+        this.truckID = id;
     }
 
     public enum Status {

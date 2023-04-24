@@ -2,9 +2,7 @@ package edu.duke.ece568.minUPS.service;
 
 import edu.duke.ece568.minUPS.ConnectionStream;
 import edu.duke.ece568.minUPS.ShipStatus;
-import edu.duke.ece568.minUPS.dao.ShipInfoDao;
 import edu.duke.ece568.minUPS.dao.TruckDao;
-import edu.duke.ece568.minUPS.entity.ShipInfo;
 import edu.duke.ece568.minUPS.entity.Truck;
 import edu.duke.ece568.minUPS.protocol.UPStoWorld.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +12,11 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WorldService {
     private final ConnectionStream worldStream;
     private TruckDao truckDao;
-    private ShipInfoDao shipInfoDao;
 
     private AmazonService amazonService;
     private long worldId;
@@ -35,10 +31,9 @@ public class WorldService {
         this.worldId = worldId;
     }
     @Autowired
-    public WorldService(Socket worldSocket, TruckDao truckDao, ShipInfoDao shipInfoDao,AmazonService amazonService) throws IOException {
+    public WorldService(Socket worldSocket, TruckDao truckDao,AmazonService amazonService) throws IOException {
         this.worldStream = new ConnectionStream(worldSocket);
         this.truckDao = truckDao;
-        this.shipInfoDao = shipInfoDao;
         this.amazonService = amazonService;
     }
 
@@ -54,7 +49,7 @@ public class WorldService {
             truck.setPosX(TRUCK_X);
             truck.setPosY(TRUCK_Y);
             truck.setStatus(Truck.Status.IDLE.getText());
-            truck.setId(i);
+            truck.setTruckID(i);
             truckDao.save(truck);
         }
         uConnectBuilder.setIsAmazon(false);
@@ -94,29 +89,29 @@ public class WorldService {
         worldStream.outputStream.flush();
     }
     public void handleUFinished(UResponses uResponses)throws IOException {
-        for (int i = 0; i < uResponses.getCompletionsCount(); ++i) {
-            UFinished uFinished = uResponses.getCompletions(i);
-            System.out.println("--- Truck " + uFinished.getTruckid() + " status: " + uFinished.getStatus());
-            sendAckCommands(uFinished.getSeqnum());
-            //database operation : truck arrive, waiting for package
-            List<ShipInfo> shipInfoList = shipInfoDao.findShipInfoByTruckID(uFinished.getTruckid());
-            int count = 0;
-            for (ShipInfo shipInfo : shipInfoList) {
-                System.out.println("ship status : " + shipInfo.getStatus());
-                if (shipInfo.getStatus().equals(ShipStatus.ROUTING.getText())) {
-                    ++count;
-                    shipInfo.setStatus(ShipStatus.WAITING.getText());
-                    shipInfoDao.updateStatus(shipInfo.getShipID(), ShipStatus.WAITING.getText());
-                    truckDao.updateStatus(uFinished.getTruckid(), Truck.Status.ARRIVE.getText());
-                    //inform amazon to load
-                    ArrayList<Long> shipIDs = new ArrayList<>();
-                    shipIDs.add(shipInfo.getShipID());
-                   // amazonService.sendTruckArrive(shipInfo.getTruckID(), shipInfo.getShipID());
-                }
-            }
-            if (count == 0) {
-                //  truckDao.updateTruckStatus(uFinished.getTruckid(), Truck.Status.IDLE.getText());
-            }
-        }
+//        for (int i = 0; i < uResponses.getCompletionsCount(); ++i) {
+//            UFinished uFinished = uResponses.getCompletions(i);
+//            System.out.println("--- Truck " + uFinished.getTruckid() + " status: " + uFinished.getStatus());
+//            sendAckCommands(uFinished.getSeqnum());
+//            //database operation : truck arrive, waiting for package
+//            List<ShipInfo> shipInfoList = shipInfoDao.findShipInfoByTruckID(uFinished.getTruckid());
+//            int count = 0;
+//            for (ShipInfo shipInfo : shipInfoList) {
+//                System.out.println("ship status : " + shipInfo.getStatus());
+//                if (shipInfo.getStatus().equals(ShipStatus.ROUTING.getText())) {
+//                    ++count;
+//                    shipInfo.setStatus(ShipStatus.WAITING.getText());
+//                    shipInfoDao.updateStatus(shipInfo.getShipID(), ShipStatus.WAITING.getText());
+//                    truckDao.updateStatus(uFinished.getTruckid(), Truck.Status.ARRIVE.getText());
+//                    //inform amazon to load
+//                    ArrayList<Long> shipIDs = new ArrayList<>();
+//                    shipIDs.add(shipInfo.getShipID());
+//                   // amazonService.sendTruckArrive(shipInfo.getTruckID(), shipInfo.getShipID());
+//                }
+//            }
+//            if (count == 0) {
+//                //  truckDao.updateTruckStatus(uFinished.getTruckid(), Truck.Status.IDLE.getText());
+//            }
+//        }
     }
 }

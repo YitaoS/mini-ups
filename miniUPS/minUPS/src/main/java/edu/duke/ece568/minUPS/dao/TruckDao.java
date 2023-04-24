@@ -12,6 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface TruckDao extends JpaRepository<Truck,Long> {
     @Modifying
     @Transactional
-    @Query("UPDATE Truck s SET s.status = :status WHERE s.id = :id")
+    @Query("UPDATE Truck s SET s.status = :status WHERE s.truckID = :id")
     int updateStatus(@Param("id") Integer id, @Param("status") String status);
 }
