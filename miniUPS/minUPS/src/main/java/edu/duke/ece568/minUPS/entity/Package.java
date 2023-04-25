@@ -21,8 +21,27 @@ public class Package {
     @Column(nullable = false)
     private Integer destinationY;
 
+    public Truck getTruck() {
+        return truck;
+    }
+
+    public void setTruck(Truck truck) {
+        this.truck = truck;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Column(nullable = false)
+    private String status;
+
     public enum Status {
-        IDLE("create"),
+        CREATED("create"),
         ROUTING("truck in route package"),
         WAITING("truck waiting for package"),
         DELIVERING("delivering"),

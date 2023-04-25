@@ -17,6 +17,7 @@ private static final long serialVersionUID = 0L;
   }
   private ABookTruck() {
     upsid_ = "";
+    detail_ = "";
   }
 
   @java.lang.Override
@@ -222,6 +223,55 @@ private static final long serialVersionUID = 0L;
     return seqnum_;
   }
 
+  public static final int DETAIL_FIELD_NUMBER = 9;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object detail_ = "";
+  /**
+   * <code>optional string detail = 9;</code>
+   * @return Whether the detail field is set.
+   */
+  @java.lang.Override
+  public boolean hasDetail() {
+    return ((bitField0_ & 0x00000100) != 0);
+  }
+  /**
+   * <code>optional string detail = 9;</code>
+   * @return The detail.
+   */
+  @java.lang.Override
+  public java.lang.String getDetail() {
+    java.lang.Object ref = detail_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      if (bs.isValidUtf8()) {
+        detail_ = s;
+      }
+      return s;
+    }
+  }
+  /**
+   * <code>optional string detail = 9;</code>
+   * @return The bytes for detail.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getDetailBytes() {
+    java.lang.Object ref = detail_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      detail_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   public static edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -354,6 +404,7 @@ private static final long serialVersionUID = 0L;
       destinationy_ = 0;
       upsid_ = "";
       seqnum_ = 0L;
+      detail_ = "";
       return this;
     }
 
@@ -419,6 +470,10 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000080) != 0)) {
         result.seqnum_ = seqnum_;
         to_bitField0_ |= 0x00000080;
+      }
+      if (((from_bitField0_ & 0x00000100) != 0)) {
+        result.detail_ = detail_;
+        to_bitField0_ |= 0x00000100;
       }
       result.bitField0_ |= to_bitField0_;
     }
@@ -781,6 +836,86 @@ private static final long serialVersionUID = 0L;
     public Builder clearSeqnum() {
       bitField0_ = (bitField0_ & ~0x00000080);
       seqnum_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object detail_ = "";
+    /**
+     * <code>optional string detail = 9;</code>
+     * @return Whether the detail field is set.
+     */
+    public boolean hasDetail() {
+      return ((bitField0_ & 0x00000100) != 0);
+    }
+    /**
+     * <code>optional string detail = 9;</code>
+     * @return The detail.
+     */
+    public java.lang.String getDetail() {
+      java.lang.Object ref = detail_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          detail_ = s;
+        }
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>optional string detail = 9;</code>
+     * @return The bytes for detail.
+     */
+    public com.google.protobuf.ByteString
+        getDetailBytes() {
+      java.lang.Object ref = detail_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        detail_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>optional string detail = 9;</code>
+     * @param value The detail to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDetail(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      detail_ = value;
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string detail = 9;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDetail() {
+      detail_ = getDefaultInstance().getDetail();
+      bitField0_ = (bitField0_ & ~0x00000100);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>optional string detail = 9;</code>
+     * @param value The bytes for detail to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDetailBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      detail_ = value;
+      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
