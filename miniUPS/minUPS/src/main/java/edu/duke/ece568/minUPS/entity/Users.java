@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class User {
+public class Users {
     @Id
     private Integer userID;
     @Column(nullable = false)

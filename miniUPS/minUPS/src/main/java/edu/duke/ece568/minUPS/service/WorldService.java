@@ -44,11 +44,11 @@ public class WorldService {
         this.worldId = worldId;
     }
     @Autowired
-    public WorldService(Socket worldSocket, TruckDao truckDao,PackageDao packageDao,AmazonService amazonService) throws IOException {
+    public WorldService(Socket worldSocket, TruckDao truckDao,PackageDao packageDao) throws IOException {
         this.worldStream = new ConnectionStream(worldSocket);
         this.truckDao = truckDao;
         this.packageDao = packageDao;
-        this.amazonService = amazonService;
+        this.amazonService = null;
         this.trackingSet = new HashSet<>();
     }
 
@@ -77,7 +77,7 @@ public class WorldService {
     public void receiveConnectedFromWorld() throws IOException {
         UConnected uConnected = UConnected.parseFrom(worldStream.inputStream);
         String result = uConnected.getResult();
-        if (!result.equals("connected!")) {
+        if (!result.equalsIgnoreCase("connected!")) {
             System.err.println("World creating connection error:\n" + result);
             worldStream.close();
             System.exit(1);
@@ -164,17 +164,18 @@ public class WorldService {
             int count = 0;
             for (Package pack : packages) {
                 System.out.println("ship status : " + pack.getStatus());
-                if (pack.getStatus().equals(Package.Status.ROUTING.getText())) {
+                if (pack.getStatus().equalsIgnoreCase(Package.Status.ROUTING.getText())) {
                     ++count;
                     pack.setStatus(Package.Status.WAITING.getText());
                     packageDao.updateStatus(pack.getPackageID(), Package.Status.WAITING.getText());
-                    truckDao.updateStatus(uFinished.getTruckid(), Truck.Status.ARRIVE.getText());
                     //inform amazon to load
-                    //amazonService.sendTruckArrive(pa, shipInfo.getShipID());
+                    amazonService.sendTruckArrive( pack.getTruck().getTruckID(), pack.getPackageID());
                 }
             }
             if (count == 0) {
-                //  truckDao.updateTruckStatus(uFinished.getTruckid(), Truck.Status.IDLE.getText());
+                truckDao.updateStatus(uFinished.getTruckid(), Truck.Status.IDLE.getText());
+            }else {
+                truckDao.updateStatus(uFinished.getTruckid(), Truck.Status.ARRIVE.getText());
             }
         }
     }

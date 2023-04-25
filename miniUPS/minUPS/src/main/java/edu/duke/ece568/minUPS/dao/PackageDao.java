@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface PackageDao extends JpaRepository<PackageDao,Integer> {
+public interface PackageDao extends JpaRepository<Package,Long> {
     List<Package> findByTruck_TruckID(int truckID);
 
     @Modifying
     @Transactional
     @Query("UPDATE Package p SET p.status = :status WHERE p.packageID = :packageID")
-    int updateStatus(@Param("id") Long packageID, @Param("status") String status);
+    int updateStatus(@Param("packageID") Long packageID, @Param("status") String status);
 
 }

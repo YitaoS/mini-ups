@@ -20,8 +20,8 @@ public class AmazonService {
     private ConnectionStream amazonStream;
 
     @Autowired
-    public AmazonService(WorldService worldService) {
-        this.worldService = worldService;
+    public AmazonService() {
+        this.worldService = null;
         this.amazonStream = null;
     }
     public long receiveWorldId() throws IOException {
@@ -35,7 +35,7 @@ public class AmazonService {
         amazonStream.outputStream.flush();
         return worldId.getWorldid();
     }
-    public void sendTruckArrive(int truckID, int packageID) {
+    public void sendTruckArrive(int truckID, long packageID) {
         new Thread(() -> {
             try {
                 //writing

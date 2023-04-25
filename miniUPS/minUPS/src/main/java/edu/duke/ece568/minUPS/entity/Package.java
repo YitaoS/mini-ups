@@ -8,9 +8,8 @@ public class Package {
     @Id
     private Long packageID;
 
-    @Column(nullable = false)
-    @ManyToOne
-    @JoinColumn(name = "truckID", referencedColumnName = "truckID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "truckID")
     private Truck truck;
     @Column(nullable = false)
     private Integer userID;
@@ -20,6 +19,8 @@ public class Package {
     private Integer destinationX;
     @Column(nullable = false)
     private Integer destinationY;
+    @Column(nullable = false)
+    private String status;
 
     public Truck getTruck() {
         return truck;
@@ -36,9 +37,6 @@ public class Package {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    @Column(nullable = false)
-    private String status;
 
     public enum Status {
         CREATED("create"),
