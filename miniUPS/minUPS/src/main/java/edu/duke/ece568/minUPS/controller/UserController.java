@@ -1,6 +1,6 @@
 package edu.duke.ece568.minUPS.controller;
 
-import edu.duke.ece568.minUPS.entity.User;
+import edu.duke.ece568.minUPS.entity.Users;
 import edu.duke.ece568.minUPS.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +17,13 @@ public class UserController {
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new Users());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registerUser(User user) {
-        userService.registerUser(user);
+    public String registerUser(Users users) {
+        userService.registerUser(users);
         return "redirect:/login";
     }
 
