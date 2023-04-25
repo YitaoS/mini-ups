@@ -100,4 +100,21 @@ public interface ABookTruckOrBuilder extends
    * @return The seqnum.
    */
   long getSeqnum();
+
+  /**
+   * <code>optional string detail = 9;</code>
+   * @return Whether the detail field is set.
+   */
+  boolean hasDetail();
+  /**
+   * <code>optional string detail = 9;</code>
+   * @return The detail.
+   */
+  java.lang.String getDetail();
+  /**
+   * <code>optional string detail = 9;</code>
+   * @return The bytes for detail.
+   */
+  com.google.protobuf.ByteString
+      getDetailBytes();
 }

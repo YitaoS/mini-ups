@@ -65,22 +65,23 @@ public final class WithAmazon {
     java.lang.String[] descriptorData = {
       "\n\020withAmazon.proto\022\010tutorial\"\037\n\014AInformW" +
       "orld\022\017\n\007worldid\030\001 \002(\003\"!\n\016UReceivedWorld\022" +
-      "\017\n\007worldid\030\001 \002(\003\"\247\001\n\nABookTruck\022\021\n\tpacka" +
+      "\017\n\007worldid\030\001 \002(\003\"\267\001\n\nABookTruck\022\021\n\tpacka" +
       "geid\030\001 \002(\003\022\023\n\013warehouseid\030\002 \002(\005\022\022\n\nwareh" +
       "ousex\030\003 \002(\005\022\022\n\nwarehousey\030\004 \002(\005\022\024\n\014desti" +
       "nationx\030\005 \002(\005\022\024\n\014destinationy\030\006 \002(\005\022\r\n\005u" +
-      "psid\030\007 \001(\t\022\016\n\006seqnum\030\010 \001(\003\"C\n\rUTruckArri" +
-      "ved\022\021\n\tpackageid\030\001 \002(\003\022\017\n\007truckid\030\002 \002(\005\022" +
-      "\016\n\006seqnum\030\003 \001(\003\"2\n\rAStartDeliver\022\021\n\tpack" +
-      "ageid\030\001 \002(\003\022\016\n\006seqnum\030\002 \001(\003\"/\n\nUDelivere" +
-      "d\022\021\n\tpackageid\030\001 \002(\003\022\016\n\006seqnum\030\002 \001(\003\"r\n\017" +
-      "AUCommunication\022&\n\010bookings\030\001 \003(\0132\024.tuto" +
-      "rial.ABookTruck\022)\n\010delivers\030\002 \003(\0132\027.tuto" +
-      "rial.AStartDeliver\022\014\n\004acks\030\003 \001(\003\"r\n\017UACo" +
-      "mmunication\022(\n\007arrived\030\001 \003(\0132\027.tutorial." +
-      "UTruckArrived\022\'\n\tdelivered\030\002 \003(\0132\024.tutor" +
-      "ial.UDelivered\022\014\n\004acks\030\003 \001(\003B1\n+edu.duke" +
-      ".ece568.minUPS.protocol.UPStoAmazonH\002P\001"
+      "psid\030\007 \001(\t\022\016\n\006seqnum\030\010 \001(\003\022\016\n\006detail\030\t \001" +
+      "(\t\"C\n\rUTruckArrived\022\021\n\tpackageid\030\001 \002(\003\022\017" +
+      "\n\007truckid\030\002 \002(\005\022\016\n\006seqnum\030\003 \001(\003\"2\n\rAStar" +
+      "tDeliver\022\021\n\tpackageid\030\001 \002(\003\022\016\n\006seqnum\030\002 " +
+      "\001(\003\"/\n\nUDelivered\022\021\n\tpackageid\030\001 \002(\003\022\016\n\006" +
+      "seqnum\030\002 \001(\003\"r\n\017AUCommunication\022&\n\010booki" +
+      "ngs\030\001 \003(\0132\024.tutorial.ABookTruck\022)\n\010deliv" +
+      "ers\030\002 \003(\0132\027.tutorial.AStartDeliver\022\014\n\004ac" +
+      "ks\030\003 \001(\003\"r\n\017UACommunication\022(\n\007arrived\030\001" +
+      " \003(\0132\027.tutorial.UTruckArrived\022\'\n\tdeliver" +
+      "ed\030\002 \003(\0132\024.tutorial.UDelivered\022\014\n\004acks\030\003" +
+      " \001(\003B1\n+edu.duke.ece568.minUPS.protocol." +
+      "UPStoAmazonH\002P\001"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -103,7 +104,7 @@ public final class WithAmazon {
     internal_static_tutorial_ABookTruck_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_tutorial_ABookTruck_descriptor,
-        new java.lang.String[] { "Packageid", "Warehouseid", "Warehousex", "Warehousey", "Destinationx", "Destinationy", "Upsid", "Seqnum", });
+        new java.lang.String[] { "Packageid", "Warehouseid", "Warehousex", "Warehousey", "Destinationx", "Destinationy", "Upsid", "Seqnum", "Detail", });
     internal_static_tutorial_UTruckArrived_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_tutorial_UTruckArrived_fieldAccessorTable = new

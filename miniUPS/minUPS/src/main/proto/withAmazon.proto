@@ -15,7 +15,6 @@ message UReceivedWorld{
   required int64 worldid = 1;
 }
 
-
 message ABookTruck {
   required int64 packageid = 1;
   required int32 warehouseid = 2;
@@ -25,6 +24,7 @@ message ABookTruck {
   required int32 destinationy = 6;
   optional string upsid = 7;
   optional int64 seqnum = 8;
+  optional string detail = 9;
 }
 
 message UTruckArrived{
