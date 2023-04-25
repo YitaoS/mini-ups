@@ -17,4 +17,5 @@ public class MinUpsApplication{
 		LOG.info("\nSTOPPED  : Spring boot application stopped");
 	}
 
+
 }
