@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Package Information</title>
+</head>
+<body>
+<h1>Package Information</h1>
+<table>
+  <tr>
+    <th>Package ID</th>
+    <th>Details</th>
+    <th>Destination</th>
+    <th>Status</th>
+    <th>Location</th>
+  </tr>
+  <tr>
+    <td th:text="${foundPackage.packageID}"></td>
+    <td th:text="${foundPackage.details}"></td>
+    <td th:text="(${foundPackage.destinationX} + ', ' + ${foundPackage.destinationY})"></td>
+    <td th:text="${foundPackage.status}"></td>
+    <td th:text="${location}"></td>
+  </tr>
+</table>
+<a th:href="@{/main}">Back to main page</a>
+</body>
+</html>

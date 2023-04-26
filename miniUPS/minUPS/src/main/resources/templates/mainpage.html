@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Main Page</title>
+    <style>
+        .topnav {
+            display: flex;
+            justify-content: flex-end;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+        .topnav a {
+            text-decoration: none;
+            color: black;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="topnav">
+    <div th:if="${#authentication == null or #authentication.principal == 'anonymousUser'}">
+        <a th:href="@{/register}">Register</a>
+        <a th:href="@{/login}">Log in</a>
+    </div>
+    <form th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}"
+         th:action="@{/logout}" method="post" id="logoutForm">
+        <span>Welcome, <span th:text="${#authentication.principal.username}"></span></span>
+        <input type="submit" value="Log out"/>
+    </form>
+
+</div>
+<h1>Main Page</h1>
+<form th:action="@{/searchPackage}" method="get">
+    <label for="packageId">Your Package ID:</label>
+    <input type="number" id="packageId" name="packageId" required />
+    <button type="submit">Search Package ID</button>
+</form>
+</body>
+</html>
