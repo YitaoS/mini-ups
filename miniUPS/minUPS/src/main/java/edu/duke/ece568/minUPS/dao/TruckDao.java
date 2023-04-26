@@ -8,8 +8,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
-public interface TruckDao extends JpaRepository<Truck,Long> {
+public interface TruckDao extends JpaRepository<Truck,Integer> {
     @Modifying
     @Transactional
     @Query("UPDATE Truck s SET s.status = :status WHERE s.truckID = :id")
@@ -19,4 +21,7 @@ public interface TruckDao extends JpaRepository<Truck,Long> {
     @Transactional
     @Query("UPDATE Truck s SET s.posX = :posX, s.posY = :posY WHERE s.truckID = :id")
     int updatePosition(@Param("id") Integer id, @Param("posX") Integer posX, @Param("posY") Integer posY);
+
+    @Query("SELECT s FROM Truck s WHERE s.truckID = ?1")
+    Optional<Truck> findTruckByTruckID(Integer truckID);
 }

@@ -6,10 +6,18 @@ import javax.persistence.*;
 @Table
 public class Users {
     @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
     private Integer id;
-
-    @Column(nullable = false, unique = true)
-    private Integer upsID;
+    @Column(unique = true, nullable = false)
+    private String upsID;
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
@@ -31,12 +39,12 @@ public class Users {
         this.id = id;
     }
 
-    public Integer getUpsID() {
+    public String getUpsID() {
         return upsID;
     }
 
-    public void setUpsID(Integer name) {
-        this.upsID = name;
+    public void setUpsID(String upsID) {
+        this.upsID = upsID;
     }
 
     public String getPassword() {

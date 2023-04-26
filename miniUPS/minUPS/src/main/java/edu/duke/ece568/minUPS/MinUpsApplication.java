@@ -10,11 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class MinUpsApplication{
 
-	private static Logger LOG =  LoggerFactory.getLogger(MinUpsApplication.class);
+	//private static Logger LOG =  LoggerFactory.getLogger(MinUpsApplication.class);
 	public static void main(String[] args) {
-		LOG.info("\nSTARTING : Spring boot application starting");
+		//LOG.info("\nSTARTING : Spring boot application starting");
 		SpringApplication.run(MinUpsApplication.class, args);
-		LOG.info("\nSTOPPED  : Spring boot application stopped");
+		//LOG.info("\nSTOPPED  : Spring boot application stopped");
 	}
 
 

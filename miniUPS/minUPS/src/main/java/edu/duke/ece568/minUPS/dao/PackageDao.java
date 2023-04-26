@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PackageDao extends JpaRepository<Package,Long> {
@@ -18,5 +19,8 @@ public interface PackageDao extends JpaRepository<Package,Long> {
     @Transactional
     @Query("UPDATE Package p SET p.status = :status WHERE p.packageID = :packageID")
     int updateStatus(@Param("packageID") Long packageID, @Param("status") String status);
+
+    @Query("SELECT s FROM Package s WHERE s.packageID = ?1")
+    Optional<Package> findPackageByPackageID(Long packageID);
 
 }
