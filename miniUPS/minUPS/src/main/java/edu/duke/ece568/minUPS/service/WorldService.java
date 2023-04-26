@@ -1,7 +1,6 @@
 package edu.duke.ece568.minUPS.service;
 
 import edu.duke.ece568.minUPS.ConnectionStream;
-import edu.duke.ece568.minUPS.TruckTracker;
 import edu.duke.ece568.minUPS.dao.PackageDao;
 import edu.duke.ece568.minUPS.dao.TruckDao;
 import edu.duke.ece568.minUPS.entity.Package;
@@ -36,8 +35,6 @@ public class WorldService {
 
     HashSet<Integer> trackingSet;
 
-    TruckTracker truckTracker;
-
     HashMap<Long, WorldCommandSender> seqHandlerMap;
 
     public void closeWorldStream()throws IOException {
@@ -46,18 +43,30 @@ public class WorldService {
     public void setWorldId(long worldId) {
         this.worldId = worldId;
     }
+
+    public HashSet<Integer> getTrackingSet() {
+        return trackingSet;
+    }
+
     @Autowired
-    public WorldService(Socket worldSocket, TruckDao truckDao,PackageDao packageDao) throws IOException {
+    public WorldService(Socket worldSocket,PackageDao packageDao,TruckDao truckDao) throws IOException {
         this.worldStream = new ConnectionStream(worldSocket);
         this.truckDao = truckDao;
         this.packageDao = packageDao;
+        this.worldId = -1;
         this.amazonService = null;
         this.trackingSet = new HashSet<>();
+        this.seqHandlerMap = new HashMap<>();
+    }
+
+    public void setAmazonService(AmazonService amazonService){
+        this.amazonService = amazonService;
     }
 
     public void connectWorld() throws IOException {
         UConnect.Builder uConnectBuilder = UConnect.newBuilder();
         uConnectBuilder.setWorldid(worldId);
+        LOG.info("Connect to world:" + worldId);
         truckDao.deleteAll();
         for (int i = 0; i < TRUCK_CNT; ++i) {
             UInitTruck.Builder uInitBuilder = UInitTruck.newBuilder();
@@ -74,18 +83,18 @@ public class WorldService {
         UConnect request = uConnectBuilder.build();
         request.writeDelimitedTo(worldStream.outputStream);
         worldStream.outputStream.flush();
-        System.out.println("sent UConnect ...");
+        LOG.info("sent UConnect ...");
     }
 
     public void receiveConnectedFromWorld() throws IOException {
         UConnected uConnected = UConnected.parseFrom(worldStream.inputStream);
         String result = uConnected.getResult();
         if (!result.equalsIgnoreCase("connected!")) {
-            System.err.println("World creating connection error:\n" + result);
+            LOG.error("World creating connection error:\n" + result);
             worldStream.close();
             System.exit(1);
         }
-        System.out.println("UConnect: " + result + ", world id = " + worldId);
+        LOG.info("UConnect: " + result + ", world id = " + worldId);
     }
 
     public void receiveUResponses() throws IOException {
@@ -118,12 +127,11 @@ public class WorldService {
         int len = uResponses.getAcksCount();
         for (int i = 0; i < len; ++i) {
             long ack = uResponses.getAcks(i);
-            System.out.println("Received ack = " + ack + " at index = " + i);
             if (seqHandlerMap.containsKey(ack)) {
                 WorldCommandSender handler = seqHandlerMap.get(ack);
                 handler.onReceive(uResponses, i);
                 seqHandlerMap.remove(ack);
-                LOG.info("\nReceived  Ack:\n"+ ack+ "\n");
+                LOG.info("Received ack = " + ack + " at index = " + i);
                 continue;
             }
             LOG.error("\nAck:\n"+ ack+ " has received twice!\n");
@@ -141,7 +149,7 @@ public class WorldService {
     private void updateTruckInfo(UTruck uTruck) {
         truckDao.updatePosition(uTruck.getTruckid(),uTruck.getX(), uTruck.getY());
         truckDao.updateStatus(uTruck.getTruckid(),uTruck.getStatus());
-        System.out.println("Update position for Truck " + uTruck.getTruckid() + ": X = "
+        LOG.info("Update position for Truck " + uTruck.getTruckid() + ": X = "
                 + uTruck.getX() + ", Y = " + uTruck.getY() + ". Status: " +uTruck.getStatus());
     }
 
@@ -158,11 +166,10 @@ public class WorldService {
             LOG.info("--- Truck " + uFinished.getTruckid() + " status: " + uFinished.getStatus());
             sendAck(uFinished.getSeqnum());
             //database operation : truck arrive, waiting for package
-            List<Package> packages = packageDao.findByTruck_TruckID(uFinished.getTruckid());
+            List<Package> aPackages = packageDao.findByTruck_TruckID(uFinished.getTruckid());
             ArrayList<Long> updatedPackageIDs = new ArrayList<>();
-            for (Package pack : packages) {
+            for (Package pack : aPackages) {
                 LOG.info("Package" + pack.getPackageID()+ " status : " + pack.getStatus());
-                System.out.println();
                 if (pack.getStatus().equalsIgnoreCase(Package.Status.ROUTING.getText())) {
                     pack.setStatus(Package.Status.WAITING.getText());
                     packageDao.updateStatus(pack.getPackageID(), Package.Status.WAITING.getText());
@@ -194,7 +201,7 @@ public class WorldService {
 
         //putting in the map
         QueryCommandSender queryCommandSender = new QueryCommandSender(seqNum, truckID, this);
-        System.out.println("@Sequence: start listen to query " + seqNum);
+        LOG.info("start listen to query " + seqNum);
         seqHandlerMap.put(seqNum, queryCommandSender);
 
         //sending

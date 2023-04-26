@@ -20,7 +20,7 @@ public class SocketConfiguration {
     @Bean
     public ServerSocket serverSocket() {
         try {
-            return new ServerSocket(8080);
+            return new ServerSocket(34567);
         } catch (IOException e) {
             throw new RuntimeException("Failed to create server socket bean", e);
         }

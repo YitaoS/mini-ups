@@ -1,5 +1,6 @@
 package edu.duke.ece568.minUPS.handler;
 
+import edu.duke.ece568.minUPS.TruckTracker;
 import edu.duke.ece568.minUPS.service.WorldService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.util.concurrent.CyclicBarrier;
 
 @Component
 public class WorldHandler implements Runnable {
-    private static Logger LOG =  LoggerFactory.getLogger(WorldService.class);
+    private final static Logger LOG =  LoggerFactory.getLogger(WorldHandler.class);
     private CyclicBarrier barrier;
-    private WorldService worldService;
+
+    private final WorldService worldService;
 
     @Autowired
-    public WorldHandler(Socket worldSocket,WorldService worldService) throws IOException {
+    public WorldHandler(WorldService worldService) {
         this.worldService = worldService;
     }
 
@@ -28,8 +29,8 @@ public class WorldHandler implements Runnable {
             barrier.await();
             connectWorld();
             receiveConnectedFromWorld();
-            startWorldListener();
-
+            startListeningToWorld();
+            startTruckTracker(worldService);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -56,7 +57,7 @@ public class WorldHandler implements Runnable {
        worldService.receiveConnectedFromWorld();
     }
 
-    private void startWorldListener() {
+    private void startListeningToWorld() {
         new Thread(() -> {
             while (true) {
                 try {
@@ -67,9 +68,16 @@ public class WorldHandler implements Runnable {
             }
         }).start();
     }
+    private void startTruckTracker(WorldService worldService){
+        TruckTracker tt= new TruckTracker(worldService.getTrackingSet(),worldService);
+        tt.start();
+    }
 
     private void receiveUResponses() throws IOException {
         worldService.receiveUResponses();
     }
 
+    public WorldService getWorldService() {
+        return worldService;
+    }
 }

@@ -5,29 +5,31 @@ import edu.duke.ece568.minUPS.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping
 public class UserController {
 
+    UserService userService;
     @Autowired
-    private UserService userService;
-
-    @GetMapping("/register")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("user", new Users());
-        return "register";
+    public UserController(UserService userService){
+        this.userService = userService;
     }
+//
+//    @GetMapping
+//    public String showRegistrationForm(Model model) {
+//        model.addAttribute("user", new Users());
+//        return "register";
+//    }
+//
+//    @PostMapping
+//    public String registerUser(Users users) {
+//        userService.registerUser(users);
+//        return "redirect:/login";
+//    }
 
-    @PostMapping("/register")
-    public String registerUser(Users users) {
-        userService.registerUser(users);
-        return "redirect:/login";
-    }
-
-    @GetMapping("/login")
+    @GetMapping("/")
     public String showLoginForm() {
         return "login";
     }

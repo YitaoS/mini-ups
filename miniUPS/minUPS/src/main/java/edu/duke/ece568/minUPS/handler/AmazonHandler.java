@@ -1,8 +1,5 @@
 package edu.duke.ece568.minUPS.handler;
 
-import edu.duke.ece568.minUPS.ConnectionStream;
-import edu.duke.ece568.minUPS.protocol.UPStoAmazon.AInformWorld;
-import edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld;
 import edu.duke.ece568.minUPS.service.AmazonService;
 import edu.duke.ece568.minUPS.service.WorldService;
 import org.slf4j.Logger;
@@ -12,13 +9,12 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 @Component
 public class AmazonHandler implements Runnable {
-    private static Logger LOG =  LoggerFactory.getLogger(WorldService.class);
-    private AmazonService amazonService;
+    private static final Logger LOG =  LoggerFactory.getLogger(AmazonHandler.class);
+    private final AmazonService amazonService;
 
     private CyclicBarrier barrier;
 
@@ -34,6 +30,7 @@ public class AmazonHandler implements Runnable {
             long worldID = amazonService.receiveWorldId();
             amazonService.setWorldId(worldID);
             barrier.await();
+            StartListeningToAmazon();
         } catch (Exception e){
             LOG.error(e.getMessage());
             e.printStackTrace();
@@ -47,11 +44,31 @@ public class AmazonHandler implements Runnable {
         }
     }
 
+    private void StartListeningToAmazon() {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    receiveAUCommunication();
+                } catch (IOException e) {
+                    LOG.error(e.getMessage());
+                }
+            }
+        }).start();
+    }
+
+    private void receiveAUCommunication() throws IOException{
+        amazonService.receiveAUCommunication();
+    }
+
     public void setBarrier(CyclicBarrier barrier){
         this.barrier = barrier;
     }
 
     public void setAmazonStream(Socket socket) throws IOException{
         amazonService.setAmazonStream(socket);
+    }
+
+    public AmazonService getAmazonService() {
+        return amazonService;
     }
 }

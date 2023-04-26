@@ -4,6 +4,10 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id "com.google.protobuf" version '0.8.12'
 }
+afterEvaluate {
+	tasks.processResources.dependsOn tasks.generateProto
+}
+
 
 group = 'edu.duke.ece568'
 version = '0.0.1-SNAPSHOT'

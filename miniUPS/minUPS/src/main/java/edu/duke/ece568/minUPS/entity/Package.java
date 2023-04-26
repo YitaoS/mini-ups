@@ -12,7 +12,7 @@ public class Package {
     @JoinColumn(name = "truckID")
     private Truck truck;
     @Column(nullable = false)
-    private Integer userID;
+    private Integer upsID;
     @Column(nullable = false)
     private String details;
     @Column(nullable = false)
@@ -65,12 +65,12 @@ public class Package {
         }
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Integer getUpsID() {
+        return upsID;
     }
 
-    public void setUserID(Integer userID) {
-        this.userID = userID;
+    public void setUpsID(Integer userID) {
+        this.upsID = userID;
     }
 
     public Integer getDestinationX() {

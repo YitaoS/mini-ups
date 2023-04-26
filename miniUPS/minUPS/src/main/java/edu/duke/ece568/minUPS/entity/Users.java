@@ -1,17 +1,15 @@
 package edu.duke.ece568.minUPS.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class Users {
     @Id
-    private Integer userID;
-    @Column(nullable = false)
-    private String name;
+    private Integer id;
+
+    @Column(nullable = false, unique = true)
+    private Integer upsID;
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
@@ -25,20 +23,20 @@ public class Users {
         this.email = email;
     }
 
-    public Integer getUserID() {
-        return userID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUserID(Integer id) {
-        this.userID = id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getUpsID() {
+        return upsID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUpsID(Integer name) {
+        this.upsID = name;
     }
 
     public String getPassword() {
