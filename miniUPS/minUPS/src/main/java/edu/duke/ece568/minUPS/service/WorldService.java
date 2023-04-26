@@ -9,6 +9,8 @@ import edu.duke.ece568.minUPS.entity.Truck;
 import edu.duke.ece568.minUPS.protocol.UPStoWorld.*;
 import edu.duke.ece568.minUPS.service.sender.QueryCommandSender;
 import edu.duke.ece568.minUPS.service.sender.WorldCommandSender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ import java.util.List;
 
 @Service
 public class WorldService {
+    private static Logger LOG =  LoggerFactory.getLogger(WorldService.class);
     private final ConnectionStream worldStream;
     private TruckDao truckDao;
     private PackageDao packageDao;
@@ -85,23 +88,27 @@ public class WorldService {
         System.out.println("UConnect: " + result + ", world id = " + worldId);
     }
 
-//    message UResponses{
-//        repeated UFinished completions = 1;
-//        repeated UDeliveryMade delivered = 2;
-//        optional bool finished = 3;
-//        repeated int64 acks = 4;
-//        repeated UTruck truckstatus = 5;
-//        repeated UErr error = 6;
-//    }
     public void receiveUResponses() throws IOException {
         UResponses uResponses = UResponses.parseFrom(worldStream.inputStream);
-        System.out.println("Received a UResponse: len of Acks=" + uResponses.getAcksCount() + " uf=" + uResponses.getCompletionsCount()
-                + " truckStatus=" + uResponses.getTruckstatusCount() + " delieverd=" + uResponses.getDeliveredCount() + " err=" + uResponses.getErrorCount());
+        LOG.info("\nReceived a UResponse:\n len of Acks=" + uResponses.getAcksCount() + " uf=" + uResponses.getCompletionsCount()
+                + " truckStatus=" + uResponses.getTruckstatusCount() + " delivered=" + uResponses.getDeliveredCount() + " err=" + uResponses.getErrorCount());
 
         handleUFinished(uResponses);
         handleUTruck(uResponses);
         handleUDeliveryMade(uResponses);
         handleAcks(uResponses);
+        handleUErr(uResponses);
+        if(uResponses.getFinished()){
+            LOG.info("World disconnect!!!");
+        }
+    }
+
+    private void handleUErr(UResponses uResponses) throws IOException{
+        for (int i = 0; i < uResponses.getErrorCount(); ++i) {
+            UErr uErr= uResponses.getError(i);
+            sendAck(uErr.getSeqnum());
+            LOG.warn("\nReceived  UError:\n"+ uErr.getErr() + "\nOriginal seq:"+ uErr.getOriginseqnum());
+        }
     }
 
     private void handleUDeliveryMade(UResponses uResponses) {
@@ -115,14 +122,11 @@ public class WorldService {
             if (seqHandlerMap.containsKey(ack)) {
                 WorldCommandSender handler = seqHandlerMap.get(ack);
                 handler.onReceive(uResponses, i);
-                System.out.println("@Sequence: resolving other " + ack);
                 seqHandlerMap.remove(ack);
+                LOG.info("\nReceived  Ack:\n"+ ack+ "\n");
                 continue;
             }
-            System.out.println("[DEBUG] ack already handled!!!!!!");
-            System.out.println("[DEBUG] ack already handled!!!!!!");
-            System.out.println("[DEBUG] ack already handled!!!!!!");
-
+            LOG.error("\nAck:\n"+ ack+ " has received twice!\n");
         }
     }
 
@@ -133,13 +137,7 @@ public class WorldService {
             updateTruckInfo(uTruck);
         }
     }
-//    message UTruck{
-//        required int32 truckid =1;
-//        required string status = 2;
-//        required int32 x = 3;
-//        required int32 y = 4;
-//        required int64 seqnum = 5;
-//    }
+
     private void updateTruckInfo(UTruck uTruck) {
         truckDao.updatePosition(uTruck.getTruckid(),uTruck.getX(), uTruck.getY());
         truckDao.updateStatus(uTruck.getTruckid(),uTruck.getStatus());
@@ -157,25 +155,29 @@ public class WorldService {
     public void handleUFinished(UResponses uResponses)throws IOException {
         for (int i = 0; i < uResponses.getCompletionsCount(); ++i) {
             UFinished uFinished = uResponses.getCompletions(i);
-            System.out.println("--- Truck " + uFinished.getTruckid() + " status: " + uFinished.getStatus());
+            LOG.info("--- Truck " + uFinished.getTruckid() + " status: " + uFinished.getStatus());
             sendAck(uFinished.getSeqnum());
             //database operation : truck arrive, waiting for package
             List<Package> packages = packageDao.findByTruck_TruckID(uFinished.getTruckid());
-            int count = 0;
+            ArrayList<Long> updatedPackageIDs = new ArrayList<>();
             for (Package pack : packages) {
-                System.out.println("ship status : " + pack.getStatus());
+                LOG.info("Package" + pack.getPackageID()+ " status : " + pack.getStatus());
+                System.out.println();
                 if (pack.getStatus().equalsIgnoreCase(Package.Status.ROUTING.getText())) {
-                    ++count;
                     pack.setStatus(Package.Status.WAITING.getText());
                     packageDao.updateStatus(pack.getPackageID(), Package.Status.WAITING.getText());
                     //inform amazon to load
-                    amazonService.sendTruckArrive( pack.getTruck().getTruckID(), pack.getPackageID());
+                    updatedPackageIDs.add(pack.getPackageID());
+                    LOG.info("Package" + pack.getPackageID()+ " status now chang to: " + Package.Status.WAITING.getText());
                 }
             }
-            if (count == 0) {
+            if (updatedPackageIDs.isEmpty()) {
+                LOG.info("Truck" + uFinished.getTruckid()+ " status now chang to: " + Truck.Status.IDLE.getText());
                 truckDao.updateStatus(uFinished.getTruckid(), Truck.Status.IDLE.getText());
             }else {
+                LOG.info("Truck" + uFinished.getTruckid()+ " status now chang to: " + Truck.Status.ARRIVE.getText());
                 truckDao.updateStatus(uFinished.getTruckid(), Truck.Status.ARRIVE.getText());
+                amazonService.sendTruckArrive(uFinished.getTruckid(), updatedPackageIDs);
             }
         }
     }

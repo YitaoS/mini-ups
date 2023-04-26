@@ -5,6 +5,8 @@ import edu.duke.ece568.minUPS.protocol.UPStoAmazon.AInformWorld;
 import edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld;
 import edu.duke.ece568.minUPS.service.AmazonService;
 import edu.duke.ece568.minUPS.service.WorldService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,7 @@ import java.util.concurrent.CyclicBarrier;
 
 @Component
 public class AmazonHandler implements Runnable {
-
+    private static Logger LOG =  LoggerFactory.getLogger(WorldService.class);
     private AmazonService amazonService;
 
     private CyclicBarrier barrier;
@@ -33,13 +35,14 @@ public class AmazonHandler implements Runnable {
             amazonService.setWorldId(worldID);
             barrier.await();
         } catch (Exception e){
+            LOG.error(e.getMessage());
             e.printStackTrace();
         }
         finally {
             try {
                 amazonService.closeAmazonStream();
             } catch (IOException e) {
-                System.err.println("Error closing socket: " + e.getMessage());
+                LOG.error("Error closing socket: " + e.getMessage());
             }
         }
     }

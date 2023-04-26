@@ -1,20 +1,23 @@
 package edu.duke.ece568.minUPS.service;
 
 import edu.duke.ece568.minUPS.ConnectionStream;
+import edu.duke.ece568.minUPS.entity.Truck;
 import edu.duke.ece568.minUPS.protocol.UPStoAmazon.AInformWorld;
 import edu.duke.ece568.minUPS.protocol.UPStoAmazon.UACommunication;
 import edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld;
 import edu.duke.ece568.minUPS.protocol.UPStoAmazon.UTruckArrived;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class AmazonService {
+    private static Logger LOG =  LoggerFactory.getLogger(WorldService.class);
     private WorldService worldService;
 
     private ConnectionStream amazonStream;
@@ -35,16 +38,19 @@ public class AmazonService {
         amazonStream.outputStream.flush();
         return worldId.getWorldid();
     }
-    public void sendTruckArrive(int truckID, long packageID) {
+    public void sendTruckArrive(int truckID, ArrayList<Long> updatedPackageIDs) {
         new Thread(() -> {
             try {
                 //writing
                 UACommunication.Builder uaResponse = UACommunication.newBuilder();
-                UTruckArrived.Builder uaTruckArrive = UTruckArrived.newBuilder();
-                uaTruckArrive.setTruckid(truckID).setPackageid(packageID);
-                uaResponse.addArrived(uaTruckArrive);
+                for(Long packageID :updatedPackageIDs){
+                    UTruckArrived.Builder uaTruckArrive = UTruckArrived.newBuilder();
+                    uaTruckArrive.setTruckid(truckID).setPackageid(packageID);
+                    uaResponse.addArrived(uaTruckArrive);
+
+                }
                 UACommunication responses = uaResponse.build();
-                System.out.println("Sending to amazon: Truck " + truckID + " with Package "+ packageID + " arrived");
+                LOG.info("Sending to amazon: Truck " + truckID + " with Packages arrived");
                 responses.writeDelimitedTo(amazonStream.outputStream);
                 amazonStream.outputStream.flush();
             }

@@ -1,6 +1,8 @@
 package edu.duke.ece568.minUPS.handler;
 
 import edu.duke.ece568.minUPS.service.WorldService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,7 @@ import java.util.concurrent.CyclicBarrier;
 
 @Component
 public class WorldHandler implements Runnable {
+    private static Logger LOG =  LoggerFactory.getLogger(WorldService.class);
     private CyclicBarrier barrier;
     private WorldService worldService;
 
@@ -59,6 +62,7 @@ public class WorldHandler implements Runnable {
                 try {
                     receiveUResponses();
                 } catch (IOException e) {
+                    LOG.error(e.getMessage());
                 }
             }
         }).start();

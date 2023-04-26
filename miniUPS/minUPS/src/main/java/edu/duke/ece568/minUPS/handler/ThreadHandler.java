@@ -3,6 +3,9 @@ package edu.duke.ece568.minUPS.handler;
 import edu.duke.ece568.minUPS.ConnectionStream;
 import edu.duke.ece568.minUPS.protocol.UPStoAmazon.AInformWorld;
 import edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld;
+import edu.duke.ece568.minUPS.service.WorldService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -14,12 +17,10 @@ import java.util.concurrent.CyclicBarrier;
 
 @Component
 public class ThreadHandler {
+    private static Logger LOG =  LoggerFactory.getLogger(WorldService.class);
     ServerSocket serverSocket;
-
     AmazonHandler amazonHandler;
-
     WorldHandler worldHandler;
-
     @Autowired
     public ThreadHandler(ServerSocket serverSocket, AmazonHandler amazonHandler, WorldHandler worldHandler) {
         this.serverSocket = serverSocket;
@@ -27,7 +28,6 @@ public class ThreadHandler {
         this.worldHandler = worldHandler;
         startServer();
     }
-
     private void startServer() {
         try {
             // Create a CyclicBarrier for two threads
@@ -41,7 +41,7 @@ public class ThreadHandler {
             new Thread(amazonHandler).start();
             new Thread(worldHandler).start();
         } catch (IOException e) {
-            System.err.println("Error starting server: " + e.getMessage());
+            LOG.error("Error starting server: " + e.getMessage());
         }
     }
 
