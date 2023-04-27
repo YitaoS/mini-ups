@@ -35,13 +35,6 @@ public class AmazonHandler implements Runnable {
             LOG.error(e.getMessage());
             e.printStackTrace();
         }
-        finally {
-            try {
-                amazonService.closeAmazonStream();
-            } catch (IOException e) {
-                LOG.error("Error closing socket: " + e.getMessage());
-            }
-        }
     }
 
     private void StartListeningToAmazon() {
