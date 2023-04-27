@@ -24,6 +24,7 @@ public class UpsServer {
         this.serverSocket = serverSocket;
         this.amazonHandler = amazonHandler;
         this.worldHandler = worldHandler;
+        startServer();
     }
     private void startServer() {
         try {
