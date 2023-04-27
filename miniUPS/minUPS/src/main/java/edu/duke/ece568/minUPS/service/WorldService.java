@@ -6,12 +6,14 @@ import edu.duke.ece568.minUPS.dao.TruckDao;
 import edu.duke.ece568.minUPS.entity.Package;
 import edu.duke.ece568.minUPS.entity.Truck;
 import edu.duke.ece568.minUPS.protocol.UPStoWorld.*;
+import edu.duke.ece568.minUPS.service.sender.DeliveryCommandSender;
 import edu.duke.ece568.minUPS.service.sender.PickUpCommandSender;
 import edu.duke.ece568.minUPS.service.sender.QueryCommandSender;
 import edu.duke.ece568.minUPS.service.sender.WorldCommandSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -27,6 +29,8 @@ public class WorldService {
     private TruckDao truckDao;
     private PackageDao packageDao;
     private AmazonService amazonService;
+    private UserService userService;
+    private EmailService emailService;
     private long worldId;
     final int TRUCK_CNT = 10;
     final int TRUCK_X = 10;
@@ -35,7 +39,7 @@ public class WorldService {
 
     HashSet<Integer> trackingSet;
 
-    HashMap<Long, WorldCommandSender> seqHandlerMap;
+    HashMap<Long, WorldCommandSender> seqSenderMap;
 
     public void closeWorldStream()throws IOException {
         worldStream.close();
@@ -49,14 +53,16 @@ public class WorldService {
     }
 
     @Autowired
-    public WorldService(Socket worldSocket,PackageDao packageDao,TruckDao truckDao) throws IOException {
+    public WorldService(Socket worldSocket,PackageDao packageDao,TruckDao truckDao,EmailService emailService, UserService userService) throws IOException {
         this.worldStream = new ConnectionStream(worldSocket);
         this.truckDao = truckDao;
         this.packageDao = packageDao;
         this.worldId = -1;
         this.amazonService = null;
+        this.emailService = emailService;
+        this.userService = userService;
         this.trackingSet = new HashSet<>();
-        this.seqHandlerMap = new HashMap<>();
+        this.seqSenderMap = new HashMap<>();
     }
 
     public void setAmazonService(AmazonService amazonService){
@@ -119,18 +125,52 @@ public class WorldService {
             LOG.warn("\nReceived  UError:\n"+ uErr.getErr() + "\nOriginal seq:"+ uErr.getOriginseqnum());
         }
     }
+//    message UDeliveryMade{
+//        required int32 truckid = 1;
+//        required int64 packageid = 2;
+//        required int64 seqnum = 3;
+//    }
+    private void handleUDeliveryMade(UResponses uResponses) throws IOException{
+        for (int i = 0; i < uResponses.getDeliveredCount(); ++i) {
+            UDeliveryMade uDeliveryMade = uResponses.getDelivered(i);
+            System.out.println("--- Package " + uDeliveryMade.getPackageid() + " of truck " + uDeliveryMade.getTruckid() + " delivered");
+            sendAck(uDeliveryMade.getSeqnum());
 
-    private void handleUDeliveryMade(UResponses uResponses) {
+            // database: Package delivered
+            packageDao.updateStatus(uDeliveryMade.getPackageid(), Package.Status.DELIVERED.getText());
+            //stop tracking
+            trackingSet.remove(uDeliveryMade.getTruckid());
+            // inform amazon
+            amazonService.sendUDelivered(uDeliveryMade.getPackageid());
+            Optional<Package> packageOptional = packageDao.findById(uDeliveryMade.getPackageid());
+            Package pack;
+            if(packageOptional.isPresent()){
+                pack = packageOptional.get();
+            }else {
+                LOG.error("Package " + uDeliveryMade.getPackageid() + " does not exist!");
+                return;
+            }
+            if(pack.getUpsID().isEmpty()||pack.getUpsID().isBlank()){
+                return;
+            }
+
+            try{
+                String userEmail = userService.getEmailByUpsID(userService.getEmailByUpsID(pack.getUpsID()));
+                emailService.sendDeliveredEmail(pack.getPackageID(), pack.getDetails(),userEmail);
+            }catch (NoSuchFieldException ignored) {
+            }
+        }
     }
+
 
     private void handleAcks(UResponses uResponses) {
         int len = uResponses.getAcksCount();
         for (int i = 0; i < len; ++i) {
             long ack = uResponses.getAcks(i);
-            if (seqHandlerMap.containsKey(ack)) {
-                WorldCommandSender handler = seqHandlerMap.get(ack);
-                handler.onReceive(uResponses, i);
-                seqHandlerMap.remove(ack);
+            if (seqSenderMap.containsKey(ack)) {
+                WorldCommandSender handler = seqSenderMap.get(ack);
+                handler.onReceive();
+                seqSenderMap.remove(ack);
                 LOG.info("Received ack = " + ack + " at index = " + i);
                 continue;
             }
@@ -184,7 +224,7 @@ public class WorldService {
             }else {
                 LOG.info("Truck" + uFinished.getTruckid()+ " status now chang to: " + Truck.Status.ARRIVE.getText());
                 truckDao.updateStatus(uFinished.getTruckid(), Truck.Status.ARRIVE.getText());
-                amazonService.sendTruckArrive(uFinished.getTruckid(), updatedPackageIDs);
+                amazonService.sendUTruckArrived(uFinished.getTruckid(), updatedPackageIDs);
             }
         }
     }
@@ -202,7 +242,7 @@ public class WorldService {
         //putting in the map
         QueryCommandSender queryCommandSender = new QueryCommandSender(seqNum, truckID, this);
         LOG.info("start listen to query " + seqNum);
-        seqHandlerMap.put(seqNum, queryCommandSender);
+        seqSenderMap.put(seqNum, queryCommandSender);
 
         //sending
         commands.writeDelimitedTo(worldStream.outputStream);
@@ -243,8 +283,8 @@ public class WorldService {
         //putting in the map
         PickUpCommandSender pickUpCommandSender = new PickUpCommandSender(seqNum, truckID, this, warehouseID, packageID);
         pickUpCommandSender.setTimerAndTask();
-        System.out.println("@Sequence: start listen to pick up " + seqNum);
-        seqHandlerMap.put(seqNum, pickUpCommandSender);
+        LOG.info("start listen to pick up " + seqNum);
+        seqSenderMap.put(seqNum, pickUpCommandSender);
 
         UCommands commands = uCommandB.build();
         commands.writeDelimitedTo(worldStream.outputStream);
@@ -253,4 +293,46 @@ public class WorldService {
         truckDao.updateStatus(truckID, Truck.Status.TRAVELING.getText());
         packageDao.updateStatus(packageID, Package.Status.ROUTING.getText());
     }
+
+    public void goDeliver(long packageID) throws IOException{
+        long seqNum = seq++;
+        Optional<Package> packageOptional = packageDao.findById(packageID);
+        Package pack = packageOptional.get();
+        sendUGoDeliver(seqNum,pack.getTruck().getTruckID(),packageID,pack.getDestinationX(),pack.getDestinationY());
+    }
+
+    public void sendUGoDeliver(long seqNum, int truckID, long packageID, int desX, int desY)throws IOException {
+        UCommands.Builder uCommandB = UCommands.newBuilder();
+        UGoDeliver.Builder uGoDeliverB = UGoDeliver.newBuilder();
+        ArrayList<UDeliveryLocation> locations = new ArrayList<>();
+        UDeliveryLocation.Builder uDeliveryLocationB = UDeliveryLocation.newBuilder();
+        uDeliveryLocationB.setX(desX).setY(desY).setPackageid(packageID);
+        locations.add(uDeliveryLocationB.build());
+        //build uCommand
+        uGoDeliverB.setSeqnum(seqNum).addAllPackages(locations).setTruckid(truckID);
+        uCommandB.addDeliveries(uGoDeliverB.build());
+
+        //putting in the map
+        DeliveryCommandSender deliveryCommandSender = new DeliveryCommandSender(seqNum,truckID,this,packageID,desX,desY);
+        deliveryCommandSender.setTimerAndTask();
+        LOG.info("start listen to deliver " + seqNum);
+        seqSenderMap.put(seqNum, deliveryCommandSender);
+        UCommands commands = uCommandB.build();
+
+        commands.writeTo(worldStream.outputStream);
+        worldStream.outputStream.flush();
+        // Update DB
+        truckDao.updateStatus(truckID,Truck.Status.DELIVERING.getText());
+        packageDao.updateStatus(packageID,Package.Status.DELIVERING.getText());
+    }
+//    message UGoDeliver{
+//        required int32 truckid = 1;
+//        repeated UDeliveryLocation packages = 2;
+//        required int64 seqnum = 3;
+//    }
+//    message UDeliveryLocation{
+//        required int64 packageid = 1;
+//        required int32 x = 2;
+//        required int32 y = 3;
+//    }
 }

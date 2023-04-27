@@ -1,24 +1,26 @@
-package edu.duke.ece568.minUPS.handler;
+package edu.duke.ece568.minUPS;
 
-import edu.duke.ece568.minUPS.service.WorldService;
+import edu.duke.ece568.minUPS.handler.AmazonHandler;
+import edu.duke.ece568.minUPS.handler.WorldHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.CyclicBarrier;
 
 @Component
-public class ThreadHandler {
-    private final static Logger LOG =  LoggerFactory.getLogger(ThreadHandler.class);
+public class UpsServer {
+    private final static Logger LOG =  LoggerFactory.getLogger(UpsServer.class);
     ServerSocket serverSocket;
     AmazonHandler amazonHandler;
     WorldHandler worldHandler;
     @Autowired
-    public ThreadHandler(ServerSocket serverSocket, AmazonHandler amazonHandler, WorldHandler worldHandler) {
+    public UpsServer(ServerSocket serverSocket, AmazonHandler amazonHandler, WorldHandler worldHandler) {
         this.serverSocket = serverSocket;
         this.amazonHandler = amazonHandler;
         this.worldHandler = worldHandler;
@@ -42,6 +44,10 @@ public class ThreadHandler {
         }
     }
 
-
+    @PreDestroy
+    public void onDestroy() throws IOException {
+        LOG.info("UpsServer is destroyed!");
+        serverSocket.close();
+    }
 
 }

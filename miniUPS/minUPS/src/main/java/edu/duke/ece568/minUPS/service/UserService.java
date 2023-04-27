@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collections;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -53,14 +54,6 @@ public class UserService implements UserDetailsService {
         return userDao.findByEmail(email);
     }
 
-    public Optional<Package> findPackageByPackageId(Long packageId) {
-        return packageDao.findByPackageID(packageId);
-    }
-
-    public Optional<Truck> findTruckByTruckId(Integer truckId) {
-        return truckDao.findByTruckID(truckId);
-    }
-
     public Package findPackageById(Long packageId) {
         return packageDao.findById(packageId).orElse(null);
     }
@@ -80,6 +73,16 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(), Collections.singletonList(authority));
     }
 
+    public String getEmailByUpsID(String upsID)throws NoSuchFieldException {
+        Optional<Users> userOptional = userDao.findByUpsID(upsID);
+
+        if (userOptional.isPresent()) {
+            Users user = userOptional.get();
+            return user.getEmail();
+        } else {
+            throw new NoSuchElementException("No user found with upsID: " + upsID);
+        }
+    }
 //    @Override
 //    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 //        Optional<Users> user = findByEmail(email);

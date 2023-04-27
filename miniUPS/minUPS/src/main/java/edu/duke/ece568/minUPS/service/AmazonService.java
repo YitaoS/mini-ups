@@ -42,18 +42,18 @@ public class AmazonService {
         amazonStream.outputStream.flush();
         return worldId.getWorldid();
     }
-    public void sendTruckArrive(int truckID, ArrayList<Long> updatedPackageIDs) {
+    public void sendUTruckArrived(int truckID, ArrayList<Long> updatedPackageIDs) {
         new Thread(() -> {
             try {
                 //writing
-                UACommunication.Builder uaResponse = UACommunication.newBuilder();
+                UACommunication.Builder uaCommunication = UACommunication.newBuilder();
                 for(Long packageID :updatedPackageIDs){
                     UTruckArrived.Builder uaTruckArrive = UTruckArrived.newBuilder();
                     uaTruckArrive.setTruckid(truckID).setPackageid(packageID);
-                    uaResponse.addArrived(uaTruckArrive);
+                    uaCommunication.addArrived(uaTruckArrive);
 
                 }
-                UACommunication responses = uaResponse.build();
+                UACommunication responses = uaCommunication.build();
                 LOG.info("Sending to amazon: Truck " + truckID + " with Packages arrived");
                 responses.writeDelimitedTo(amazonStream.outputStream);
                 amazonStream.outputStream.flush();
@@ -98,23 +98,13 @@ public class AmazonService {
                 for (int i = 0; i < auCommunication.getDeliversCount(); i++) {
                     AStartDeliver aStartDeliver = auCommunication.getDelivers(i);
                     LOG.info("Amazon: start deliver packageID = " + aStartDeliver.getPackageid());
-                    Optional<Package> packageOptional = packageDao.findByPackageID(aStartDeliver.getPackageid());
-//                    shipInfo.setStatus(ShipStatus.CREATED.getText());
-//                    shipInfo.setWhID(pick.getWhnum());
-//                    shipInfo.setDestX(pick.getX());
-//                    shipInfo.setDestY(pick.getY());
-//
-//                    // save to product table
-//                    storeProductInfo(pick);
-//                    int truckID = worldController.allocateAvailableTrucks(shipInfo);
-//                    trackingShipDao.insertNewTracking(shipInfo); // update db & get tracking ID
-//                    associateWithAccount(pick, shipInfo);
-//                    sendAck(pick.getSeq()); // send back to amazon
-//                    worldController.trackingRecords.put(shipInfo.getTrackingID(), shipInfo.getTruckID());
-//                    worldController.pickUp(truckID, shipInfo);
+                    Optional<Package> packageOptional = packageDao.findById(aStartDeliver.getPackageid());
+                    if(packageOptional.isEmpty()){
+                        LOG.error("This is a new package!");
+                        continue;
+                    }
+                    worldService.goDeliver(aStartDeliver.getPackageid());
                 }
-                throw new IOException();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -173,5 +163,25 @@ public class AmazonService {
     private void createPackage(Package pack) {
         packageDao.save(pack);
     }
+//    message UDelivered{
+//        required int64 packageid = 1;
+//        optional int64 seqnum = 2;
+//    }
+    public void sendUDelivered(long packageID) {
+        new Thread(() -> {
+            try {
+                UACommunication.Builder uaCommunication = UACommunication.newBuilder();
+                UDelivered.Builder uDeliveredB = UDelivered.newBuilder();
+                uDeliveredB.setPackageid(packageID);
+                uaCommunication.addDelivered(uDeliveredB.build());
+                UACommunication responses = uaCommunication.build();
 
+                LOG.info("Sending to amazon: package " + packageID + " is delivered ");
+                responses.writeDelimitedTo(amazonStream.outputStream);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
 }

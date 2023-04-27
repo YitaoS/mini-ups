@@ -22,7 +22,5 @@ public interface TruckDao extends JpaRepository<Truck,Integer> {
     @Query("UPDATE Truck s SET s.posX = :posX, s.posY = :posY WHERE s.truckID = :id")
     int updatePosition(@Param("id") Integer id, @Param("posX") Integer posX, @Param("posY") Integer posY);
 
-    Optional<Truck> findByTruckID(Integer truckID);
-
     Optional<Truck> findByStatus(String status);
 }

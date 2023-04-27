@@ -8,14 +8,16 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.TimerTask;
 
-public class PickUpCommandSender extends WorldCommandSender{
-    private static Logger LOG =  LoggerFactory.getLogger(PickUpCommandSender.class);
-    private int warehouseID;
+public class DeliveryCommandSender extends WorldCommandSender{
+    private static Logger LOG =  LoggerFactory.getLogger(DeliveryCommandSender.class);
     private long packageID;
-    public PickUpCommandSender(long seq, int truckID, WorldService worldService, int warehouseID,long packageID) {
+    private int desX;
+    private int desY;
+    public DeliveryCommandSender(long seq, int truckID, WorldService worldService, long packageID, int desX,int desY) {
         super(seq, truckID, worldService);
-        this.warehouseID = warehouseID;
         this.packageID = packageID;
+        this.desX = desX;
+        this.desY = desY;
     }
     @Override
     public void setTimerAndTask() {
@@ -23,8 +25,8 @@ public class PickUpCommandSender extends WorldCommandSender{
             @Override
             public void run() {
                 try {
-                    LOG.info("Resending pick up seq=" + seq + ", truckID=" + truckID + ", warehouseID=" + warehouseID + ", packageID=" + packageID);
-                    worldService.sendUGoPickUp(seq,truckID,warehouseID,packageID);
+                    LOG.info("Resending Delivery seq=" + seq + ", truckID=" + truckID + ", packageID=" + packageID + ", desX=" + desX + ", dexY=" + desY);
+                    worldService.sendUGoDeliver(seq,truckID,packageID,desX,desY);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

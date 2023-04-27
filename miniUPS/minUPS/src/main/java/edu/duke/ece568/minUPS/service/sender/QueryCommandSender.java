@@ -14,6 +14,6 @@ public class QueryCommandSender extends WorldCommandSender {
     }
 
     @Override
-    public void onReceive(UResponses uResponses, int index) throws RuntimeException {
+    public void onReceive(){
     }
 }

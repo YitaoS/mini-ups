@@ -31,5 +31,5 @@ public abstract class WorldCommandSender {
 
     public abstract void setTimerAndTask();
 
-    public abstract void onReceive(UResponses uResponses, int index);
+    public abstract void onReceive();
 }

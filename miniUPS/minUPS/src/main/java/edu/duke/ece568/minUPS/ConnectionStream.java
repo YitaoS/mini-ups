@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 public class ConnectionStream {
-
     public Socket socket;
     public InputStream inputStream;
     public OutputStream outputStream;

@@ -25,7 +25,7 @@ public class AmazonHandler implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Amazon handler thread running...");
+        LOG.info("Amazon handler thread running...");
         try  {
             long worldID = amazonService.receiveWorldId();
             amazonService.setWorldId(worldID);
