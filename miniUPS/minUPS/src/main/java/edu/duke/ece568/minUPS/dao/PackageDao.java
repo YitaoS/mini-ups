@@ -25,4 +25,6 @@ public interface PackageDao extends JpaRepository<Package,Long> {
     @Query("UPDATE Package p SET p.status = :status WHERE p.packageID = :packageID")
     int updateStatus(@Param("packageID") Long packageID, @Param("status") String status);
 
+
+    List<Package> findAllByUpsID(String upsID);
 }
