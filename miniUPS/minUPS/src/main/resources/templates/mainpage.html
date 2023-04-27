@@ -31,8 +31,17 @@
         <input type="submit" value="Log out"/>
     </form>
 
+
+    <div th:if="${#authorization.expression('isAuthenticated()')}">
+        <a href="/userPackages">Check Your Packages</a>
+    </div>
+
+
 </div>
 <h1>Main Page</h1>
+<div th:if="${errorMessage}" class="alert alert-danger" role="alert" style="color: red;">
+    <p th:text="${errorMessage}"></p>
+</div>
 <form th:action="@{/searchPackage}" method="get">
     <label for="packageId">Your Package ID:</label>
     <input type="number" id="packageId" name="packageId" required />

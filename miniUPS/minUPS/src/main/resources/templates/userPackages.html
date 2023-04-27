@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Packages</title>
+</head>
+<body>
+<h1>Your Packages</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Package ID</th>
+    <th>Details</th>
+    <th>Destination</th>
+    <th>Status</th>
+    <th>Location</th>
+    <th>Distance</th>
+    <th>Actions</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="pkg, i : ${userPackages}">
+    <td th:text="${pkg.packageID}"></td>
+    <td th:text="${pkg.details}"></td>
+    <td th:text="${pkg.destinationX + ', ' + pkg.destinationY}"></td>
+    <td th:text="${pkg.status}"></td>
+    <td th:if="${pkg.status == 'delivered'}" th:text="${pkg.destinationX + ', ' + pkg.destinationY}"></td>
+    <td th:if="${pkg.status == 'delivering'}" th:text="${pkg.truck.posX + ', ' + pkg.truck.posY}"></td>
+    <td th:if="${pkg.status != 'delivering' and pkg.status != 'delivered'}">Wait for delivery</td>
+    <td th:text="${distances[__${i.index}__]}"></td>
+
+    <td>
+      <form th:if="${pkg.status != 'delivered'}" th:action="@{/changedest/{id}(id=${pkg.packageID})}" method="get">
+        <button type="submit">Change Destination</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<a th:href="@{/main}">Back to main page</a>
+</body>
+</html>

@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Collections;
 import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -93,6 +94,10 @@ public class UserService implements UserDetailsService {
 //        GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_USER");
 //        return new CustomUserDetails(user.get(), Collections.singletonList(authority));
 //    }
+
+    public List<Package> findAllByUpsID(String upsID) {
+        return packageDao.findAllByUpsID(upsID);
+    }
 
 }
 

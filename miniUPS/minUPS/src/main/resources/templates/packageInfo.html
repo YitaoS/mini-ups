@@ -12,6 +12,7 @@
     <th>Destination</th>
     <th>Status</th>
     <th>Location</th>
+    <th>Distance</th>
   </tr>
   <tr>
     <td th:text="${foundPackage.packageID}"></td>
@@ -19,6 +20,7 @@
     <td th:text="(${foundPackage.destinationX} + ', ' + ${foundPackage.destinationY})"></td>
     <td th:text="${foundPackage.status}"></td>
     <td th:text="${location}"></td>
+    <td th:text="${distance}"></td>
   </tr>
 </table>
 <a th:href="@{/main}">Back to main page</a>
