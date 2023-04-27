@@ -81,7 +81,7 @@ public class AmazonService {
     }
 
     public void receiveAUCommunication() throws IOException{
-        AUCommunication auCommunication = AUCommunication.parseFrom(amazonStream.inputStream);
+        AUCommunication auCommunication = AUCommunication.parseDelimitedFrom(amazonStream.inputStream);
         LOG.info("\nReceived a AUCommunication:\n len of ABookTruck=" + auCommunication.getBookingsCount()+
                 " AStartDeliver=" + auCommunication.getDeliversCount());
         handleABookTruck(auCommunication);
@@ -146,7 +146,7 @@ public class AmazonService {
                     pack.setDetails(aBookTruck.getDetail());
                     pack.setStatus(Package.Status.CREATED.getText());
                     createPackage(pack);
-                    int truckID = worldService.findAvailableTrucks(pack);
+                    int truckID = worldService.findAvailableTrucks();
                     LOG.info("---find truck " + truckID + " to deliver the package");
                     packageDao.updateTruckID(aBookTruck.getPackageid(),truckID);
                     worldService.trackingSet.add(truckID);

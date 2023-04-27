@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.*;
@@ -36,7 +37,7 @@ public class WorldService {
     final int TRUCK_X = 10;
     final int TRUCK_Y = 10;
     private static long seq = 0;
-
+    private HashSet<Long> ackSet;
     HashSet<Integer> trackingSet;
 
     HashMap<Long, WorldCommandSender> seqSenderMap;
@@ -63,6 +64,7 @@ public class WorldService {
         this.userService = userService;
         this.trackingSet = new HashSet<>();
         this.seqSenderMap = new HashMap<>();
+        this.ackSet = new HashSet<>();
     }
 
     public void setAmazonService(AmazonService amazonService){
@@ -93,7 +95,7 @@ public class WorldService {
     }
 
     public void receiveConnectedFromWorld() throws IOException {
-        UConnected uConnected = UConnected.parseFrom(worldStream.inputStream);
+        UConnected uConnected = UConnected.parseDelimitedFrom(worldStream.inputStream);
         String result = uConnected.getResult();
         if (!result.equalsIgnoreCase("connected!")) {
             LOG.error("World creating connection error:\n" + result);
@@ -104,7 +106,7 @@ public class WorldService {
     }
 
     public void receiveUResponses() throws IOException {
-        UResponses uResponses = UResponses.parseFrom(worldStream.inputStream);
+        UResponses uResponses = UResponses.parseDelimitedFrom(worldStream.inputStream);
         LOG.info("\nReceived a UResponse:\n len of Acks=" + uResponses.getAcksCount() + " uf=" + uResponses.getCompletionsCount()
                 + " truckStatus=" + uResponses.getTruckstatusCount() + " delivered=" + uResponses.getDeliveredCount() + " err=" + uResponses.getErrorCount());
 
@@ -121,6 +123,11 @@ public class WorldService {
     private void handleUErr(UResponses uResponses) throws IOException{
         for (int i = 0; i < uResponses.getErrorCount(); ++i) {
             UErr uErr= uResponses.getError(i);
+            if(ackSet.contains(uErr.getSeqnum())){
+                continue;
+            }else {
+                ackSet.add(uErr.getSeqnum());
+            }
             sendAck(uErr.getSeqnum());
             LOG.warn("\nReceived  UError:\n"+ uErr.getErr() + "\nOriginal seq:"+ uErr.getOriginseqnum());
         }
@@ -133,6 +140,11 @@ public class WorldService {
     private void handleUDeliveryMade(UResponses uResponses) throws IOException{
         for (int i = 0; i < uResponses.getDeliveredCount(); ++i) {
             UDeliveryMade uDeliveryMade = uResponses.getDelivered(i);
+            if(ackSet.contains(uDeliveryMade.getSeqnum())){
+                continue;
+            }else {
+                ackSet.add(uDeliveryMade.getSeqnum());
+            }
             System.out.println("--- Package " + uDeliveryMade.getPackageid() + " of truck " + uDeliveryMade.getTruckid() + " delivered");
             sendAck(uDeliveryMade.getSeqnum());
 
@@ -181,6 +193,11 @@ public class WorldService {
     private void handleUTruck(UResponses uResponses) throws IOException{
         for (int i = 0; i < uResponses.getTruckstatusCount(); ++i) {
             UTruck uTruck = uResponses.getTruckstatus(i);
+            if(ackSet.contains(uTruck.getSeqnum())){
+                continue;
+            }else {
+                ackSet.add(uTruck.getSeqnum());
+            }
             sendAck(uTruck.getSeqnum()); 
             updateTruckInfo(uTruck);
         }
@@ -203,6 +220,11 @@ public class WorldService {
     public void handleUFinished(UResponses uResponses)throws IOException {
         for (int i = 0; i < uResponses.getCompletionsCount(); ++i) {
             UFinished uFinished = uResponses.getCompletions(i);
+            if(ackSet.contains(uFinished.getSeqnum())){
+                continue;
+            }else {
+                ackSet.add(uFinished.getSeqnum());
+            }
             LOG.info("--- Truck " + uFinished.getTruckid() + " status: " + uFinished.getStatus());
             sendAck(uFinished.getSeqnum());
             //database operation : truck arrive, waiting for package
@@ -249,7 +271,7 @@ public class WorldService {
         worldStream.outputStream.flush();
     }
 
-    public int findAvailableTrucks(Package pack) {
+    public int findAvailableTrucks() {
         Optional<Truck> truckOptional = truckDao.findByStatus(Truck.Status.IDLE.getText());
         if(truckOptional.isPresent()){
             return truckOptional.get().getTruckID();
@@ -266,7 +288,7 @@ public class WorldService {
             sleep(1000);
         }catch (Exception e){
         }
-        return findAvailableTrucks(pack);
+        return findAvailableTrucks();
     }
 
     public void pickup(int truckID, int warehouseID,long packageID) throws IOException{
