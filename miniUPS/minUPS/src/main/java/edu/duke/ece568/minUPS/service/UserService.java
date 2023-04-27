@@ -50,15 +50,15 @@ public class UserService implements UserDetailsService {
     }
 
     public Optional<Users> findByEmail(String email) {
-        return userDao.findUsersByEmail(email);
+        return userDao.findByEmail(email);
     }
 
     public Optional<Package> findPackageByPackageId(Long packageId) {
-        return packageDao.findPackageByPackageID(packageId);
+        return packageDao.findByPackageID(packageId);
     }
 
     public Optional<Truck> findTruckByTruckId(Integer truckId) {
-        return truckDao.findTruckByTruckID(truckId);
+        return truckDao.findByTruckID(truckId);
     }
 
     public Package findPackageById(Long packageId) {

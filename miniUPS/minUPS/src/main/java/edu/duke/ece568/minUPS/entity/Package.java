@@ -11,8 +11,18 @@ public class Package {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "truckID")
     private Truck truck;
-    @Column(nullable = false)
     private String upsID;
+
+    public Integer getWarehouseID() {
+        return warehouseID;
+    }
+
+    public void setWarehouseID(Integer warehouseID) {
+        this.warehouseID = warehouseID;
+    }
+
+    @Column(nullable = false)
+    private Integer warehouseID;
     @Column(nullable = false)
     private String details;
     @Column(nullable = false)

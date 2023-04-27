@@ -17,10 +17,14 @@ public interface PackageDao extends JpaRepository<Package,Long> {
 
     @Modifying
     @Transactional
+    @Query("UPDATE Package p SET p.truck.truckID = :truckID WHERE p.packageID = :packageID")
+    int updateTruckID(@Param("packageID") Long packageID, @Param("truckID") Integer truckID);
+
+    @Modifying
+    @Transactional
     @Query("UPDATE Package p SET p.status = :status WHERE p.packageID = :packageID")
     int updateStatus(@Param("packageID") Long packageID, @Param("status") String status);
-
-    @Query("SELECT s FROM Package s WHERE s.packageID = ?1")
-    Optional<Package> findPackageByPackageID(Long packageID);
+    
+    Optional<Package> findByPackageID(Long packageID);
 
 }

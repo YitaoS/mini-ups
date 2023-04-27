@@ -6,6 +6,7 @@ import edu.duke.ece568.minUPS.dao.TruckDao;
 import edu.duke.ece568.minUPS.entity.Package;
 import edu.duke.ece568.minUPS.entity.Truck;
 import edu.duke.ece568.minUPS.protocol.UPStoWorld.*;
+import edu.duke.ece568.minUPS.service.sender.PickUpCommandSender;
 import edu.duke.ece568.minUPS.service.sender.QueryCommandSender;
 import edu.duke.ece568.minUPS.service.sender.WorldCommandSender;
 import org.slf4j.Logger;
@@ -15,10 +16,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+
+import static java.lang.Thread.sleep;
 
 @Service
 public class WorldService {
@@ -209,4 +209,48 @@ public class WorldService {
         worldStream.outputStream.flush();
     }
 
+    public int findAvailableTrucks(Package pack) {
+        Optional<Truck> truckOptional = truckDao.findByStatus(Truck.Status.IDLE.getText());
+        if(truckOptional.isPresent()){
+            return truckOptional.get().getTruckID();
+        }
+        truckOptional = truckDao.findByStatus(Truck.Status.DELIVERING.getText());
+        if(truckOptional.isPresent()){
+            return truckOptional.get().getTruckID();
+        }
+        truckOptional = truckDao.findByStatus(Truck.Status.ARRIVE.getText());
+        if(truckOptional.isPresent()){
+            return truckOptional.get().getTruckID();
+        }
+        try {
+            sleep(1000);
+        }catch (Exception e){
+        }
+        return findAvailableTrucks(pack);
+    }
+
+    public void pickup(int truckID, int warehouseID,long packageID) throws IOException{
+        long seqNum = seq++;
+        sendUGoPickUp(seqNum, truckID, warehouseID,packageID);
+    }
+
+    public void sendUGoPickUp(long seqNum, int truckID, int warehouseID,long packageID) throws IOException{
+        UCommands.Builder uCommandB = UCommands.newBuilder();
+        UGoPickup.Builder uGoPickB = UGoPickup.newBuilder();
+        uGoPickB.setSeqnum(seqNum).setTruckid(truckID).setWhid(warehouseID);
+        uCommandB.addPickups(uGoPickB.build());
+
+        //putting in the map
+        PickUpCommandSender pickUpCommandSender = new PickUpCommandSender(seqNum, truckID, this, warehouseID, packageID);
+        pickUpCommandSender.setTimerAndTask();
+        System.out.println("@Sequence: start listen to pick up " + seqNum);
+        seqHandlerMap.put(seqNum, pickUpCommandSender);
+
+        UCommands commands = uCommandB.build();
+        commands.writeDelimitedTo(worldStream.outputStream);
+        worldStream.outputStream.flush();
+        // update truck status
+        truckDao.updateStatus(truckID, Truck.Status.TRAVELING.getText());
+        packageDao.updateStatus(packageID, Package.Status.ROUTING.getText());
+    }
 }

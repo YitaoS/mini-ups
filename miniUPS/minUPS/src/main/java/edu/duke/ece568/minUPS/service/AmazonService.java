@@ -1,6 +1,7 @@
 package edu.duke.ece568.minUPS.service;
 
 import edu.duke.ece568.minUPS.ConnectionStream;
+import edu.duke.ece568.minUPS.dao.PackageDao;
 import edu.duke.ece568.minUPS.dao.TruckDao;
 import edu.duke.ece568.minUPS.entity.Package;
 import edu.duke.ece568.minUPS.protocol.UPStoAmazon.*;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class AmazonService {
@@ -20,9 +22,12 @@ public class AmazonService {
     private ConnectionStream amazonStream;
     private TruckDao truckDao;
 
+    private PackageDao packageDao;
+
     @Autowired
-    public AmazonService(TruckDao truckDao) {
+    public AmazonService(TruckDao truckDao, PackageDao packageDao) {
         this.truckDao = truckDao;
+        this.packageDao = packageDao;
         this.worldService = null;
         this.amazonStream = null;
     }
@@ -83,7 +88,37 @@ public class AmazonService {
         handleAStartDeliver(auCommunication);
     }
 
+//    message AStartDeliver {
+//        required int64 packageid = 1;
+//        optional int64 seqnum = 2;
+//    }
     private void handleAStartDeliver(AUCommunication auCommunication) {
+        new Thread(() -> {
+            try {
+                for (int i = 0; i < auCommunication.getDeliversCount(); i++) {
+                    AStartDeliver aStartDeliver = auCommunication.getDelivers(i);
+                    LOG.info("Amazon: start deliver packageID = " + aStartDeliver.getPackageid());
+                    Optional<Package> packageOptional = packageDao.findByPackageID(aStartDeliver.getPackageid());
+//                    shipInfo.setStatus(ShipStatus.CREATED.getText());
+//                    shipInfo.setWhID(pick.getWhnum());
+//                    shipInfo.setDestX(pick.getX());
+//                    shipInfo.setDestY(pick.getY());
+//
+//                    // save to product table
+//                    storeProductInfo(pick);
+//                    int truckID = worldController.allocateAvailableTrucks(shipInfo);
+//                    trackingShipDao.insertNewTracking(shipInfo); // update db & get tracking ID
+//                    associateWithAccount(pick, shipInfo);
+//                    sendAck(pick.getSeq()); // send back to amazon
+//                    worldController.trackingRecords.put(shipInfo.getTrackingID(), shipInfo.getTruckID());
+//                    worldController.pickUp(truckID, shipInfo);
+                }
+                throw new IOException();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 //    message ABookTruck {
@@ -98,26 +133,45 @@ public class AmazonService {
 //
 //    }
     private void handleABookTruck(AUCommunication auCommunication) {
-        for(int i = 0; i < auCommunication.getBookingsCount(); i++){
-            ABookTruck aBookTruck = auCommunication.getBookings(i);
-            LOG.info("--- BOOK Truck" + "\npackageID:" + aBookTruck.getPackageid()
-                    + "\nwarehouseID: " + aBookTruck.getWarehouseid()
-                    + "\nwarehouseX: " + aBookTruck.getWarehousex()
-                    + "\nwarehouseY: " + aBookTruck.getWarehousey()
-                    + "\ndestinationX: " + aBookTruck.getDestinationx()
-                    + "\ndestinationY: " + aBookTruck.getDestinationy()
-                    + "\nupsID: " + aBookTruck.getUpsid()
-                    + "\ndetail: " + aBookTruck.getDetail()
-            );
-            //database operation:
-            Package pack = new Package();
-            pack.setPackageID(aBookTruck.getPackageid());
-            pack.setDestinationX(aBookTruck.getDestinationx());
-            pack.setDestinationY(aBookTruck.getDestinationy());
-            //pack.setUserID(aBookTruck.getUpsid());
-        }
+        new Thread(() -> {
+            try {
+                for(int i = 0; i < auCommunication.getBookingsCount(); i++){
+                    ABookTruck aBookTruck = auCommunication.getBookings(i);
+                    LOG.info("--- BOOK Truck" + "\npackageID:" + aBookTruck.getPackageid()
+                            + "\nwarehouseID: " + aBookTruck.getWarehouseid()
+                            + "\nwarehouseX: " + aBookTruck.getWarehousex()
+                            + "\nwarehouseY: " + aBookTruck.getWarehousey()
+                            + "\ndestinationX: " + aBookTruck.getDestinationx()
+                            + "\ndestinationY: " + aBookTruck.getDestinationy()
+                            + "\nupsID: " + aBookTruck.getUpsid()
+                            + "\ndetail: " + aBookTruck.getDetail()
+                    );
+                    //database operation:
+                    Package pack = new Package();
+                    pack.setPackageID(aBookTruck.getPackageid());
+                    pack.setWarehouseID(aBookTruck.getWarehouseid());
+                    pack.setDestinationX(aBookTruck.getDestinationx());
+                    pack.setDestinationY(aBookTruck.getDestinationy());
+                    pack.setUpsID(aBookTruck.getUpsid());
+                    pack.setDetails(aBookTruck.getDetail());
+                    pack.setStatus(Package.Status.CREATED.getText());
+                    createPackage(pack);
+                    int truckID = worldService.findAvailableTrucks(pack);
+                    LOG.info("---find truck " + truckID + " to deliver the package");
+                    packageDao.updateTruckID(aBookTruck.getPackageid(),truckID);
+                    worldService.trackingSet.add(truckID);
+                    worldService.pickup(truckID,aBookTruck.getWarehouseid(),pack.getPackageID());
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
 
-    private void sendAck(long seqnum) {
+    private void createPackage(Package pack) {
+        packageDao.save(pack);
     }
+
 }

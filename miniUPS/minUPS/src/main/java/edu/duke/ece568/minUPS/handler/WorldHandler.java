@@ -24,7 +24,7 @@ public class WorldHandler implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("World handler running...");
+        LOG.info("World handler running...");
         try {
             barrier.await();
             connectWorld();
