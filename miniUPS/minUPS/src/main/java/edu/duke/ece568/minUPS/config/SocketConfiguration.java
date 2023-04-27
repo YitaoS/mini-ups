@@ -9,7 +9,7 @@ import java.net.Socket;
 
 @Configuration
 public class SocketConfiguration {
-    private final String HOST = "vcm-33355.vm.duke.edu";
+    private final String HOST = "vcm-32232.vm.duke.edu";
     private final int WORLD_PORT = 12345;
 
     @Bean
@@ -20,7 +20,7 @@ public class SocketConfiguration {
     @Bean
     public ServerSocket serverSocket() {
         try {
-            return new ServerSocket(34567);
+            return new ServerSocket(22222);
         } catch (IOException e) {
             throw new RuntimeException("Failed to create server socket bean", e);
         }
