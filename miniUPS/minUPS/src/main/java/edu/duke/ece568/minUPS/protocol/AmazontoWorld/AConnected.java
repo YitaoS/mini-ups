@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.AmazontoWorld;
 /**
  * Protobuf type {@code AConnected}
  */
-public final class AConnected extends
+public  final class AConnected extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:AConnected)
     AConnectedOrBuilder {
@@ -16,16 +16,15 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private AConnected() {
+    worldid_ = 0L;
     result_ = "";
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new AConnected();
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
   }
-
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.AmazontoWorld.AmazontoWorld.internal_static_AConnected_descriptor;
@@ -41,40 +40,31 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int WORLDID_FIELD_NUMBER = 1;
-  private long worldid_ = 0L;
+  private long worldid_;
   /**
    * <code>required int64 worldid = 1;</code>
-   * @return Whether the worldid field is set.
    */
-  @java.lang.Override
   public boolean hasWorldid() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000001) == 0x00000001);
   }
   /**
    * <code>required int64 worldid = 1;</code>
-   * @return The worldid.
    */
-  @java.lang.Override
   public long getWorldid() {
     return worldid_;
   }
 
   public static final int RESULT_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object result_ = "";
+  private volatile java.lang.Object result_;
   /**
    * <code>required string result = 2;</code>
-   * @return Whether the result field is set.
    */
-  @java.lang.Override
   public boolean hasResult() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000002) == 0x00000002);
   }
   /**
    * <code>required string result = 2;</code>
-   * @return The result.
    */
-  @java.lang.Override
   public java.lang.String getResult() {
     java.lang.Object ref = result_;
     if (ref instanceof java.lang.String) {
@@ -91,9 +81,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <code>required string result = 2;</code>
-   * @return The bytes for result.
    */
-  @java.lang.Override
   public com.google.protobuf.ByteString
       getResultBytes() {
     java.lang.Object ref = result_;
@@ -220,20 +208,26 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnected.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bitField0_ = 0;
       worldid_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000001);
       result_ = "";
+      bitField0_ = (bitField0_ & ~0x00000002);
       return this;
     }
 
@@ -260,59 +254,79 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnected buildPartial() {
       edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnected result = new edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnected(this);
-      if (bitField0_ != 0) { buildPartial0(result); }
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        to_bitField0_ |= 0x00000001;
+      }
+      result.worldid_ = worldid_;
+      if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        to_bitField0_ |= 0x00000002;
+      }
+      result.result_ = result_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnected result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.worldid_ = worldid_;
-        to_bitField0_ |= 0x00000001;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.result_ = result_;
-        to_bitField0_ |= 0x00000002;
-      }
-      result.bitField0_ |= to_bitField0_;
+    @java.lang.Override
+    public Builder clone() {
+      return (Builder) super.clone();
     }
-
+    @java.lang.Override
+    public Builder setField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
+    }
+    @java.lang.Override
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
+    }
+    @java.lang.Override
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
+    }
+    @java.lang.Override
+    public Builder setRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
+    }
+    @java.lang.Override
+    public Builder addRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
+    }
     private int bitField0_;
 
     private long worldid_ ;
     /**
      * <code>required int64 worldid = 1;</code>
-     * @return Whether the worldid field is set.
      */
-    @java.lang.Override
     public boolean hasWorldid() {
-      return ((bitField0_ & 0x00000001) != 0);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>required int64 worldid = 1;</code>
-     * @return The worldid.
      */
-    @java.lang.Override
     public long getWorldid() {
       return worldid_;
     }
     /**
      * <code>required int64 worldid = 1;</code>
-     * @param value The worldid to set.
-     * @return This builder for chaining.
      */
     public Builder setWorldid(long value) {
-
-      worldid_ = value;
       bitField0_ |= 0x00000001;
+      worldid_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 worldid = 1;</code>
-     * @return This builder for chaining.
      */
     public Builder clearWorldid() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -324,14 +338,12 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object result_ = "";
     /**
      * <code>required string result = 2;</code>
-     * @return Whether the result field is set.
      */
     public boolean hasResult() {
-      return ((bitField0_ & 0x00000002) != 0);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>required string result = 2;</code>
-     * @return The result.
      */
     public java.lang.String getResult() {
       java.lang.Object ref = result_;
@@ -349,7 +361,6 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>required string result = 2;</code>
-     * @return The bytes for result.
      */
     public com.google.protobuf.ByteString
         getResultBytes() {
@@ -366,37 +377,36 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>required string result = 2;</code>
-     * @param value The result to set.
-     * @return This builder for chaining.
      */
     public Builder setResult(
         java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
       result_ = value;
-      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
      * <code>required string result = 2;</code>
-     * @return This builder for chaining.
      */
     public Builder clearResult() {
-      result_ = getDefaultInstance().getResult();
       bitField0_ = (bitField0_ & ~0x00000002);
+      result_ = getDefaultInstance().getResult();
       onChanged();
       return this;
     }
     /**
      * <code>required string result = 2;</code>
-     * @param value The bytes for result to set.
-     * @return This builder for chaining.
      */
     public Builder setResultBytes(
         com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
       result_ = value;
-      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -438,11 +448,10 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
-            .setUnfinishedMessage(builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(
+                builder.buildPartial());
       }
       return builder.buildPartial();
     }

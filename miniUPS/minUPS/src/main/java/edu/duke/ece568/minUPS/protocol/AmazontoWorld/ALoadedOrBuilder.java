@@ -9,23 +9,19 @@ public interface ALoadedOrBuilder extends
 
   /**
    * <code>required int64 shipid = 1;</code>
-   * @return Whether the shipid field is set.
    */
   boolean hasShipid();
   /**
    * <code>required int64 shipid = 1;</code>
-   * @return The shipid.
    */
   long getShipid();
 
   /**
    * <code>required int64 seqnum = 2;</code>
-   * @return Whether the seqnum field is set.
    */
   boolean hasSeqnum();
   /**
    * <code>required int64 seqnum = 2;</code>
-   * @return The seqnum.
    */
   long getSeqnum();
 }

@@ -9,40 +9,33 @@ public interface APackageOrBuilder extends
 
   /**
    * <code>required int64 packageid = 1;</code>
-   * @return Whether the packageid field is set.
    */
   boolean hasPackageid();
   /**
    * <code>required int64 packageid = 1;</code>
-   * @return The packageid.
    */
   long getPackageid();
 
   /**
    * <code>required string status = 2;</code>
-   * @return Whether the status field is set.
    */
   boolean hasStatus();
   /**
    * <code>required string status = 2;</code>
-   * @return The status.
    */
   java.lang.String getStatus();
   /**
    * <code>required string status = 2;</code>
-   * @return The bytes for status.
    */
   com.google.protobuf.ByteString
       getStatusBytes();
 
   /**
    * <code>required int64 seqnum = 3;</code>
-   * @return Whether the seqnum field is set.
    */
   boolean hasSeqnum();
   /**
    * <code>required int64 seqnum = 3;</code>
-   * @return The seqnum.
    */
   long getSeqnum();
 }

@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.AmazontoWorld;
 /**
  * Protobuf type {@code APurchaseMore}
  */
-public final class APurchaseMore extends
+public  final class APurchaseMore extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:APurchaseMore)
     APurchaseMoreOrBuilder {
@@ -16,16 +16,16 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private APurchaseMore() {
+    whnum_ = 0;
     things_ = java.util.Collections.emptyList();
+    seqnum_ = 0L;
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new APurchaseMore();
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
   }
-
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.AmazontoWorld.AmazontoWorld.internal_static_APurchaseMore_descriptor;
@@ -41,38 +41,31 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int WHNUM_FIELD_NUMBER = 1;
-  private int whnum_ = 0;
+  private int whnum_;
   /**
    * <code>required int32 whnum = 1;</code>
-   * @return Whether the whnum field is set.
    */
-  @java.lang.Override
   public boolean hasWhnum() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000001) == 0x00000001);
   }
   /**
    * <code>required int32 whnum = 1;</code>
-   * @return The whnum.
    */
-  @java.lang.Override
   public int getWhnum() {
     return whnum_;
   }
 
   public static final int THINGS_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct> things_;
   /**
    * <code>repeated .AProduct things = 2;</code>
    */
-  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct> getThingsList() {
     return things_;
   }
   /**
    * <code>repeated .AProduct things = 2;</code>
    */
-  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProductOrBuilder> 
       getThingsOrBuilderList() {
     return things_;
@@ -80,41 +73,34 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .AProduct things = 2;</code>
    */
-  @java.lang.Override
   public int getThingsCount() {
     return things_.size();
   }
   /**
    * <code>repeated .AProduct things = 2;</code>
    */
-  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct getThings(int index) {
     return things_.get(index);
   }
   /**
    * <code>repeated .AProduct things = 2;</code>
    */
-  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProductOrBuilder getThingsOrBuilder(
       int index) {
     return things_.get(index);
   }
 
   public static final int SEQNUM_FIELD_NUMBER = 3;
-  private long seqnum_ = 0L;
+  private long seqnum_;
   /**
    * <code>required int64 seqnum = 3;</code>
-   * @return Whether the seqnum field is set.
    */
-  @java.lang.Override
   public boolean hasSeqnum() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000002) == 0x00000002);
   }
   /**
    * <code>required int64 seqnum = 3;</code>
-   * @return The seqnum.
    */
-  @java.lang.Override
   public long getSeqnum() {
     return seqnum_;
   }
@@ -231,27 +217,33 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getThingsFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bitField0_ = 0;
       whnum_ = 0;
+      bitField0_ = (bitField0_ & ~0x00000001);
       if (thingsBuilder_ == null) {
         things_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
-        things_ = null;
         thingsBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000002);
       seqnum_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -278,15 +270,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore buildPartial() {
       edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore result = new edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore(this);
-      buildPartialRepeatedFields(result);
-      if (bitField0_ != 0) { buildPartial0(result); }
-      onBuilt();
-      return result;
-    }
-
-    private void buildPartialRepeatedFields(edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        to_bitField0_ |= 0x00000001;
+      }
+      result.whnum_ = whnum_;
       if (thingsBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) != 0)) {
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
           things_ = java.util.Collections.unmodifiableList(things_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
@@ -294,56 +285,73 @@ private static final long serialVersionUID = 0L;
       } else {
         result.things_ = thingsBuilder_.build();
       }
-    }
-
-    private void buildPartial0(edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.whnum_ = whnum_;
-        to_bitField0_ |= 0x00000001;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.seqnum_ = seqnum_;
+      if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
         to_bitField0_ |= 0x00000002;
       }
-      result.bitField0_ |= to_bitField0_;
+      result.seqnum_ = seqnum_;
+      result.bitField0_ = to_bitField0_;
+      onBuilt();
+      return result;
     }
 
+    @java.lang.Override
+    public Builder clone() {
+      return (Builder) super.clone();
+    }
+    @java.lang.Override
+    public Builder setField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
+    }
+    @java.lang.Override
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
+    }
+    @java.lang.Override
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
+    }
+    @java.lang.Override
+    public Builder setRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
+    }
+    @java.lang.Override
+    public Builder addRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
+    }
     private int bitField0_;
 
     private int whnum_ ;
     /**
      * <code>required int32 whnum = 1;</code>
-     * @return Whether the whnum field is set.
      */
-    @java.lang.Override
     public boolean hasWhnum() {
-      return ((bitField0_ & 0x00000001) != 0);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>required int32 whnum = 1;</code>
-     * @return The whnum.
      */
-    @java.lang.Override
     public int getWhnum() {
       return whnum_;
     }
     /**
      * <code>required int32 whnum = 1;</code>
-     * @param value The whnum to set.
-     * @return This builder for chaining.
      */
     public Builder setWhnum(int value) {
-
-      whnum_ = value;
       bitField0_ |= 0x00000001;
+      whnum_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int32 whnum = 1;</code>
-     * @return This builder for chaining.
      */
     public Builder clearWhnum() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -355,7 +363,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct> things_ =
       java.util.Collections.emptyList();
     private void ensureThingsIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
+      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
         things_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct>(things_);
         bitField0_ |= 0x00000002;
        }
@@ -584,7 +592,7 @@ private static final long serialVersionUID = 0L;
         thingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct, edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProductOrBuilder>(
                 things_,
-                ((bitField0_ & 0x00000002) != 0),
+                ((bitField0_ & 0x00000002) == 0x00000002),
                 getParentForChildren(),
                 isClean());
         things_ = null;
@@ -595,35 +603,27 @@ private static final long serialVersionUID = 0L;
     private long seqnum_ ;
     /**
      * <code>required int64 seqnum = 3;</code>
-     * @return Whether the seqnum field is set.
      */
-    @java.lang.Override
     public boolean hasSeqnum() {
-      return ((bitField0_ & 0x00000004) != 0);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>required int64 seqnum = 3;</code>
-     * @return The seqnum.
      */
-    @java.lang.Override
     public long getSeqnum() {
       return seqnum_;
     }
     /**
      * <code>required int64 seqnum = 3;</code>
-     * @param value The seqnum to set.
-     * @return This builder for chaining.
      */
     public Builder setSeqnum(long value) {
-
-      seqnum_ = value;
       bitField0_ |= 0x00000004;
+      seqnum_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 seqnum = 3;</code>
-     * @return This builder for chaining.
      */
     public Builder clearSeqnum() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -669,11 +669,10 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
-            .setUnfinishedMessage(builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(
+                builder.buildPartial());
       }
       return builder.buildPartial();
     }

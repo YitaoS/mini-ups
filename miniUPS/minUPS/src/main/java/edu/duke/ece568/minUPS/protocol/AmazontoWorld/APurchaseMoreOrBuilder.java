@@ -9,12 +9,10 @@ public interface APurchaseMoreOrBuilder extends
 
   /**
    * <code>required int32 whnum = 1;</code>
-   * @return Whether the whnum field is set.
    */
   boolean hasWhnum();
   /**
    * <code>required int32 whnum = 1;</code>
-   * @return The whnum.
    */
   int getWhnum();
 
@@ -44,12 +42,10 @@ public interface APurchaseMoreOrBuilder extends
 
   /**
    * <code>required int64 seqnum = 3;</code>
-   * @return Whether the seqnum field is set.
    */
   boolean hasSeqnum();
   /**
    * <code>required int64 seqnum = 3;</code>
-   * @return The seqnum.
    */
   long getSeqnum();
 }
