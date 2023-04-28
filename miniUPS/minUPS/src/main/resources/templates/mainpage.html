@@ -2,50 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Main Page</title>
-    <style>
-        .topnav {
-            display: flex;
-            justify-content: flex-end;
-            background-color: #f1f1f1;
-            padding: 20px;
-        }
-        .topnav a {
-            text-decoration: none;
-            color: black;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-
 <body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Main Page</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" th:if="${#authentication == null or #authentication.principal == 'anonymousUser'}">
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+                <li class="nav-item" th:if="${#authentication == null or #authentication.principal == 'anonymousUser'}">
+                    <a class="nav-link" th:href="@{/login}">Log in</a>
+                </li>
+                <li class="nav-item" th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+                    <form th:action="@{/logout}" method="post" id="logoutForm" class="form-inline my-2 my-lg-0">
+                        <span>Welcome, <span th:text="${#authentication.principal.username}"></span></span>
+                        <input class="btn btn-outline-success my-2 my-sm-0 ml-2" type="submit" value="Log out"/>
+                    </form>
+                </li>
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" href="/userPackages">Check Your Packages</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-<div class="topnav">
-    <div th:if="${#authentication == null or #authentication.principal == 'anonymousUser'}">
-        <a th:href="@{/register}">Register</a>
-        <a th:href="@{/login}">Log in</a>
+    <h1>Main Page</h1>
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
     </div>
-    <form th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}"
-         th:action="@{/logout}" method="post" id="logoutForm">
-        <span>Welcome, <span th:text="${#authentication.principal.username}"></span></span>
-        <input type="submit" value="Log out"/>
+    <form th:action="@{/searchPackage}" method="get">
+        <div class="form-group">
+            <label for="packageId">Your Package ID:</label>
+            <input type="number" class="form-control" id="packageId" name="packageId" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Search Package ID</button>
     </form>
-
-
-    <div th:if="${#authorization.expression('isAuthenticated()')}">
-        <a href="/userPackages">Check Your Packages</a>
-    </div>
-
-
 </div>
-<h1>Main Page</h1>
-<div th:if="${errorMessage}" class="alert alert-danger" role="alert" style="color: red;">
-    <p th:text="${errorMessage}"></p>
-</div>
-<form th:action="@{/searchPackage}" method="get">
-    <label for="packageId">Your Package ID:</label>
-    <input type="number" id="packageId" name="packageId" required />
-    <button type="submit">Search Package ID</button>
-</form>
 </body>
 </html>
