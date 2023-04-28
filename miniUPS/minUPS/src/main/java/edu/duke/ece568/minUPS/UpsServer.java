@@ -26,7 +26,7 @@ public class UpsServer {
         this.worldHandler = worldHandler;
         //startServer();
     }
-    private void startServer() {
+    public void startServer() {
         try {
             // Create a CyclicBarrier for two threads
             CyclicBarrier barrier = new CyclicBarrier(2);

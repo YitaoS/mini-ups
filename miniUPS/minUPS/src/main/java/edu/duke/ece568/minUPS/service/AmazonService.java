@@ -8,6 +8,7 @@ import edu.duke.ece568.minUPS.protocol.UPStoAmazon.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -100,7 +101,8 @@ public class AmazonService {
                         LOG.error("This is a new package!");
                         continue;
                     }
-                    worldService.goDeliver(aStartDeliver.getPackageid());
+                    Package pack = packageOptional.get();
+                    worldService.goDeliver(pack.getTruck().getTruckID(),pack.getPackageID(),pack.getDestinationX(),pack.getDestinationY());
                 }
             } catch (IOException e) {
                 e.printStackTrace();

@@ -23,7 +23,7 @@ public class TruckTracker extends Thread {
         LOG.info("Running distance checker ... ");
         while (true) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
                 if (trackingSet.isEmpty()) {
                     continue;
                 }
