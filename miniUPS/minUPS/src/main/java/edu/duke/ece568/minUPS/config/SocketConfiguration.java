@@ -9,7 +9,7 @@ import java.net.Socket;
 
 @Configuration
 public class SocketConfiguration {
-    private final String HOST = "vcm-32232.vm.duke.edu";
+    private final String HOST = "vcm-31112.vm.duke.edu";
     private final int WORLD_PORT = 12345;
 
     @Bean

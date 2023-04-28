@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,5 +23,5 @@ public interface TruckDao extends JpaRepository<Truck,Integer> {
     @Query("UPDATE Truck s SET s.posX = :posX, s.posY = :posY WHERE s.truckID = :id")
     int updatePosition(@Param("id") Integer id, @Param("posX") Integer posX, @Param("posY") Integer posY);
 
-    Optional<Truck> findByStatus(String status);
+    List<Truck> findByStatus(String status);
 }

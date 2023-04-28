@@ -2,6 +2,8 @@ package edu.duke.ece568.minUPS.handler;
 
 import edu.duke.ece568.minUPS.TruckTracker;
 import edu.duke.ece568.minUPS.service.WorldService;
+import net.bytebuddy.asm.Advice.Exit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +35,6 @@ public class WorldHandler implements Runnable {
             startTruckTracker(worldService);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                worldService.closeWorldStream();
-            } catch (IOException e) {
-                LOG.error("Error closing socket: " + e.getMessage());
-            }
         }
     }
 
@@ -63,7 +59,8 @@ public class WorldHandler implements Runnable {
                 try {
                     receiveUResponses();
                 } catch (IOException e) {
-                    LOG.error(e.getMessage());
+                    LOG.error("world listener error:" + e.getMessage());
+                    System.exit(1);
                 }
             }
         }).start();

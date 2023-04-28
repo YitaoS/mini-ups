@@ -45,10 +45,4 @@ public class UpsServer {
         }
     }
 
-    @PreDestroy
-    public void onDestroy() throws IOException {
-        LOG.info("UpsServer is destroyed!");
-        serverSocket.close();
-    }
-
 }

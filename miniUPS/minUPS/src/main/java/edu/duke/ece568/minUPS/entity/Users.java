@@ -20,7 +20,7 @@ public class Users {
     private String upsID;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String email;
 
     public String getEmail() {

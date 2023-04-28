@@ -34,12 +34,12 @@ public class AmazonService {
     public long receiveWorldId() throws IOException {
         // Read the message from the socket
         AInformWorld worldId = AInformWorld.parseDelimitedFrom(amazonStream.inputStream);
-        System.out.println("Received: " + worldId);
+        LOG.info("receive from world " + worldId);
 
         // Send a response message
-        UReceivedWorld ACKMessage = UReceivedWorld.newBuilder().setWorldid(worldId.getWorldid()).build();
-        ACKMessage.writeDelimitedTo(amazonStream.outputStream);
-        amazonStream.outputStream.flush();
+        // UReceivedWorld ACKMessage = UReceivedWorld.newBuilder().setWorldid(worldId.getWorldid()).build();
+        // ACKMessage.writeDelimitedTo(amazonStream.outputStream);
+        // amazonStream.outputStream.flush();
         return worldId.getWorldid();
     }
     public void sendUTruckArrived(int truckID, ArrayList<Long> updatedPackageIDs) {
@@ -54,7 +54,7 @@ public class AmazonService {
 
                 }
                 UACommunication responses = uaCommunication.build();
-                LOG.info("Sending to amazon: Truck " + truckID + " with Packages arrived");
+                LOG.info("sending Amazon -------- " + responses + "-----------\n");
                 responses.writeDelimitedTo(amazonStream.outputStream);
                 amazonStream.outputStream.flush();
             }
@@ -83,18 +83,15 @@ public class AmazonService {
     public void receiveAUCommunication() throws IOException{
         AUCommunication auCommunication = AUCommunication.parseDelimitedFrom(amazonStream.inputStream);
         LOG.info("\nReceived a AUCommunication:\n len of ABookTruck=" + auCommunication.getBookingsCount()+
-                " AStartDeliver=" + auCommunication.getDeliversCount());
+                " AStartDeliver=" + auCommunication.getDeliversCount() + "\n"+ auCommunication);
         handleABookTruck(auCommunication);
         handleAStartDeliver(auCommunication);
     }
-
-//    message AStartDeliver {
-//        required int64 packageid = 1;
-//        optional int64 seqnum = 2;
-//    }
     private void handleAStartDeliver(AUCommunication auCommunication) {
+        LOG.info("start new thread for Delivering...");
         new Thread(() -> {
             try {
+                LOG.info("start handle AStartDeliver:"+ " num " + auCommunication.getDeliversCount() );
                 for (int i = 0; i < auCommunication.getDeliversCount(); i++) {
                     AStartDeliver aStartDeliver = auCommunication.getDelivers(i);
                     LOG.info("Amazon: start deliver packageID = " + aStartDeliver.getPackageid());
@@ -108,7 +105,7 @@ public class AmazonService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+        }).start();
     }
 
 //    message ABookTruck {
@@ -123,8 +120,10 @@ public class AmazonService {
 //
 //    }
     private void handleABookTruck(AUCommunication auCommunication) {
+        LOG.info("start new thread for booking...");
         new Thread(() -> {
             try {
+                LOG.info("start handle ABookTruck:"+ " num " + auCommunication.getBookingsCount());
                 for(int i = 0; i < auCommunication.getBookingsCount(); i++){
                     ABookTruck aBookTruck = auCommunication.getBookings(i);
                     LOG.info("--- BOOK Truck" + "\npackageID:" + aBookTruck.getPackageid()
@@ -176,7 +175,7 @@ public class AmazonService {
                 uaCommunication.addDelivered(uDeliveredB.build());
                 UACommunication responses = uaCommunication.build();
 
-                LOG.info("Sending to amazon: package " + packageID + " is delivered ");
+                LOG.info("sending Amazon -------- " + responses + "-----------\n");
                 responses.writeDelimitedTo(amazonStream.outputStream);
             }
             catch (IOException e) {
