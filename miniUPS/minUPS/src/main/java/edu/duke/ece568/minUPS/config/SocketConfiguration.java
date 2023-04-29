@@ -9,7 +9,7 @@ import java.net.Socket;
 
 @Configuration
 public class SocketConfiguration {
-    private final String HOST = "vcm-30706.vm.duke.edu";
+    private final String HOST = "vcm-30634.vm.duke.edu";
     private final int WORLD_PORT = 12345;
 
     @Bean
@@ -17,8 +17,8 @@ public class SocketConfiguration {
         return new Socket(HOST, WORLD_PORT);
     }
 
-    @Bean
-    public ServerSocket serverSocket() {
+    @Bean(name = "serverScoket1")
+    public ServerSocket serverSocket1() {
         try {
             return new ServerSocket(22222);
         } catch (IOException e) {

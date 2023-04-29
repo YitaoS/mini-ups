@@ -20,11 +20,11 @@ public class UpsServer {
     AmazonHandler amazonHandler;
     WorldHandler worldHandler;
     @Autowired
-    public UpsServer(ServerSocket serverSocket, AmazonHandler amazonHandler, WorldHandler worldHandler) {
-        this.serverSocket = serverSocket;
+    public UpsServer(ServerSocket serverSocket1, AmazonHandler amazonHandler, WorldHandler worldHandler) {
+        this.serverSocket = serverSocket1;
         this.amazonHandler = amazonHandler;
         this.worldHandler = worldHandler;
-        //startServer();
+        startServer();
     }
     public void startServer() {
         try {

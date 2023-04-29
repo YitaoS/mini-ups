@@ -29,10 +29,14 @@
       <td th:text="${pkg.details}"></td>
       <td th:text="${pkg.destinationX + ', ' + pkg.destinationY}"></td>
       <td th:text="${pkg.status}"></td>
-      <td th:text="${pkg.locationX + ', ' + pkg.locationY}"></td>
-      <td th:text="${pkg.distance}"></td>
+      <td th:if="${pkg.status == 'delivered'}" th:text="${pkg.destinationX + ', ' + pkg.destinationY}"></td>
+      <td th:if="${pkg.status == 'delivering'}" th:text="${pkg.truck.posX + ', ' + pkg.truck.posY}"></td>
+      <td th:if="${pkg.status != 'delivering' and pkg.status != 'delivered'}">Wait for delivery</td>
+      <td th:text="${distances[__${i.index}__]}"></td>
       <td>
-        <a th:href="@{'/changeDestination/' + ${pkg.packageID}}" class="btn btn-primary">Change Destination</a>
+        <form th:if="${pkg.status != 'delivered'}" th:action="@{/changedest/{id}(id=${pkg.packageID})}" method="get">
+          <button type="submit">Change Destination</button>
+        </form>
       </td>
     </tr>
     </tbody>
