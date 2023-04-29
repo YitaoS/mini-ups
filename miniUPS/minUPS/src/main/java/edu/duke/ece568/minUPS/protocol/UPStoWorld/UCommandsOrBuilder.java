@@ -57,19 +57,23 @@ public interface UCommandsOrBuilder extends
 
   /**
    * <code>optional uint32 simspeed = 3;</code>
+   * @return Whether the simspeed field is set.
    */
   boolean hasSimspeed();
   /**
    * <code>optional uint32 simspeed = 3;</code>
+   * @return The simspeed.
    */
   int getSimspeed();
 
   /**
    * <code>optional bool disconnect = 4;</code>
+   * @return Whether the disconnect field is set.
    */
   boolean hasDisconnect();
   /**
    * <code>optional bool disconnect = 4;</code>
+   * @return The disconnect.
    */
   boolean getDisconnect();
 
@@ -99,14 +103,18 @@ public interface UCommandsOrBuilder extends
 
   /**
    * <code>repeated int64 acks = 6;</code>
+   * @return A list containing the acks.
    */
   java.util.List<java.lang.Long> getAcksList();
   /**
    * <code>repeated int64 acks = 6;</code>
+   * @return The count of acks.
    */
   int getAcksCount();
   /**
    * <code>repeated int64 acks = 6;</code>
+   * @param index The index of the element to return.
+   * @return The acks at the given index.
    */
   long getAcks(int index);
 }

@@ -9,28 +9,34 @@ public interface AInitWarehouseOrBuilder extends
 
   /**
    * <code>required int32 id = 1;</code>
+   * @return Whether the id field is set.
    */
   boolean hasId();
   /**
    * <code>required int32 id = 1;</code>
+   * @return The id.
    */
   int getId();
 
   /**
    * <code>required int32 x = 2;</code>
+   * @return Whether the x field is set.
    */
   boolean hasX();
   /**
    * <code>required int32 x = 2;</code>
+   * @return The x.
    */
   int getX();
 
   /**
    * <code>required int32 y = 3;</code>
+   * @return Whether the y field is set.
    */
   boolean hasY();
   /**
    * <code>required int32 y = 3;</code>
+   * @return The y.
    */
   int getY();
 }

@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.AmazontoWorld;
 /**
  * Protobuf type {@code AResponses}
  */
-public  final class AResponses extends
+public final class AResponses extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:AResponses)
     AResponsesOrBuilder {
@@ -19,17 +19,18 @@ private static final long serialVersionUID = 0L;
     arrived_ = java.util.Collections.emptyList();
     ready_ = java.util.Collections.emptyList();
     loaded_ = java.util.Collections.emptyList();
-    finished_ = false;
     error_ = java.util.Collections.emptyList();
-    acks_ = java.util.Collections.emptyList();
+    acks_ = emptyLongList();
     packagestatus_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new AResponses();
   }
+
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.AmazontoWorld.AmazontoWorld.internal_static_AResponses_descriptor;
@@ -45,16 +46,19 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int ARRIVED_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore> arrived_;
   /**
    * <code>repeated .APurchaseMore arrived = 1;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore> getArrivedList() {
     return arrived_;
   }
   /**
    * <code>repeated .APurchaseMore arrived = 1;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMoreOrBuilder> 
       getArrivedOrBuilderList() {
     return arrived_;
@@ -62,34 +66,40 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .APurchaseMore arrived = 1;</code>
    */
+  @java.lang.Override
   public int getArrivedCount() {
     return arrived_.size();
   }
   /**
    * <code>repeated .APurchaseMore arrived = 1;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore getArrived(int index) {
     return arrived_.get(index);
   }
   /**
    * <code>repeated .APurchaseMore arrived = 1;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMoreOrBuilder getArrivedOrBuilder(
       int index) {
     return arrived_.get(index);
   }
 
   public static final int READY_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APacked> ready_;
   /**
    * <code>repeated .APacked ready = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APacked> getReadyList() {
     return ready_;
   }
   /**
    * <code>repeated .APacked ready = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackedOrBuilder> 
       getReadyOrBuilderList() {
     return ready_;
@@ -97,34 +107,40 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .APacked ready = 2;</code>
    */
+  @java.lang.Override
   public int getReadyCount() {
     return ready_.size();
   }
   /**
    * <code>repeated .APacked ready = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APacked getReady(int index) {
     return ready_.get(index);
   }
   /**
    * <code>repeated .APacked ready = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackedOrBuilder getReadyOrBuilder(
       int index) {
     return ready_.get(index);
   }
 
   public static final int LOADED_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoaded> loaded_;
   /**
    * <code>repeated .ALoaded loaded = 3;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoaded> getLoadedList() {
     return loaded_;
   }
   /**
    * <code>repeated .ALoaded loaded = 3;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoadedOrBuilder> 
       getLoadedOrBuilderList() {
     return loaded_;
@@ -132,49 +148,59 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .ALoaded loaded = 3;</code>
    */
+  @java.lang.Override
   public int getLoadedCount() {
     return loaded_.size();
   }
   /**
    * <code>repeated .ALoaded loaded = 3;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoaded getLoaded(int index) {
     return loaded_.get(index);
   }
   /**
    * <code>repeated .ALoaded loaded = 3;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoadedOrBuilder getLoadedOrBuilder(
       int index) {
     return loaded_.get(index);
   }
 
   public static final int FINISHED_FIELD_NUMBER = 4;
-  private boolean finished_;
+  private boolean finished_ = false;
   /**
    * <code>optional bool finished = 4;</code>
+   * @return Whether the finished field is set.
    */
+  @java.lang.Override
   public boolean hasFinished() {
-    return ((bitField0_ & 0x00000001) == 0x00000001);
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
    * <code>optional bool finished = 4;</code>
+   * @return The finished.
    */
+  @java.lang.Override
   public boolean getFinished() {
     return finished_;
   }
 
   public static final int ERROR_FIELD_NUMBER = 5;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErr> error_;
   /**
    * <code>repeated .AErr error = 5;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErr> getErrorList() {
     return error_;
   }
   /**
    * <code>repeated .AErr error = 5;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErrOrBuilder> 
       getErrorOrBuilderList() {
     return error_;
@@ -182,56 +208,68 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .AErr error = 5;</code>
    */
+  @java.lang.Override
   public int getErrorCount() {
     return error_.size();
   }
   /**
    * <code>repeated .AErr error = 5;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErr getError(int index) {
     return error_.get(index);
   }
   /**
    * <code>repeated .AErr error = 5;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErrOrBuilder getErrorOrBuilder(
       int index) {
     return error_.get(index);
   }
 
   public static final int ACKS_FIELD_NUMBER = 6;
-  private java.util.List<java.lang.Long> acks_;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.Internal.LongList acks_;
   /**
    * <code>repeated int64 acks = 6;</code>
+   * @return A list containing the acks.
    */
+  @java.lang.Override
   public java.util.List<java.lang.Long>
       getAcksList() {
     return acks_;
   }
   /**
    * <code>repeated int64 acks = 6;</code>
+   * @return The count of acks.
    */
   public int getAcksCount() {
     return acks_.size();
   }
   /**
    * <code>repeated int64 acks = 6;</code>
+   * @param index The index of the element to return.
+   * @return The acks at the given index.
    */
   public long getAcks(int index) {
-    return acks_.get(index);
+    return acks_.getLong(index);
   }
 
   public static final int PACKAGESTATUS_FIELD_NUMBER = 7;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackage> packagestatus_;
   /**
    * <code>repeated .APackage packagestatus = 7;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackage> getPackagestatusList() {
     return packagestatus_;
   }
   /**
    * <code>repeated .APackage packagestatus = 7;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackageOrBuilder> 
       getPackagestatusOrBuilderList() {
     return packagestatus_;
@@ -239,18 +277,21 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .APackage packagestatus = 7;</code>
    */
+  @java.lang.Override
   public int getPackagestatusCount() {
     return packagestatus_.size();
   }
   /**
    * <code>repeated .APackage packagestatus = 7;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackage getPackagestatus(int index) {
     return packagestatus_.get(index);
   }
   /**
    * <code>repeated .APackage packagestatus = 7;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackageOrBuilder getPackagestatusOrBuilder(
       int index) {
     return packagestatus_.get(index);
@@ -368,61 +409,55 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.AmazontoWorld.AResponses.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-        getArrivedFieldBuilder();
-        getReadyFieldBuilder();
-        getLoadedFieldBuilder();
-        getErrorFieldBuilder();
-        getPackagestatusFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
       if (arrivedBuilder_ == null) {
         arrived_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
       } else {
+        arrived_ = null;
         arrivedBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000001);
       if (readyBuilder_ == null) {
         ready_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
+        ready_ = null;
         readyBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000002);
       if (loadedBuilder_ == null) {
         loaded_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
       } else {
+        loaded_ = null;
         loadedBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000004);
       finished_ = false;
-      bitField0_ = (bitField0_ & ~0x00000008);
       if (errorBuilder_ == null) {
         error_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000010);
       } else {
+        error_ = null;
         errorBuilder_.clear();
       }
-      acks_ = java.util.Collections.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000020);
+      bitField0_ = (bitField0_ & ~0x00000010);
+      acks_ = emptyLongList();
       if (packagestatusBuilder_ == null) {
         packagestatus_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
       } else {
+        packagestatus_ = null;
         packagestatusBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000040);
       return this;
     }
 
@@ -449,10 +484,15 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AResponses buildPartial() {
       edu.duke.ece568.minUPS.protocol.AmazontoWorld.AResponses result = new edu.duke.ece568.minUPS.protocol.AmazontoWorld.AResponses(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
+      buildPartialRepeatedFields(result);
+      if (bitField0_ != 0) { buildPartial0(result); }
+      onBuilt();
+      return result;
+    }
+
+    private void buildPartialRepeatedFields(edu.duke.ece568.minUPS.protocol.AmazontoWorld.AResponses result) {
       if (arrivedBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           arrived_ = java.util.Collections.unmodifiableList(arrived_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
@@ -461,7 +501,7 @@ private static final long serialVersionUID = 0L;
         result.arrived_ = arrivedBuilder_.build();
       }
       if (readyBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000002) != 0)) {
           ready_ = java.util.Collections.unmodifiableList(ready_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
@@ -470,7 +510,7 @@ private static final long serialVersionUID = 0L;
         result.ready_ = readyBuilder_.build();
       }
       if (loadedBuilder_ == null) {
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000004) != 0)) {
           loaded_ = java.util.Collections.unmodifiableList(loaded_);
           bitField0_ = (bitField0_ & ~0x00000004);
         }
@@ -478,12 +518,8 @@ private static final long serialVersionUID = 0L;
       } else {
         result.loaded_ = loadedBuilder_.build();
       }
-      if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-        to_bitField0_ |= 0x00000001;
-      }
-      result.finished_ = finished_;
       if (errorBuilder_ == null) {
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((bitField0_ & 0x00000010) != 0)) {
           error_ = java.util.Collections.unmodifiableList(error_);
           bitField0_ = (bitField0_ & ~0x00000010);
         }
@@ -491,13 +527,13 @@ private static final long serialVersionUID = 0L;
       } else {
         result.error_ = errorBuilder_.build();
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        acks_ = java.util.Collections.unmodifiableList(acks_);
+      if (((bitField0_ & 0x00000020) != 0)) {
+        acks_.makeImmutable();
         bitField0_ = (bitField0_ & ~0x00000020);
       }
       result.acks_ = acks_;
       if (packagestatusBuilder_ == null) {
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((bitField0_ & 0x00000040) != 0)) {
           packagestatus_ = java.util.Collections.unmodifiableList(packagestatus_);
           bitField0_ = (bitField0_ & ~0x00000040);
         }
@@ -505,49 +541,24 @@ private static final long serialVersionUID = 0L;
       } else {
         result.packagestatus_ = packagestatusBuilder_.build();
       }
-      result.bitField0_ = to_bitField0_;
-      onBuilt();
-      return result;
     }
 
-    @java.lang.Override
-    public Builder clone() {
-      return (Builder) super.clone();
+    private void buildPartial0(edu.duke.ece568.minUPS.protocol.AmazontoWorld.AResponses result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.finished_ = finished_;
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
-    @java.lang.Override
-    public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.setField(field, value);
-    }
-    @java.lang.Override
-    public Builder clearField(
-        com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
-    }
-    @java.lang.Override
-    public Builder clearOneof(
-        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
-    }
-    @java.lang.Override
-    public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
-    }
-    @java.lang.Override
-    public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
-    }
+
     private int bitField0_;
 
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore> arrived_ =
       java.util.Collections.emptyList();
     private void ensureArrivedIsMutable() {
-      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (!((bitField0_ & 0x00000001) != 0)) {
         arrived_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore>(arrived_);
         bitField0_ |= 0x00000001;
        }
@@ -776,7 +787,7 @@ private static final long serialVersionUID = 0L;
         arrivedBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMoreOrBuilder>(
                 arrived_,
-                ((bitField0_ & 0x00000001) == 0x00000001),
+                ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
                 isClean());
         arrived_ = null;
@@ -787,7 +798,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APacked> ready_ =
       java.util.Collections.emptyList();
     private void ensureReadyIsMutable() {
-      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (!((bitField0_ & 0x00000002) != 0)) {
         ready_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APacked>(ready_);
         bitField0_ |= 0x00000002;
        }
@@ -1016,7 +1027,7 @@ private static final long serialVersionUID = 0L;
         readyBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.APacked, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APacked.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackedOrBuilder>(
                 ready_,
-                ((bitField0_ & 0x00000002) == 0x00000002),
+                ((bitField0_ & 0x00000002) != 0),
                 getParentForChildren(),
                 isClean());
         ready_ = null;
@@ -1027,7 +1038,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoaded> loaded_ =
       java.util.Collections.emptyList();
     private void ensureLoadedIsMutable() {
-      if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (!((bitField0_ & 0x00000004) != 0)) {
         loaded_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoaded>(loaded_);
         bitField0_ |= 0x00000004;
        }
@@ -1256,7 +1267,7 @@ private static final long serialVersionUID = 0L;
         loadedBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoaded, edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoaded.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.ALoadedOrBuilder>(
                 loaded_,
-                ((bitField0_ & 0x00000004) == 0x00000004),
+                ((bitField0_ & 0x00000004) != 0),
                 getParentForChildren(),
                 isClean());
         loaded_ = null;
@@ -1267,27 +1278,35 @@ private static final long serialVersionUID = 0L;
     private boolean finished_ ;
     /**
      * <code>optional bool finished = 4;</code>
+     * @return Whether the finished field is set.
      */
+    @java.lang.Override
     public boolean hasFinished() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000008) != 0);
     }
     /**
      * <code>optional bool finished = 4;</code>
+     * @return The finished.
      */
+    @java.lang.Override
     public boolean getFinished() {
       return finished_;
     }
     /**
      * <code>optional bool finished = 4;</code>
+     * @param value The finished to set.
+     * @return This builder for chaining.
      */
     public Builder setFinished(boolean value) {
-      bitField0_ |= 0x00000008;
+
       finished_ = value;
+      bitField0_ |= 0x00000008;
       onChanged();
       return this;
     }
     /**
      * <code>optional bool finished = 4;</code>
+     * @return This builder for chaining.
      */
     public Builder clearFinished() {
       bitField0_ = (bitField0_ & ~0x00000008);
@@ -1299,7 +1318,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErr> error_ =
       java.util.Collections.emptyList();
     private void ensureErrorIsMutable() {
-      if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (!((bitField0_ & 0x00000010) != 0)) {
         error_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErr>(error_);
         bitField0_ |= 0x00000010;
        }
@@ -1528,7 +1547,7 @@ private static final long serialVersionUID = 0L;
         errorBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErr, edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErr.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.AErrOrBuilder>(
                 error_,
-                ((bitField0_ & 0x00000010) == 0x00000010),
+                ((bitField0_ & 0x00000010) != 0),
                 getParentForChildren(),
                 isClean());
         error_ = null;
@@ -1536,53 +1555,67 @@ private static final long serialVersionUID = 0L;
       return errorBuilder_;
     }
 
-    private java.util.List<java.lang.Long> acks_ = java.util.Collections.emptyList();
+    private com.google.protobuf.Internal.LongList acks_ = emptyLongList();
     private void ensureAcksIsMutable() {
-      if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-        acks_ = new java.util.ArrayList<java.lang.Long>(acks_);
+      if (!((bitField0_ & 0x00000020) != 0)) {
+        acks_ = mutableCopy(acks_);
         bitField0_ |= 0x00000020;
-       }
+      }
     }
     /**
      * <code>repeated int64 acks = 6;</code>
+     * @return A list containing the acks.
      */
     public java.util.List<java.lang.Long>
         getAcksList() {
-      return java.util.Collections.unmodifiableList(acks_);
+      return ((bitField0_ & 0x00000020) != 0) ?
+               java.util.Collections.unmodifiableList(acks_) : acks_;
     }
     /**
      * <code>repeated int64 acks = 6;</code>
+     * @return The count of acks.
      */
     public int getAcksCount() {
       return acks_.size();
     }
     /**
      * <code>repeated int64 acks = 6;</code>
+     * @param index The index of the element to return.
+     * @return The acks at the given index.
      */
     public long getAcks(int index) {
-      return acks_.get(index);
+      return acks_.getLong(index);
     }
     /**
      * <code>repeated int64 acks = 6;</code>
+     * @param index The index to set the value at.
+     * @param value The acks to set.
+     * @return This builder for chaining.
      */
     public Builder setAcks(
         int index, long value) {
+
       ensureAcksIsMutable();
-      acks_.set(index, value);
+      acks_.setLong(index, value);
       onChanged();
       return this;
     }
     /**
      * <code>repeated int64 acks = 6;</code>
+     * @param value The acks to add.
+     * @return This builder for chaining.
      */
     public Builder addAcks(long value) {
+
       ensureAcksIsMutable();
-      acks_.add(value);
+      acks_.addLong(value);
       onChanged();
       return this;
     }
     /**
      * <code>repeated int64 acks = 6;</code>
+     * @param values The acks to add.
+     * @return This builder for chaining.
      */
     public Builder addAllAcks(
         java.lang.Iterable<? extends java.lang.Long> values) {
@@ -1594,9 +1627,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>repeated int64 acks = 6;</code>
+     * @return This builder for chaining.
      */
     public Builder clearAcks() {
-      acks_ = java.util.Collections.emptyList();
+      acks_ = emptyLongList();
       bitField0_ = (bitField0_ & ~0x00000020);
       onChanged();
       return this;
@@ -1605,7 +1639,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackage> packagestatus_ =
       java.util.Collections.emptyList();
     private void ensurePackagestatusIsMutable() {
-      if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (!((bitField0_ & 0x00000040) != 0)) {
         packagestatus_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackage>(packagestatus_);
         bitField0_ |= 0x00000040;
        }
@@ -1834,7 +1868,7 @@ private static final long serialVersionUID = 0L;
         packagestatusBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackage, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackage.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackageOrBuilder>(
                 packagestatus_,
-                ((bitField0_ & 0x00000040) == 0x00000040),
+                ((bitField0_ & 0x00000040) != 0),
                 getParentForChildren(),
                 isClean());
         packagestatus_ = null;
@@ -1879,10 +1913,11 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(
-                builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+            .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();
     }

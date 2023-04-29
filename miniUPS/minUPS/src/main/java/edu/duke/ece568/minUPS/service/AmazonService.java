@@ -83,8 +83,7 @@ public class AmazonService {
 
     public void receiveAUCommunication() throws IOException{
         AUCommunication auCommunication = AUCommunication.parseDelimitedFrom(amazonStream.inputStream);
-        LOG.info("\nReceived a AUCommunication:\n len of ABookTruck=" + auCommunication.getBookingsCount()+
-                " AStartDeliver=" + auCommunication.getDeliversCount() + "\n"+ auCommunication);
+        LOG.info("\nAmazon send: \nAAAAAAAAAA"+ auCommunication + "\n");
         handleABookTruck(auCommunication);
         handleAStartDeliver(auCommunication);
     }

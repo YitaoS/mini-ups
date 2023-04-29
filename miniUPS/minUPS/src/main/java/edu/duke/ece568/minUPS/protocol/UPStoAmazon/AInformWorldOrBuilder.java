@@ -9,10 +9,12 @@ public interface AInformWorldOrBuilder extends
 
   /**
    * <code>required int64 worldid = 1;</code>
+   * @return Whether the worldid field is set.
    */
   boolean hasWorldid();
   /**
    * <code>required int64 worldid = 1;</code>
+   * @return The worldid.
    */
   long getWorldid();
 }

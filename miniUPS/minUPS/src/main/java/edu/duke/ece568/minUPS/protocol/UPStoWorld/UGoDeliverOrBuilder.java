@@ -9,10 +9,12 @@ public interface UGoDeliverOrBuilder extends
 
   /**
    * <code>required int32 truckid = 1;</code>
+   * @return Whether the truckid field is set.
    */
   boolean hasTruckid();
   /**
    * <code>required int32 truckid = 1;</code>
+   * @return The truckid.
    */
   int getTruckid();
 
@@ -42,10 +44,12 @@ public interface UGoDeliverOrBuilder extends
 
   /**
    * <code>required int64 seqnum = 3;</code>
+   * @return Whether the seqnum field is set.
    */
   boolean hasSeqnum();
   /**
    * <code>required int64 seqnum = 3;</code>
+   * @return The seqnum.
    */
   long getSeqnum();
 }

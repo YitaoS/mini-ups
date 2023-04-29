@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.AmazontoWorld;
 /**
  * Protobuf type {@code AProduct}
  */
-public  final class AProduct extends
+public final class AProduct extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:AProduct)
     AProductOrBuilder {
@@ -16,16 +16,16 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private AProduct() {
-    id_ = 0L;
     description_ = "";
-    count_ = 0;
   }
 
   @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new AProduct();
   }
+
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.AmazontoWorld.AmazontoWorld.internal_static_AProduct_descriptor;
@@ -41,31 +41,40 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int ID_FIELD_NUMBER = 1;
-  private long id_;
+  private long id_ = 0L;
   /**
    * <code>required int64 id = 1;</code>
+   * @return Whether the id field is set.
    */
+  @java.lang.Override
   public boolean hasId() {
-    return ((bitField0_ & 0x00000001) == 0x00000001);
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
    * <code>required int64 id = 1;</code>
+   * @return The id.
    */
+  @java.lang.Override
   public long getId() {
     return id_;
   }
 
   public static final int DESCRIPTION_FIELD_NUMBER = 2;
-  private volatile java.lang.Object description_;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object description_ = "";
   /**
    * <code>required string description = 2;</code>
+   * @return Whether the description field is set.
    */
+  @java.lang.Override
   public boolean hasDescription() {
-    return ((bitField0_ & 0x00000002) == 0x00000002);
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
    * <code>required string description = 2;</code>
+   * @return The description.
    */
+  @java.lang.Override
   public java.lang.String getDescription() {
     java.lang.Object ref = description_;
     if (ref instanceof java.lang.String) {
@@ -82,7 +91,9 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <code>required string description = 2;</code>
+   * @return The bytes for description.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString
       getDescriptionBytes() {
     java.lang.Object ref = description_;
@@ -98,16 +109,20 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int COUNT_FIELD_NUMBER = 3;
-  private int count_;
+  private int count_ = 0;
   /**
    * <code>required int32 count = 3;</code>
+   * @return Whether the count field is set.
    */
+  @java.lang.Override
   public boolean hasCount() {
-    return ((bitField0_ & 0x00000004) == 0x00000004);
+    return ((bitField0_ & 0x00000004) != 0);
   }
   /**
    * <code>required int32 count = 3;</code>
+   * @return The count.
    */
+  @java.lang.Override
   public int getCount() {
     return count_;
   }
@@ -224,28 +239,21 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
       id_ = 0L;
-      bitField0_ = (bitField0_ & ~0x00000001);
       description_ = "";
-      bitField0_ = (bitField0_ & ~0x00000002);
       count_ = 0;
-      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -272,83 +280,63 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct buildPartial() {
       edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct result = new edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-        to_bitField0_ |= 0x00000001;
-      }
-      result.id_ = id_;
-      if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-        to_bitField0_ |= 0x00000002;
-      }
-      result.description_ = description_;
-      if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-        to_bitField0_ |= 0x00000004;
-      }
-      result.count_ = count_;
-      result.bitField0_ = to_bitField0_;
+      if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    @java.lang.Override
-    public Builder clone() {
-      return (Builder) super.clone();
+    private void buildPartial0(edu.duke.ece568.minUPS.protocol.AmazontoWorld.AProduct result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.id_ = id_;
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.description_ = description_;
+        to_bitField0_ |= 0x00000002;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.count_ = count_;
+        to_bitField0_ |= 0x00000004;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
-    @java.lang.Override
-    public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.setField(field, value);
-    }
-    @java.lang.Override
-    public Builder clearField(
-        com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
-    }
-    @java.lang.Override
-    public Builder clearOneof(
-        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
-    }
-    @java.lang.Override
-    public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
-    }
-    @java.lang.Override
-    public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
-    }
+
     private int bitField0_;
 
     private long id_ ;
     /**
      * <code>required int64 id = 1;</code>
+     * @return Whether the id field is set.
      */
+    @java.lang.Override
     public boolean hasId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>required int64 id = 1;</code>
+     * @return The id.
      */
+    @java.lang.Override
     public long getId() {
       return id_;
     }
     /**
      * <code>required int64 id = 1;</code>
+     * @param value The id to set.
+     * @return This builder for chaining.
      */
     public Builder setId(long value) {
-      bitField0_ |= 0x00000001;
+
       id_ = value;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 id = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearId() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -360,12 +348,14 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object description_ = "";
     /**
      * <code>required string description = 2;</code>
+     * @return Whether the description field is set.
      */
     public boolean hasDescription() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000002) != 0);
     }
     /**
      * <code>required string description = 2;</code>
+     * @return The description.
      */
     public java.lang.String getDescription() {
       java.lang.Object ref = description_;
@@ -383,6 +373,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>required string description = 2;</code>
+     * @return The bytes for description.
      */
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
@@ -399,36 +390,37 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>required string description = 2;</code>
+     * @param value The description to set.
+     * @return This builder for chaining.
      */
     public Builder setDescription(
         java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+      if (value == null) { throw new NullPointerException(); }
       description_ = value;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
     /**
      * <code>required string description = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearDescription() {
-      bitField0_ = (bitField0_ & ~0x00000002);
       description_ = getDefaultInstance().getDescription();
+      bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
      * <code>required string description = 2;</code>
+     * @param value The bytes for description to set.
+     * @return This builder for chaining.
      */
     public Builder setDescriptionBytes(
         com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
+      if (value == null) { throw new NullPointerException(); }
       description_ = value;
+      bitField0_ |= 0x00000002;
       onChanged();
       return this;
     }
@@ -436,27 +428,35 @@ private static final long serialVersionUID = 0L;
     private int count_ ;
     /**
      * <code>required int32 count = 3;</code>
+     * @return Whether the count field is set.
      */
+    @java.lang.Override
     public boolean hasCount() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
      * <code>required int32 count = 3;</code>
+     * @return The count.
      */
+    @java.lang.Override
     public int getCount() {
       return count_;
     }
     /**
      * <code>required int32 count = 3;</code>
+     * @param value The count to set.
+     * @return This builder for chaining.
      */
     public Builder setCount(int value) {
-      bitField0_ |= 0x00000004;
+
       count_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
      * <code>required int32 count = 3;</code>
+     * @return This builder for chaining.
      */
     public Builder clearCount() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -502,10 +502,11 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(
-                builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+            .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();
     }

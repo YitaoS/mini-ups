@@ -20,6 +20,7 @@ import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static java.lang.Thread.sleep;
@@ -34,9 +35,10 @@ public class WorldService {
     private UserService userService;
     private EmailService emailService;
     private long worldId;
-    final int TRUCK_CNT = 10;
+    final int TRUCK_CNT = 100;
     final int TRUCK_X = 10;
     final int TRUCK_Y = 10;
+    private AtomicInteger truck_alloc = new AtomicInteger(0);
     private AtomicLong seq = new AtomicLong(0);
     private HashSet<Long> ackSet;
     HashSet<Integer> trackingSet;
@@ -110,7 +112,7 @@ public class WorldService {
         UResponses uResponses = UResponses.parseDelimitedFrom(worldStream.inputStream);
         //LOG.info("\nReceived a UResponse:\n len of Acks=" + uResponses.getAcksCount() + " uf=" + uResponses.getCompletionsCount()
         //        + " truckStatus=" + uResponses.getTruckstatusCount() + " delivered=" + uResponses.getDeliveredCount() + " err=" + uResponses.getErrorCount());
-        LOG.info("receive world -------- " + uResponses.getDeliveredList().toString() + "-----------\n");
+        LOG.info("receive world -------- " + uResponses.getCompletionsList().toString() +"\n" + uResponses.getDeliveredList().toString() + "\n" + uResponses.getErrorList().toString() + "-----------\n");
         handleUFinished(uResponses);
         handleUTruck(uResponses);
         handleUDeliveryMade(uResponses);
@@ -305,23 +307,28 @@ public class WorldService {
     }
 
     public int findAvailableTrucks() {
-        List<Truck> truckList = truckDao.findByStatus(Truck.Status.IDLE.getText());
-        if(!truckList.isEmpty()){
-            return truckList.get(0).getTruckID();
+        // List<Truck> truckList = truckDao.findByStatus(Truck.Status.IDLE.getText());
+        // if(!truckList.isEmpty()){
+        //     return truckList.get(0).getTruckID();
+        // }
+        // truckList = truckDao.findByStatus(Truck.Status.DELIVERING.getText());
+        // if(!truckList.isEmpty()){
+        //     return truckList.get(0).getTruckID();
+        // }
+        // truckList = truckDao.findByStatus(Truck.Status.ARRIVE.getText());
+        // if(!truckList.isEmpty()){
+        //     return truckList.get(0).getTruckID();
+        // }
+        // try {
+        //     sleep(1000);
+        // }catch (Exception e){
+        // }
+        // return findAvailableTrucks();
+        int truckID = truck_alloc.getAndIncrement();
+        if (truck_alloc.get() >= TRUCK_CNT) {
+            truck_alloc.set(truck_alloc.get() % TRUCK_CNT);
         }
-        truckList = truckDao.findByStatus(Truck.Status.DELIVERING.getText());
-        if(!truckList.isEmpty()){
-            return truckList.get(0).getTruckID();
-        }
-        truckList = truckDao.findByStatus(Truck.Status.ARRIVE.getText());
-        if(!truckList.isEmpty()){
-            return truckList.get(0).getTruckID();
-        }
-        try {
-            sleep(1000);
-        }catch (Exception e){
-        }
-        return findAvailableTrucks();
+        return truckID;
     }
 
     public void pickup(int truckID, int warehouseID,long packageID) throws IOException{

@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.AmazontoWorld;
 /**
  * Protobuf type {@code ACommands}
  */
-public  final class ACommands extends
+public final class ACommands extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:ACommands)
     ACommandsOrBuilder {
@@ -20,16 +20,16 @@ private static final long serialVersionUID = 0L;
     topack_ = java.util.Collections.emptyList();
     load_ = java.util.Collections.emptyList();
     queries_ = java.util.Collections.emptyList();
-    simspeed_ = 0;
-    disconnect_ = false;
-    acks_ = java.util.Collections.emptyList();
+    acks_ = emptyLongList();
   }
 
   @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new ACommands();
   }
+
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.AmazontoWorld.AmazontoWorld.internal_static_ACommands_descriptor;
@@ -45,16 +45,19 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int BUY_FIELD_NUMBER = 1;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore> buy_;
   /**
    * <code>repeated .APurchaseMore buy = 1;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore> getBuyList() {
     return buy_;
   }
   /**
    * <code>repeated .APurchaseMore buy = 1;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMoreOrBuilder> 
       getBuyOrBuilderList() {
     return buy_;
@@ -62,34 +65,40 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .APurchaseMore buy = 1;</code>
    */
+  @java.lang.Override
   public int getBuyCount() {
     return buy_.size();
   }
   /**
    * <code>repeated .APurchaseMore buy = 1;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore getBuy(int index) {
     return buy_.get(index);
   }
   /**
    * <code>repeated .APurchaseMore buy = 1;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMoreOrBuilder getBuyOrBuilder(
       int index) {
     return buy_.get(index);
   }
 
   public static final int TOPACK_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APack> topack_;
   /**
    * <code>repeated .APack topack = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APack> getTopackList() {
     return topack_;
   }
   /**
    * <code>repeated .APack topack = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackOrBuilder> 
       getTopackOrBuilderList() {
     return topack_;
@@ -97,34 +106,40 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .APack topack = 2;</code>
    */
+  @java.lang.Override
   public int getTopackCount() {
     return topack_.size();
   }
   /**
    * <code>repeated .APack topack = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APack getTopack(int index) {
     return topack_.get(index);
   }
   /**
    * <code>repeated .APack topack = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackOrBuilder getTopackOrBuilder(
       int index) {
     return topack_.get(index);
   }
 
   public static final int LOAD_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruck> load_;
   /**
    * <code>repeated .APutOnTruck load = 3;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruck> getLoadList() {
     return load_;
   }
   /**
    * <code>repeated .APutOnTruck load = 3;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruckOrBuilder> 
       getLoadOrBuilderList() {
     return load_;
@@ -132,34 +147,40 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .APutOnTruck load = 3;</code>
    */
+  @java.lang.Override
   public int getLoadCount() {
     return load_.size();
   }
   /**
    * <code>repeated .APutOnTruck load = 3;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruck getLoad(int index) {
     return load_.get(index);
   }
   /**
    * <code>repeated .APutOnTruck load = 3;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruckOrBuilder getLoadOrBuilder(
       int index) {
     return load_.get(index);
   }
 
   public static final int QUERIES_FIELD_NUMBER = 4;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery> queries_;
   /**
    * <code>repeated .AQuery queries = 4;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery> getQueriesList() {
     return queries_;
   }
   /**
    * <code>repeated .AQuery queries = 4;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQueryOrBuilder> 
       getQueriesOrBuilderList() {
     return queries_;
@@ -167,73 +188,90 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .AQuery queries = 4;</code>
    */
+  @java.lang.Override
   public int getQueriesCount() {
     return queries_.size();
   }
   /**
    * <code>repeated .AQuery queries = 4;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery getQueries(int index) {
     return queries_.get(index);
   }
   /**
    * <code>repeated .AQuery queries = 4;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQueryOrBuilder getQueriesOrBuilder(
       int index) {
     return queries_.get(index);
   }
 
   public static final int SIMSPEED_FIELD_NUMBER = 5;
-  private int simspeed_;
+  private int simspeed_ = 0;
   /**
    * <code>optional uint32 simspeed = 5;</code>
+   * @return Whether the simspeed field is set.
    */
+  @java.lang.Override
   public boolean hasSimspeed() {
-    return ((bitField0_ & 0x00000001) == 0x00000001);
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
    * <code>optional uint32 simspeed = 5;</code>
+   * @return The simspeed.
    */
+  @java.lang.Override
   public int getSimspeed() {
     return simspeed_;
   }
 
   public static final int DISCONNECT_FIELD_NUMBER = 6;
-  private boolean disconnect_;
+  private boolean disconnect_ = false;
   /**
    * <code>optional bool disconnect = 6;</code>
+   * @return Whether the disconnect field is set.
    */
+  @java.lang.Override
   public boolean hasDisconnect() {
-    return ((bitField0_ & 0x00000002) == 0x00000002);
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
    * <code>optional bool disconnect = 6;</code>
+   * @return The disconnect.
    */
+  @java.lang.Override
   public boolean getDisconnect() {
     return disconnect_;
   }
 
   public static final int ACKS_FIELD_NUMBER = 7;
-  private java.util.List<java.lang.Long> acks_;
+  @SuppressWarnings("serial")
+  private com.google.protobuf.Internal.LongList acks_;
   /**
    * <code>repeated int64 acks = 7;</code>
+   * @return A list containing the acks.
    */
+  @java.lang.Override
   public java.util.List<java.lang.Long>
       getAcksList() {
     return acks_;
   }
   /**
    * <code>repeated int64 acks = 7;</code>
+   * @return The count of acks.
    */
   public int getAcksCount() {
     return acks_.size();
   }
   /**
    * <code>repeated int64 acks = 7;</code>
+   * @param index The index of the element to return.
+   * @return The acks at the given index.
    */
   public long getAcks(int index) {
-    return acks_.get(index);
+    return acks_.getLong(index);
   }
 
   public static edu.duke.ece568.minUPS.protocol.AmazontoWorld.ACommands parseFrom(
@@ -348,56 +386,49 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.AmazontoWorld.ACommands.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-        getBuyFieldBuilder();
-        getTopackFieldBuilder();
-        getLoadFieldBuilder();
-        getQueriesFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
       if (buyBuilder_ == null) {
         buy_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
       } else {
+        buy_ = null;
         buyBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000001);
       if (topackBuilder_ == null) {
         topack_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
+        topack_ = null;
         topackBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000002);
       if (loadBuilder_ == null) {
         load_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
       } else {
+        load_ = null;
         loadBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000004);
       if (queriesBuilder_ == null) {
         queries_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000008);
       } else {
+        queries_ = null;
         queriesBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000008);
       simspeed_ = 0;
-      bitField0_ = (bitField0_ & ~0x00000010);
       disconnect_ = false;
-      bitField0_ = (bitField0_ & ~0x00000020);
-      acks_ = java.util.Collections.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000040);
+      acks_ = emptyLongList();
       return this;
     }
 
@@ -424,10 +455,15 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.AmazontoWorld.ACommands buildPartial() {
       edu.duke.ece568.minUPS.protocol.AmazontoWorld.ACommands result = new edu.duke.ece568.minUPS.protocol.AmazontoWorld.ACommands(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
+      buildPartialRepeatedFields(result);
+      if (bitField0_ != 0) { buildPartial0(result); }
+      onBuilt();
+      return result;
+    }
+
+    private void buildPartialRepeatedFields(edu.duke.ece568.minUPS.protocol.AmazontoWorld.ACommands result) {
       if (buyBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           buy_ = java.util.Collections.unmodifiableList(buy_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
@@ -436,7 +472,7 @@ private static final long serialVersionUID = 0L;
         result.buy_ = buyBuilder_.build();
       }
       if (topackBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000002) != 0)) {
           topack_ = java.util.Collections.unmodifiableList(topack_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
@@ -445,7 +481,7 @@ private static final long serialVersionUID = 0L;
         result.topack_ = topackBuilder_.build();
       }
       if (loadBuilder_ == null) {
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000004) != 0)) {
           load_ = java.util.Collections.unmodifiableList(load_);
           bitField0_ = (bitField0_ & ~0x00000004);
         }
@@ -454,7 +490,7 @@ private static final long serialVersionUID = 0L;
         result.load_ = loadBuilder_.build();
       }
       if (queriesBuilder_ == null) {
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000008) != 0)) {
           queries_ = java.util.Collections.unmodifiableList(queries_);
           bitField0_ = (bitField0_ & ~0x00000008);
         }
@@ -462,62 +498,33 @@ private static final long serialVersionUID = 0L;
       } else {
         result.queries_ = queriesBuilder_.build();
       }
-      if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-        to_bitField0_ |= 0x00000001;
-      }
-      result.simspeed_ = simspeed_;
-      if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-        to_bitField0_ |= 0x00000002;
-      }
-      result.disconnect_ = disconnect_;
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        acks_ = java.util.Collections.unmodifiableList(acks_);
+      if (((bitField0_ & 0x00000040) != 0)) {
+        acks_.makeImmutable();
         bitField0_ = (bitField0_ & ~0x00000040);
       }
       result.acks_ = acks_;
-      result.bitField0_ = to_bitField0_;
-      onBuilt();
-      return result;
     }
 
-    @java.lang.Override
-    public Builder clone() {
-      return (Builder) super.clone();
+    private void buildPartial0(edu.duke.ece568.minUPS.protocol.AmazontoWorld.ACommands result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.simspeed_ = simspeed_;
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000020) != 0)) {
+        result.disconnect_ = disconnect_;
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
-    @java.lang.Override
-    public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.setField(field, value);
-    }
-    @java.lang.Override
-    public Builder clearField(
-        com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
-    }
-    @java.lang.Override
-    public Builder clearOneof(
-        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
-    }
-    @java.lang.Override
-    public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
-    }
-    @java.lang.Override
-    public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
-    }
+
     private int bitField0_;
 
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore> buy_ =
       java.util.Collections.emptyList();
     private void ensureBuyIsMutable() {
-      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+      if (!((bitField0_ & 0x00000001) != 0)) {
         buy_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore>(buy_);
         bitField0_ |= 0x00000001;
        }
@@ -746,7 +753,7 @@ private static final long serialVersionUID = 0L;
         buyBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMore.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APurchaseMoreOrBuilder>(
                 buy_,
-                ((bitField0_ & 0x00000001) == 0x00000001),
+                ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
                 isClean());
         buy_ = null;
@@ -757,7 +764,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APack> topack_ =
       java.util.Collections.emptyList();
     private void ensureTopackIsMutable() {
-      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (!((bitField0_ & 0x00000002) != 0)) {
         topack_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APack>(topack_);
         bitField0_ |= 0x00000002;
        }
@@ -986,7 +993,7 @@ private static final long serialVersionUID = 0L;
         topackBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.APack, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APack.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APackOrBuilder>(
                 topack_,
-                ((bitField0_ & 0x00000002) == 0x00000002),
+                ((bitField0_ & 0x00000002) != 0),
                 getParentForChildren(),
                 isClean());
         topack_ = null;
@@ -997,7 +1004,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruck> load_ =
       java.util.Collections.emptyList();
     private void ensureLoadIsMutable() {
-      if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+      if (!((bitField0_ & 0x00000004) != 0)) {
         load_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruck>(load_);
         bitField0_ |= 0x00000004;
        }
@@ -1226,7 +1233,7 @@ private static final long serialVersionUID = 0L;
         loadBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruck, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruck.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.APutOnTruckOrBuilder>(
                 load_,
-                ((bitField0_ & 0x00000004) == 0x00000004),
+                ((bitField0_ & 0x00000004) != 0),
                 getParentForChildren(),
                 isClean());
         load_ = null;
@@ -1237,7 +1244,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery> queries_ =
       java.util.Collections.emptyList();
     private void ensureQueriesIsMutable() {
-      if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+      if (!((bitField0_ & 0x00000008) != 0)) {
         queries_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery>(queries_);
         bitField0_ |= 0x00000008;
        }
@@ -1466,7 +1473,7 @@ private static final long serialVersionUID = 0L;
         queriesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery, edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQueryOrBuilder>(
                 queries_,
-                ((bitField0_ & 0x00000008) == 0x00000008),
+                ((bitField0_ & 0x00000008) != 0),
                 getParentForChildren(),
                 isClean());
         queries_ = null;
@@ -1477,27 +1484,35 @@ private static final long serialVersionUID = 0L;
     private int simspeed_ ;
     /**
      * <code>optional uint32 simspeed = 5;</code>
+     * @return Whether the simspeed field is set.
      */
+    @java.lang.Override
     public boolean hasSimspeed() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000010) != 0);
     }
     /**
      * <code>optional uint32 simspeed = 5;</code>
+     * @return The simspeed.
      */
+    @java.lang.Override
     public int getSimspeed() {
       return simspeed_;
     }
     /**
      * <code>optional uint32 simspeed = 5;</code>
+     * @param value The simspeed to set.
+     * @return This builder for chaining.
      */
     public Builder setSimspeed(int value) {
-      bitField0_ |= 0x00000010;
+
       simspeed_ = value;
+      bitField0_ |= 0x00000010;
       onChanged();
       return this;
     }
     /**
      * <code>optional uint32 simspeed = 5;</code>
+     * @return This builder for chaining.
      */
     public Builder clearSimspeed() {
       bitField0_ = (bitField0_ & ~0x00000010);
@@ -1509,27 +1524,35 @@ private static final long serialVersionUID = 0L;
     private boolean disconnect_ ;
     /**
      * <code>optional bool disconnect = 6;</code>
+     * @return Whether the disconnect field is set.
      */
+    @java.lang.Override
     public boolean hasDisconnect() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000020) != 0);
     }
     /**
      * <code>optional bool disconnect = 6;</code>
+     * @return The disconnect.
      */
+    @java.lang.Override
     public boolean getDisconnect() {
       return disconnect_;
     }
     /**
      * <code>optional bool disconnect = 6;</code>
+     * @param value The disconnect to set.
+     * @return This builder for chaining.
      */
     public Builder setDisconnect(boolean value) {
-      bitField0_ |= 0x00000020;
+
       disconnect_ = value;
+      bitField0_ |= 0x00000020;
       onChanged();
       return this;
     }
     /**
      * <code>optional bool disconnect = 6;</code>
+     * @return This builder for chaining.
      */
     public Builder clearDisconnect() {
       bitField0_ = (bitField0_ & ~0x00000020);
@@ -1538,53 +1561,67 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<java.lang.Long> acks_ = java.util.Collections.emptyList();
+    private com.google.protobuf.Internal.LongList acks_ = emptyLongList();
     private void ensureAcksIsMutable() {
-      if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-        acks_ = new java.util.ArrayList<java.lang.Long>(acks_);
+      if (!((bitField0_ & 0x00000040) != 0)) {
+        acks_ = mutableCopy(acks_);
         bitField0_ |= 0x00000040;
-       }
+      }
     }
     /**
      * <code>repeated int64 acks = 7;</code>
+     * @return A list containing the acks.
      */
     public java.util.List<java.lang.Long>
         getAcksList() {
-      return java.util.Collections.unmodifiableList(acks_);
+      return ((bitField0_ & 0x00000040) != 0) ?
+               java.util.Collections.unmodifiableList(acks_) : acks_;
     }
     /**
      * <code>repeated int64 acks = 7;</code>
+     * @return The count of acks.
      */
     public int getAcksCount() {
       return acks_.size();
     }
     /**
      * <code>repeated int64 acks = 7;</code>
+     * @param index The index of the element to return.
+     * @return The acks at the given index.
      */
     public long getAcks(int index) {
-      return acks_.get(index);
+      return acks_.getLong(index);
     }
     /**
      * <code>repeated int64 acks = 7;</code>
+     * @param index The index to set the value at.
+     * @param value The acks to set.
+     * @return This builder for chaining.
      */
     public Builder setAcks(
         int index, long value) {
+
       ensureAcksIsMutable();
-      acks_.set(index, value);
+      acks_.setLong(index, value);
       onChanged();
       return this;
     }
     /**
      * <code>repeated int64 acks = 7;</code>
+     * @param value The acks to add.
+     * @return This builder for chaining.
      */
     public Builder addAcks(long value) {
+
       ensureAcksIsMutable();
-      acks_.add(value);
+      acks_.addLong(value);
       onChanged();
       return this;
     }
     /**
      * <code>repeated int64 acks = 7;</code>
+     * @param values The acks to add.
+     * @return This builder for chaining.
      */
     public Builder addAllAcks(
         java.lang.Iterable<? extends java.lang.Long> values) {
@@ -1596,9 +1633,10 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>repeated int64 acks = 7;</code>
+     * @return This builder for chaining.
      */
     public Builder clearAcks() {
-      acks_ = java.util.Collections.emptyList();
+      acks_ = emptyLongList();
       bitField0_ = (bitField0_ & ~0x00000040);
       onChanged();
       return this;
@@ -1641,10 +1679,11 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(
-                builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+            .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();
     }

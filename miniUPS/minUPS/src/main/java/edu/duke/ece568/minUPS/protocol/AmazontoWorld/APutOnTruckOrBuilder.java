@@ -9,37 +9,45 @@ public interface APutOnTruckOrBuilder extends
 
   /**
    * <code>required int32 whnum = 1;</code>
+   * @return Whether the whnum field is set.
    */
   boolean hasWhnum();
   /**
    * <code>required int32 whnum = 1;</code>
+   * @return The whnum.
    */
   int getWhnum();
 
   /**
    * <code>required int32 truckid = 2;</code>
+   * @return Whether the truckid field is set.
    */
   boolean hasTruckid();
   /**
    * <code>required int32 truckid = 2;</code>
+   * @return The truckid.
    */
   int getTruckid();
 
   /**
    * <code>required int64 shipid = 3;</code>
+   * @return Whether the shipid field is set.
    */
   boolean hasShipid();
   /**
    * <code>required int64 shipid = 3;</code>
+   * @return The shipid.
    */
   long getShipid();
 
   /**
    * <code>required int64 seqnum = 4;</code>
+   * @return Whether the seqnum field is set.
    */
   boolean hasSeqnum();
   /**
    * <code>required int64 seqnum = 4;</code>
+   * @return The seqnum.
    */
   long getSeqnum();
 }

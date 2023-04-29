@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.UPStoWorld;
 /**
  * Protobuf type {@code protocol.UGoDeliver}
  */
-public  final class UGoDeliver extends
+public final class UGoDeliver extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:protocol.UGoDeliver)
     UGoDeliverOrBuilder {
@@ -16,16 +16,16 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private UGoDeliver() {
-    truckid_ = 0;
     packages_ = java.util.Collections.emptyList();
-    seqnum_ = 0L;
   }
 
   @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new UGoDeliver();
   }
+
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.UPStoWorld.WorldUps.internal_static_protocol_UGoDeliver_descriptor;
@@ -41,31 +41,38 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int TRUCKID_FIELD_NUMBER = 1;
-  private int truckid_;
+  private int truckid_ = 0;
   /**
    * <code>required int32 truckid = 1;</code>
+   * @return Whether the truckid field is set.
    */
+  @java.lang.Override
   public boolean hasTruckid() {
-    return ((bitField0_ & 0x00000001) == 0x00000001);
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
    * <code>required int32 truckid = 1;</code>
+   * @return The truckid.
    */
+  @java.lang.Override
   public int getTruckid() {
     return truckid_;
   }
 
   public static final int PACKAGES_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocation> packages_;
   /**
    * <code>repeated .protocol.UDeliveryLocation packages = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocation> getPackagesList() {
     return packages_;
   }
   /**
    * <code>repeated .protocol.UDeliveryLocation packages = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocationOrBuilder> 
       getPackagesOrBuilderList() {
     return packages_;
@@ -73,34 +80,41 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .protocol.UDeliveryLocation packages = 2;</code>
    */
+  @java.lang.Override
   public int getPackagesCount() {
     return packages_.size();
   }
   /**
    * <code>repeated .protocol.UDeliveryLocation packages = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocation getPackages(int index) {
     return packages_.get(index);
   }
   /**
    * <code>repeated .protocol.UDeliveryLocation packages = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocationOrBuilder getPackagesOrBuilder(
       int index) {
     return packages_.get(index);
   }
 
   public static final int SEQNUM_FIELD_NUMBER = 3;
-  private long seqnum_;
+  private long seqnum_ = 0L;
   /**
    * <code>required int64 seqnum = 3;</code>
+   * @return Whether the seqnum field is set.
    */
+  @java.lang.Override
   public boolean hasSeqnum() {
-    return ((bitField0_ & 0x00000002) == 0x00000002);
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
    * <code>required int64 seqnum = 3;</code>
+   * @return The seqnum.
    */
+  @java.lang.Override
   public long getSeqnum() {
     return seqnum_;
   }
@@ -217,33 +231,27 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.UPStoWorld.UGoDeliver.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-        getPackagesFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
       truckid_ = 0;
-      bitField0_ = (bitField0_ & ~0x00000001);
       if (packagesBuilder_ == null) {
         packages_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
+        packages_ = null;
         packagesBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000002);
       seqnum_ = 0L;
-      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -270,14 +278,15 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.UPStoWorld.UGoDeliver buildPartial() {
       edu.duke.ece568.minUPS.protocol.UPStoWorld.UGoDeliver result = new edu.duke.ece568.minUPS.protocol.UPStoWorld.UGoDeliver(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-        to_bitField0_ |= 0x00000001;
-      }
-      result.truckid_ = truckid_;
+      buildPartialRepeatedFields(result);
+      if (bitField0_ != 0) { buildPartial0(result); }
+      onBuilt();
+      return result;
+    }
+
+    private void buildPartialRepeatedFields(edu.duke.ece568.minUPS.protocol.UPStoWorld.UGoDeliver result) {
       if (packagesBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000002) != 0)) {
           packages_ = java.util.Collections.unmodifiableList(packages_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
@@ -285,73 +294,56 @@ private static final long serialVersionUID = 0L;
       } else {
         result.packages_ = packagesBuilder_.build();
       }
-      if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-        to_bitField0_ |= 0x00000002;
-      }
-      result.seqnum_ = seqnum_;
-      result.bitField0_ = to_bitField0_;
-      onBuilt();
-      return result;
     }
 
-    @java.lang.Override
-    public Builder clone() {
-      return (Builder) super.clone();
+    private void buildPartial0(edu.duke.ece568.minUPS.protocol.UPStoWorld.UGoDeliver result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.truckid_ = truckid_;
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.seqnum_ = seqnum_;
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
-    @java.lang.Override
-    public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.setField(field, value);
-    }
-    @java.lang.Override
-    public Builder clearField(
-        com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
-    }
-    @java.lang.Override
-    public Builder clearOneof(
-        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
-    }
-    @java.lang.Override
-    public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
-    }
-    @java.lang.Override
-    public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
-    }
+
     private int bitField0_;
 
     private int truckid_ ;
     /**
      * <code>required int32 truckid = 1;</code>
+     * @return Whether the truckid field is set.
      */
+    @java.lang.Override
     public boolean hasTruckid() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>required int32 truckid = 1;</code>
+     * @return The truckid.
      */
+    @java.lang.Override
     public int getTruckid() {
       return truckid_;
     }
     /**
      * <code>required int32 truckid = 1;</code>
+     * @param value The truckid to set.
+     * @return This builder for chaining.
      */
     public Builder setTruckid(int value) {
-      bitField0_ |= 0x00000001;
+
       truckid_ = value;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <code>required int32 truckid = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearTruckid() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -363,7 +355,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocation> packages_ =
       java.util.Collections.emptyList();
     private void ensurePackagesIsMutable() {
-      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (!((bitField0_ & 0x00000002) != 0)) {
         packages_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocation>(packages_);
         bitField0_ |= 0x00000002;
        }
@@ -592,7 +584,7 @@ private static final long serialVersionUID = 0L;
         packagesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocation, edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocation.Builder, edu.duke.ece568.minUPS.protocol.UPStoWorld.UDeliveryLocationOrBuilder>(
                 packages_,
-                ((bitField0_ & 0x00000002) == 0x00000002),
+                ((bitField0_ & 0x00000002) != 0),
                 getParentForChildren(),
                 isClean());
         packages_ = null;
@@ -603,27 +595,35 @@ private static final long serialVersionUID = 0L;
     private long seqnum_ ;
     /**
      * <code>required int64 seqnum = 3;</code>
+     * @return Whether the seqnum field is set.
      */
+    @java.lang.Override
     public boolean hasSeqnum() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
      * <code>required int64 seqnum = 3;</code>
+     * @return The seqnum.
      */
+    @java.lang.Override
     public long getSeqnum() {
       return seqnum_;
     }
     /**
      * <code>required int64 seqnum = 3;</code>
+     * @param value The seqnum to set.
+     * @return This builder for chaining.
      */
     public Builder setSeqnum(long value) {
-      bitField0_ |= 0x00000004;
+
       seqnum_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 seqnum = 3;</code>
+     * @return This builder for chaining.
      */
     public Builder clearSeqnum() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -669,10 +669,11 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(
-                builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+            .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();
     }

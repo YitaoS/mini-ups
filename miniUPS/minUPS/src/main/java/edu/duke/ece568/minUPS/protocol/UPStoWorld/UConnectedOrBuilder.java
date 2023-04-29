@@ -9,23 +9,28 @@ public interface UConnectedOrBuilder extends
 
   /**
    * <code>required int64 worldid = 1;</code>
+   * @return Whether the worldid field is set.
    */
   boolean hasWorldid();
   /**
    * <code>required int64 worldid = 1;</code>
+   * @return The worldid.
    */
   long getWorldid();
 
   /**
    * <code>required string result = 2;</code>
+   * @return Whether the result field is set.
    */
   boolean hasResult();
   /**
    * <code>required string result = 2;</code>
+   * @return The result.
    */
   java.lang.String getResult();
   /**
    * <code>required string result = 2;</code>
+   * @return The bytes for result.
    */
   com.google.protobuf.ByteString
       getResultBytes();

@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.AmazontoWorld;
 /**
  * Protobuf type {@code AConnect}
  */
-public  final class AConnect extends
+public final class AConnect extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:AConnect)
     AConnectOrBuilder {
@@ -16,16 +16,16 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private AConnect() {
-    worldid_ = 0L;
     initwh_ = java.util.Collections.emptyList();
-    isAmazon_ = false;
   }
 
   @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new AConnect();
   }
+
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.AmazontoWorld.AmazontoWorld.internal_static_AConnect_descriptor;
@@ -41,31 +41,38 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int WORLDID_FIELD_NUMBER = 1;
-  private long worldid_;
+  private long worldid_ = 0L;
   /**
    * <code>optional int64 worldid = 1;</code>
+   * @return Whether the worldid field is set.
    */
+  @java.lang.Override
   public boolean hasWorldid() {
-    return ((bitField0_ & 0x00000001) == 0x00000001);
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
    * <code>optional int64 worldid = 1;</code>
+   * @return The worldid.
    */
+  @java.lang.Override
   public long getWorldid() {
     return worldid_;
   }
 
   public static final int INITWH_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouse> initwh_;
   /**
    * <code>repeated .AInitWarehouse initwh = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouse> getInitwhList() {
     return initwh_;
   }
   /**
    * <code>repeated .AInitWarehouse initwh = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouseOrBuilder> 
       getInitwhOrBuilderList() {
     return initwh_;
@@ -73,34 +80,41 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .AInitWarehouse initwh = 2;</code>
    */
+  @java.lang.Override
   public int getInitwhCount() {
     return initwh_.size();
   }
   /**
    * <code>repeated .AInitWarehouse initwh = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouse getInitwh(int index) {
     return initwh_.get(index);
   }
   /**
    * <code>repeated .AInitWarehouse initwh = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouseOrBuilder getInitwhOrBuilder(
       int index) {
     return initwh_.get(index);
   }
 
   public static final int ISAMAZON_FIELD_NUMBER = 3;
-  private boolean isAmazon_;
+  private boolean isAmazon_ = false;
   /**
    * <code>required bool isAmazon = 3;</code>
+   * @return Whether the isAmazon field is set.
    */
+  @java.lang.Override
   public boolean hasIsAmazon() {
-    return ((bitField0_ & 0x00000002) == 0x00000002);
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
    * <code>required bool isAmazon = 3;</code>
+   * @return The isAmazon.
    */
+  @java.lang.Override
   public boolean getIsAmazon() {
     return isAmazon_;
   }
@@ -217,33 +231,27 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnect.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-        getInitwhFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
       worldid_ = 0L;
-      bitField0_ = (bitField0_ & ~0x00000001);
       if (initwhBuilder_ == null) {
         initwh_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
+        initwh_ = null;
         initwhBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000002);
       isAmazon_ = false;
-      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -270,14 +278,15 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnect buildPartial() {
       edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnect result = new edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnect(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-        to_bitField0_ |= 0x00000001;
-      }
-      result.worldid_ = worldid_;
+      buildPartialRepeatedFields(result);
+      if (bitField0_ != 0) { buildPartial0(result); }
+      onBuilt();
+      return result;
+    }
+
+    private void buildPartialRepeatedFields(edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnect result) {
       if (initwhBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000002) != 0)) {
           initwh_ = java.util.Collections.unmodifiableList(initwh_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
@@ -285,73 +294,56 @@ private static final long serialVersionUID = 0L;
       } else {
         result.initwh_ = initwhBuilder_.build();
       }
-      if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-        to_bitField0_ |= 0x00000002;
-      }
-      result.isAmazon_ = isAmazon_;
-      result.bitField0_ = to_bitField0_;
-      onBuilt();
-      return result;
     }
 
-    @java.lang.Override
-    public Builder clone() {
-      return (Builder) super.clone();
+    private void buildPartial0(edu.duke.ece568.minUPS.protocol.AmazontoWorld.AConnect result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.worldid_ = worldid_;
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.isAmazon_ = isAmazon_;
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
-    @java.lang.Override
-    public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.setField(field, value);
-    }
-    @java.lang.Override
-    public Builder clearField(
-        com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
-    }
-    @java.lang.Override
-    public Builder clearOneof(
-        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
-    }
-    @java.lang.Override
-    public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
-    }
-    @java.lang.Override
-    public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
-    }
+
     private int bitField0_;
 
     private long worldid_ ;
     /**
      * <code>optional int64 worldid = 1;</code>
+     * @return Whether the worldid field is set.
      */
+    @java.lang.Override
     public boolean hasWorldid() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>optional int64 worldid = 1;</code>
+     * @return The worldid.
      */
+    @java.lang.Override
     public long getWorldid() {
       return worldid_;
     }
     /**
      * <code>optional int64 worldid = 1;</code>
+     * @param value The worldid to set.
+     * @return This builder for chaining.
      */
     public Builder setWorldid(long value) {
-      bitField0_ |= 0x00000001;
+
       worldid_ = value;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <code>optional int64 worldid = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearWorldid() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -363,7 +355,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouse> initwh_ =
       java.util.Collections.emptyList();
     private void ensureInitwhIsMutable() {
-      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (!((bitField0_ & 0x00000002) != 0)) {
         initwh_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouse>(initwh_);
         bitField0_ |= 0x00000002;
        }
@@ -592,7 +584,7 @@ private static final long serialVersionUID = 0L;
         initwhBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouse, edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouse.Builder, edu.duke.ece568.minUPS.protocol.AmazontoWorld.AInitWarehouseOrBuilder>(
                 initwh_,
-                ((bitField0_ & 0x00000002) == 0x00000002),
+                ((bitField0_ & 0x00000002) != 0),
                 getParentForChildren(),
                 isClean());
         initwh_ = null;
@@ -603,27 +595,35 @@ private static final long serialVersionUID = 0L;
     private boolean isAmazon_ ;
     /**
      * <code>required bool isAmazon = 3;</code>
+     * @return Whether the isAmazon field is set.
      */
+    @java.lang.Override
     public boolean hasIsAmazon() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
      * <code>required bool isAmazon = 3;</code>
+     * @return The isAmazon.
      */
+    @java.lang.Override
     public boolean getIsAmazon() {
       return isAmazon_;
     }
     /**
      * <code>required bool isAmazon = 3;</code>
+     * @param value The isAmazon to set.
+     * @return This builder for chaining.
      */
     public Builder setIsAmazon(boolean value) {
-      bitField0_ |= 0x00000004;
+
       isAmazon_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
      * <code>required bool isAmazon = 3;</code>
+     * @return This builder for chaining.
      */
     public Builder clearIsAmazon() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -669,10 +669,11 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(
-                builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+            .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();
     }

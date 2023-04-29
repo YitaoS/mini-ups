@@ -9,33 +9,40 @@ public interface AProductOrBuilder extends
 
   /**
    * <code>required int64 id = 1;</code>
+   * @return Whether the id field is set.
    */
   boolean hasId();
   /**
    * <code>required int64 id = 1;</code>
+   * @return The id.
    */
   long getId();
 
   /**
    * <code>required string description = 2;</code>
+   * @return Whether the description field is set.
    */
   boolean hasDescription();
   /**
    * <code>required string description = 2;</code>
+   * @return The description.
    */
   java.lang.String getDescription();
   /**
    * <code>required string description = 2;</code>
+   * @return The bytes for description.
    */
   com.google.protobuf.ByteString
       getDescriptionBytes();
 
   /**
    * <code>required int32 count = 3;</code>
+   * @return Whether the count field is set.
    */
   boolean hasCount();
   /**
    * <code>required int32 count = 3;</code>
+   * @return The count.
    */
   int getCount();
 }

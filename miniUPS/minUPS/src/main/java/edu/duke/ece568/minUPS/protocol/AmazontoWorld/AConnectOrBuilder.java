@@ -9,10 +9,12 @@ public interface AConnectOrBuilder extends
 
   /**
    * <code>optional int64 worldid = 1;</code>
+   * @return Whether the worldid field is set.
    */
   boolean hasWorldid();
   /**
    * <code>optional int64 worldid = 1;</code>
+   * @return The worldid.
    */
   long getWorldid();
 
@@ -42,10 +44,12 @@ public interface AConnectOrBuilder extends
 
   /**
    * <code>required bool isAmazon = 3;</code>
+   * @return Whether the isAmazon field is set.
    */
   boolean hasIsAmazon();
   /**
    * <code>required bool isAmazon = 3;</code>
+   * @return The isAmazon.
    */
   boolean getIsAmazon();
 }

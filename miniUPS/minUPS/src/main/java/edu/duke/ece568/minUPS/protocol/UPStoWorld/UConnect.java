@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.UPStoWorld;
 /**
  * Protobuf type {@code protocol.UConnect}
  */
-public  final class UConnect extends
+public final class UConnect extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:protocol.UConnect)
     UConnectOrBuilder {
@@ -16,16 +16,16 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private UConnect() {
-    worldid_ = 0L;
     trucks_ = java.util.Collections.emptyList();
-    isAmazon_ = false;
   }
 
   @java.lang.Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new UConnect();
   }
+
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.UPStoWorld.WorldUps.internal_static_protocol_UConnect_descriptor;
@@ -41,31 +41,38 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int WORLDID_FIELD_NUMBER = 1;
-  private long worldid_;
+  private long worldid_ = 0L;
   /**
    * <code>optional int64 worldid = 1;</code>
+   * @return Whether the worldid field is set.
    */
+  @java.lang.Override
   public boolean hasWorldid() {
-    return ((bitField0_ & 0x00000001) == 0x00000001);
+    return ((bitField0_ & 0x00000001) != 0);
   }
   /**
    * <code>optional int64 worldid = 1;</code>
+   * @return The worldid.
    */
+  @java.lang.Override
   public long getWorldid() {
     return worldid_;
   }
 
   public static final int TRUCKS_FIELD_NUMBER = 2;
+  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruck> trucks_;
   /**
    * <code>repeated .protocol.UInitTruck trucks = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruck> getTrucksList() {
     return trucks_;
   }
   /**
    * <code>repeated .protocol.UInitTruck trucks = 2;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruckOrBuilder> 
       getTrucksOrBuilderList() {
     return trucks_;
@@ -73,34 +80,41 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .protocol.UInitTruck trucks = 2;</code>
    */
+  @java.lang.Override
   public int getTrucksCount() {
     return trucks_.size();
   }
   /**
    * <code>repeated .protocol.UInitTruck trucks = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruck getTrucks(int index) {
     return trucks_.get(index);
   }
   /**
    * <code>repeated .protocol.UInitTruck trucks = 2;</code>
    */
+  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruckOrBuilder getTrucksOrBuilder(
       int index) {
     return trucks_.get(index);
   }
 
   public static final int ISAMAZON_FIELD_NUMBER = 3;
-  private boolean isAmazon_;
+  private boolean isAmazon_ = false;
   /**
    * <code>required bool isAmazon = 3;</code>
+   * @return Whether the isAmazon field is set.
    */
+  @java.lang.Override
   public boolean hasIsAmazon() {
-    return ((bitField0_ & 0x00000002) == 0x00000002);
+    return ((bitField0_ & 0x00000002) != 0);
   }
   /**
    * <code>required bool isAmazon = 3;</code>
+   * @return The isAmazon.
    */
+  @java.lang.Override
   public boolean getIsAmazon() {
     return isAmazon_;
   }
@@ -217,33 +231,27 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.UPStoWorld.UConnect.newBuilder()
     private Builder() {
-      maybeForceBuilderInitialization();
+
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-        getTrucksFieldBuilder();
-      }
+
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
+      bitField0_ = 0;
       worldid_ = 0L;
-      bitField0_ = (bitField0_ & ~0x00000001);
       if (trucksBuilder_ == null) {
         trucks_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
+        trucks_ = null;
         trucksBuilder_.clear();
       }
+      bitField0_ = (bitField0_ & ~0x00000002);
       isAmazon_ = false;
-      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -270,14 +278,15 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.UPStoWorld.UConnect buildPartial() {
       edu.duke.ece568.minUPS.protocol.UPStoWorld.UConnect result = new edu.duke.ece568.minUPS.protocol.UPStoWorld.UConnect(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-        to_bitField0_ |= 0x00000001;
-      }
-      result.worldid_ = worldid_;
+      buildPartialRepeatedFields(result);
+      if (bitField0_ != 0) { buildPartial0(result); }
+      onBuilt();
+      return result;
+    }
+
+    private void buildPartialRepeatedFields(edu.duke.ece568.minUPS.protocol.UPStoWorld.UConnect result) {
       if (trucksBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000002) != 0)) {
           trucks_ = java.util.Collections.unmodifiableList(trucks_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
@@ -285,73 +294,56 @@ private static final long serialVersionUID = 0L;
       } else {
         result.trucks_ = trucksBuilder_.build();
       }
-      if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-        to_bitField0_ |= 0x00000002;
-      }
-      result.isAmazon_ = isAmazon_;
-      result.bitField0_ = to_bitField0_;
-      onBuilt();
-      return result;
     }
 
-    @java.lang.Override
-    public Builder clone() {
-      return (Builder) super.clone();
+    private void buildPartial0(edu.duke.ece568.minUPS.protocol.UPStoWorld.UConnect result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        result.worldid_ = worldid_;
+        to_bitField0_ |= 0x00000001;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.isAmazon_ = isAmazon_;
+        to_bitField0_ |= 0x00000002;
+      }
+      result.bitField0_ |= to_bitField0_;
     }
-    @java.lang.Override
-    public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.setField(field, value);
-    }
-    @java.lang.Override
-    public Builder clearField(
-        com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
-    }
-    @java.lang.Override
-    public Builder clearOneof(
-        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
-    }
-    @java.lang.Override
-    public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
-    }
-    @java.lang.Override
-    public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
-    }
+
     private int bitField0_;
 
     private long worldid_ ;
     /**
      * <code>optional int64 worldid = 1;</code>
+     * @return Whether the worldid field is set.
      */
+    @java.lang.Override
     public boolean hasWorldid() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
+      return ((bitField0_ & 0x00000001) != 0);
     }
     /**
      * <code>optional int64 worldid = 1;</code>
+     * @return The worldid.
      */
+    @java.lang.Override
     public long getWorldid() {
       return worldid_;
     }
     /**
      * <code>optional int64 worldid = 1;</code>
+     * @param value The worldid to set.
+     * @return This builder for chaining.
      */
     public Builder setWorldid(long value) {
-      bitField0_ |= 0x00000001;
+
       worldid_ = value;
+      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <code>optional int64 worldid = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearWorldid() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -363,7 +355,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruck> trucks_ =
       java.util.Collections.emptyList();
     private void ensureTrucksIsMutable() {
-      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (!((bitField0_ & 0x00000002) != 0)) {
         trucks_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruck>(trucks_);
         bitField0_ |= 0x00000002;
        }
@@ -592,7 +584,7 @@ private static final long serialVersionUID = 0L;
         trucksBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruck, edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruck.Builder, edu.duke.ece568.minUPS.protocol.UPStoWorld.UInitTruckOrBuilder>(
                 trucks_,
-                ((bitField0_ & 0x00000002) == 0x00000002),
+                ((bitField0_ & 0x00000002) != 0),
                 getParentForChildren(),
                 isClean());
         trucks_ = null;
@@ -603,27 +595,35 @@ private static final long serialVersionUID = 0L;
     private boolean isAmazon_ ;
     /**
      * <code>required bool isAmazon = 3;</code>
+     * @return Whether the isAmazon field is set.
      */
+    @java.lang.Override
     public boolean hasIsAmazon() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000004) != 0);
     }
     /**
      * <code>required bool isAmazon = 3;</code>
+     * @return The isAmazon.
      */
+    @java.lang.Override
     public boolean getIsAmazon() {
       return isAmazon_;
     }
     /**
      * <code>required bool isAmazon = 3;</code>
+     * @param value The isAmazon to set.
+     * @return This builder for chaining.
      */
     public Builder setIsAmazon(boolean value) {
-      bitField0_ |= 0x00000004;
+
       isAmazon_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
      * <code>required bool isAmazon = 3;</code>
+     * @return This builder for chaining.
      */
     public Builder clearIsAmazon() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -669,10 +669,11 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
+      } catch (com.google.protobuf.UninitializedMessageException e) {
+        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(
-                builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+            .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();
     }
