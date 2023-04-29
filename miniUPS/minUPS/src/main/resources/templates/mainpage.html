@@ -6,6 +6,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+    <style>
+        #logo {
+            background: #ffb710;
+            border-radius: 7px;
+            width: 100%;
+            color: white;
+            padding: 5px;
+            font-size: xxx-large;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+
+
 </head>
 <body>
 <div class="container">
@@ -35,17 +52,83 @@
         </div>
     </nav>
 
-    <h1>Main Page</h1>
+    <div class="wrap">
+        <label id="logo">UPS</label>
+    </div>
     <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
         <p th:text="${errorMessage}"></p>
     </div>
     <form th:action="@{/searchPackage}" method="get">
         <div class="form-group">
-            <label for="packageId">Your Package ID:</label>
+            <label for="packageId">Search Package ID:</label>
             <input type="number" class="form-control" id="packageId" name="packageId" required />
         </div>
-        <button type="submit" class="btn btn-primary">Search Package ID</button>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
+
+<audio id="myAudio">
+    <source src="audio/background-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<!-- Add these elements to show the playback state to the user -->
+<div id="loading" style="display:none;">Loading...</div>
+<div id="playing" style="display:none;">Playing</div>
+<div id="paused">Paused</div>
+
+<p>Enjot some music!</p>
+
+<button onclick="playAudio()" type="button">Play Audio</button>
+<button onclick="pauseAudio()" type="button">Pause Audio</button>
+
+<script>
+    var myAudio = document.getElementById("myAudio");
+    var loading = document.getElementById("loading");
+    var playing = document.getElementById("playing");
+    var paused = document.getElementById("paused");
+
+    function showLoading() {
+        loading.style.display = "block";
+        playing.style.display = "none";
+        paused.style.display = "none";
+    }
+
+    function showPlaying() {
+        loading.style.display = "none";
+        playing.style.display = "block";
+        paused.style.display = "none";
+    }
+
+    function showPaused() {
+        loading.style.display = "none";
+        playing.style.display = "none";
+        paused.style.display = "block";
+    }
+
+    function playAudio() {
+        showLoading();
+        var playPromise = myAudio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(_ => {
+                // Automatic playback started!
+                // Show playing UI.
+                showPlaying();
+            })
+                .catch(error => {
+                    // Auto-play was prevented
+                    // Show paused UI.
+                    showPaused();
+                });
+        }
+    }
+
+    function pauseAudio() {
+        myAudio.pause();
+        showPaused();
+    }
+</script>
+
 </body>
 </html>

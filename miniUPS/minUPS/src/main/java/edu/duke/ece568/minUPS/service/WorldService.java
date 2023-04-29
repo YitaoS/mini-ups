@@ -413,42 +413,47 @@ public class WorldService {
 //        required int32 y = 3;
 //    }
     // public void RunTest() throws IOException{
-    //     UConnect.Builder uConnectBuilder = UConnect.newBuilder();
-    //     truckDao.deleteAll();
-    //     for (int i = 0; i < TRUCK_CNT; ++i) {
-    //         UInitTruck.Builder uInitBuilder = UInitTruck.newBuilder();
-    //         uInitBuilder.setId(i).setX(TRUCK_X).setY(TRUCK_Y);
-    //         uConnectBuilder.addTrucks(uInitBuilder.build());
-    //         Truck truck = new Truck();
-    //         truck.setPosX(TRUCK_X);
-    //         truck.setPosY(TRUCK_Y);
-    //         truck.setStatus(Truck.Status.IDLE.getText());
-    //         truck.setTruckID(i);
-    //         truckDao.save(truck);
-    //     }
-    //     uConnectBuilder.setIsAmazon(false);
-    //     UConnect request = uConnectBuilder.build();
-    //     LOG.info("sending world -------- " + request + "-----------\n");
-    //     request.writeDelimitedTo(worldStream.outputStream);
-
-    //     receiveConnectedFromWorld();
-    //     new Thread(()->{
-    //         while (true) {
-    //         try {
-    //             receiveUResponses();
-    //         } catch (IOException e) {
-    //             LOG.error("world listener error:" + e.getMessage());
-    //             System.exit(1);
-    //         }
-    //     }}).start();
-    //     goDeliver(1,0,4,5);
-    //     // goDeliver(2,3,1,8);
-    //     // trackingTruckInfo(0);
-    //     // trackingTruckInfo(1);
-    //     // trackingTruckInfo(2);
-    //     // trackingTruckInfo(3);
-    //     // pickup(0, 7, 6);
-    //     // pickup(4, 2, 5);
+//         try{
+//             String userEmail = userService.getEmailByUpsID("peicansx");
+//             emailService.sendDeliveredEmail(3, "iphone",userEmail);
+//         }catch (Exception ignored) {
+//        }
+//         UConnect.Builder uConnectBuilder = UConnect.newBuilder();
+//         truckDao.deleteAll();
+//         for (int i = 0; i < TRUCK_CNT; ++i) {
+//             UInitTruck.Builder uInitBuilder = UInitTruck.newBuilder();
+//             uInitBuilder.setId(i).setX(TRUCK_X).setY(TRUCK_Y);
+//             uConnectBuilder.addTrucks(uInitBuilder.build());
+//             Truck truck = new Truck();
+//             truck.setPosX(TRUCK_X);
+//             truck.setPosY(TRUCK_Y);
+//             truck.setStatus(Truck.Status.IDLE.getText());
+//             truck.setTruckID(i);
+//             truckDao.save(truck);
+//         }
+//         uConnectBuilder.setIsAmazon(false);
+//         UConnect request = uConnectBuilder.build();
+//         LOG.info("sending world -------- " + request + "-----------\n");
+//         request.writeDelimitedTo(worldStream.outputStream);
+//
+//         receiveConnectedFromWorld();
+//         new Thread(()->{
+//             while (true) {
+//             try {
+//                 receiveUResponses();
+//             } catch (IOException e) {
+//                 LOG.error("world listener error:" + e.getMessage());
+//                 System.exit(1);
+//             }
+//         }}).start();
+//         goDeliver(1,0,4,5);
+         // goDeliver(2,3,1,8);
+         // trackingTruckInfo(0);
+         // trackingTruckInfo(1);
+         // trackingTruckInfo(2);
+         // trackingTruckInfo(3);
+         // pickup(0, 7, 6);
+         // pickup(4, 2, 5);
 
 
     // }

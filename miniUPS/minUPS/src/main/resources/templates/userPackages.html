@@ -7,6 +7,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
 </head>
 <body>
 <div class="container">
@@ -34,7 +37,7 @@
       <td th:if="${pkg.status != 'delivering' and pkg.status != 'delivered'}">Wait for delivery</td>
       <td th:text="${distances[__${i.index}__]}"></td>
       <td>
-        <form th:if="${pkg.status != 'delivered'}" th:action="@{/changedest/{id}(id=${pkg.packageID})}" method="get">
+        <form th:if="${pkg.status != 'delivered' and pkg.status != 'delivering'}" th:action="@{/changedest/{id}(id=${pkg.packageID})}" method="get">
           <button type="submit">Change Destination</button>
         </form>
       </td>

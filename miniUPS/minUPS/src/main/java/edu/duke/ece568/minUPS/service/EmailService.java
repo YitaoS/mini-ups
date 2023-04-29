@@ -54,7 +54,6 @@ public class EmailService {
         try {
             // Create a message
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("default from email"));
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
