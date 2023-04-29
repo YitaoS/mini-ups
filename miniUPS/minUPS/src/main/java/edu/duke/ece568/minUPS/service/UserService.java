@@ -99,5 +99,21 @@ public class UserService implements UserDetailsService {
         return packageDao.findAllByUpsID(upsID);
     }
 
+    public void updateEmail(String currentEmail, String newEmail) {
+        Users user = userDao.findByEmail(currentEmail).orElse(null);
+        if (user != null) {
+            user.setEmail(newEmail);
+            userDao.save(user);
+        }
+    }
+
+    public void updatePassword(Users user, String newPassword) {
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPassword(encodedPassword);
+        userDao.save(user);
+    }
+
+
+
 }
 

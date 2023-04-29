@@ -61,6 +61,10 @@
                     </form>
                 </li>
                 <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+                    <a class="nav-link" href="/userProfile">User Profile</a>
+                </li>
+
+                <li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
                     <a class="nav-link" href="/userPackages">Check Your Packages</a>
                 </li>
             </ul>
@@ -75,7 +79,7 @@
     </div>
     <form th:action="@{/searchPackage}" method="get">
         <div class="form-group">
-            <label for="packageId">Search Package ID:</label>
+            <label for="packageId">Search Tracking number:</label>
             <input type="number" class="form-control" id="packageId" name="packageId" required />
         </div>
         <button type="submit" class="btn btn-primary">Search</button>

@@ -13,6 +13,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,9 @@ import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private UserService userService;
@@ -104,7 +108,7 @@ public class UserController {
     public String searchPackage(@RequestParam("packageId") Long packageId, Model model) {
         Package foundPackage = userService.findPackageById(packageId);
         if (foundPackage == null) {
-            model.addAttribute("errorMessage", "Sorry, the packageID is not valid!");
+            model.addAttribute("errorMessage", "Sorry, the Tracking number is not valid!");
             return "mainpage";
         }
         model.addAttribute("foundPackage", foundPackage);
@@ -161,6 +165,44 @@ public class UserController {
         return "redirect:/userPackages";
     }
 
+    @GetMapping("/userProfile")
+    public String showUserProfile(Model model, Principal principal) {
+        if (principal != null) {
+            Users user = userService.findByEmail(principal.getName()).orElse(null);
+            if (user != null) {
+                model.addAttribute("user", user);
+            }
 
-
+        }
+        return "userProfile";
     }
+
+
+    @GetMapping("/changePassword")
+    public String showChangePasswordForm() {
+        return "changePassword";
+    }
+
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword, Model model, Principal principal, RedirectAttributes redirectAttributes) {
+        Users user = userService.findByEmail(principal.getName()).orElse(null);
+        if (user != null) {
+            if (!newPassword.equals(confirmPassword)) {
+                model.addAttribute("passwordError", "New password and confirm password do not match!");
+                return "changePassword";
+            }
+            if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+                model.addAttribute("passwordError", "Old password is incorrect!");
+                return "changePassword";
+            }
+            userService.updatePassword(user, newPassword);
+            redirectAttributes.addFlashAttribute("message", "Password updated successfully!");
+        }
+        return "redirect:/userProfile";
+    }
+
+
+
+
+
+}
