@@ -5,21 +5,23 @@ import edu.duke.ece568.minUPS.entity.Users;
 import edu.duke.ece568.minUPS.entity.Truck;
 import edu.duke.ece568.minUPS.service.UserService;
 import edu.duke.ece568.minUPS.service.PackageService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.persistence.PersistenceException;
 import java.security.Principal;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @Controller
 public class UserController {
@@ -37,10 +39,28 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(Users users) {
-        userService.registerUser(users);
-        return "redirect:/login";
+    public String registerUser(@ModelAttribute("user") Users users, Model model) {
+        try {
+            userService.registerUser(users);
+            return "redirect:/login";
+        }catch (DataIntegrityViolationException e) {
+            Throwable cause = e.getCause();
+            if (cause instanceof ConstraintViolationException) {
+                ConstraintViolationException constraintException = (ConstraintViolationException) cause;
+                String errorMessage = constraintException.getSQLException().getMessage();
+
+                if (errorMessage.contains("Key (upsid)=")) {
+                    model.addAttribute("error", "UpsID already exists!");
+                } else if (errorMessage.contains("Key (email)=")) {
+                    model.addAttribute("error", "This email is already used!");
+                }
+            }
+            return "register";
+        }
+
     }
+
+
 
     @GetMapping("/login")
     public String showLoginForm() {
