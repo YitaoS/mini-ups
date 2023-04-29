@@ -72,7 +72,7 @@ public class WorldService {
     public void setAmazonService(AmazonService amazonService){
         this.amazonService = amazonService;
     }
- 
+
     public void connectWorld() throws IOException {
         UConnect.Builder uConnectBuilder = UConnect.newBuilder();
         uConnectBuilder.setWorldid(worldId);
@@ -91,7 +91,7 @@ public class WorldService {
         }
         uConnectBuilder.setIsAmazon(false);
         UConnect request = uConnectBuilder.build();
-        LOG.info("sending world -------- " + request + "-----------\n");
+        //LOG.info("sending world -------- " + request + "-----------\n");
         request.writeDelimitedTo(worldStream.outputStream);
     }
 
@@ -108,9 +108,9 @@ public class WorldService {
 
     public void receiveUResponses() throws IOException {
         UResponses uResponses = UResponses.parseDelimitedFrom(worldStream.inputStream);
-        LOG.info("\nReceived a UResponse:\n len of Acks=" + uResponses.getAcksCount() + " uf=" + uResponses.getCompletionsCount()
-                + " truckStatus=" + uResponses.getTruckstatusCount() + " delivered=" + uResponses.getDeliveredCount() + " err=" + uResponses.getErrorCount());
-        LOG.info("receive world -------- " + uResponses + "-----------\n");
+        //LOG.info("\nReceived a UResponse:\n len of Acks=" + uResponses.getAcksCount() + " uf=" + uResponses.getCompletionsCount()
+        //        + " truckStatus=" + uResponses.getTruckstatusCount() + " delivered=" + uResponses.getDeliveredCount() + " err=" + uResponses.getErrorCount());
+        LOG.info("receive world -------- " + uResponses.getDeliveredList().toString() + "-----------\n");
         handleUFinished(uResponses);
         handleUTruck(uResponses);
         handleUDeliveryMade(uResponses);
@@ -119,7 +119,7 @@ public class WorldService {
         if(uResponses.getFinished()){
             LOG.info("World disconnect!!!");
         }
-    
+
     }
 
     private void handleUErr(UResponses uResponses) throws IOException{
@@ -151,11 +151,9 @@ public class WorldService {
                         ackSet.add(uDeliveryMade.getSeqnum());
                     }
                     System.out.println("--- Package " + uDeliveryMade.getPackageid() + " of truck " + uDeliveryMade.getTruckid() + " delivered");
-        
+
                     // database: Package delivered
                     packageDao.updateStatus(uDeliveryMade.getPackageid(), Package.Status.DELIVERED.getText());
-                    //stop tracking
-                    trackingSet.remove(uDeliveryMade.getTruckid());
                     // inform amazon
                     amazonService.sendUDelivered(uDeliveryMade.getPackageid());
                     Optional<Package> packageOptional = packageDao.findById(uDeliveryMade.getPackageid());
@@ -163,17 +161,17 @@ public class WorldService {
                     if(packageOptional.isPresent()){
                         pack = packageOptional.get();
                     }else {
-                        LOG.error("Package " + uDeliveryMade.getPackageid() + " does not exist!");
-                        return;
+                        LOG.error("Package " + uDeliveryMade.getPackageid() + " does not exist!SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSDSSSSSSSSSSSSSSSSS");
+                        continue;
                     }
                     if(pack.getUpsID().isEmpty()||pack.getUpsID().isBlank()){
-                        return;
+                        continue;
                     }
-        
+
                     try{
                         String userEmail = userService.getEmailByUpsID(userService.getEmailByUpsID(pack.getUpsID()));
                         emailService.sendDeliveredEmail(pack.getPackageID(), pack.getDetails(),userEmail);
-                    }catch (NoSuchFieldException ignored) {
+                    }catch (Exception ignored) {
                     }
                 }
             }
@@ -181,7 +179,7 @@ public class WorldService {
                 e.printStackTrace();
             }
         }).start();
-       
+
     }
 
 
@@ -193,7 +191,7 @@ public class WorldService {
                 WorldCommandSender handler = seqSenderMap.get(ack);
                 handler.onReceive();
                 seqSenderMap.remove(ack);
-                LOG.info("Received ack = " + ack + " at index = " + i);
+                //LOG.info("Received ack = " + ack + " at index = " + i);
                 continue;
             }
             LOG.error("\nAck:\n"+ ack+ " has received twice!\n");
@@ -204,15 +202,14 @@ public class WorldService {
         new Thread(() -> {
             try {
                 for (int i = 0; i < uResponses.getTruckstatusCount(); ++i) {
-                    LOG.info("sending world XXXXXXXX" + "XXXXXXXXXX  handleUTruck\n");
                     UTruck uTruck = uResponses.getTruckstatus(i);
-                    sendAck(uTruck.getSeqnum()); 
+                    sendAck(uTruck.getSeqnum());
                     if(ackSet.contains(uTruck.getSeqnum())){
                         continue;
                     }else {
                         ackSet.add(uTruck.getSeqnum());
                     }
-                    
+
                     updateTruckInfo(uTruck);
                 }
             }
@@ -226,15 +223,15 @@ public class WorldService {
     private void updateTruckInfo(UTruck uTruck) {
         truckDao.updatePosition(uTruck.getTruckid(),uTruck.getX(), uTruck.getY());
         truckDao.updateStatus(uTruck.getTruckid(),uTruck.getStatus());
-        LOG.info("Update position for Truck " + uTruck.getTruckid() + ": X = "
-                + uTruck.getX() + ", Y = " + uTruck.getY() + ". Status: " +uTruck.getStatus());
+        // LOG.info("Update position for Truck " + uTruck.getTruckid() + ": X = "
+        //         + uTruck.getX() + ", Y = " + uTruck.getY() + ". Status: " +uTruck.getStatus());
     }
 
     public void sendAck(long ack) throws IOException {
         UCommands.Builder uCommandsBuilder = UCommands.newBuilder();
         uCommandsBuilder.addAcks(ack).setDisconnect(false);
         UCommands uCommands = uCommandsBuilder.build();
-        LOG.info("sending world AAAAAAAA" + uCommands + "AAAAAAAA  sendACK\n");
+        //LOG.info("sending world AAAAAAAA" + uCommands + "AAAAAAAA  sendACK\n");
         uCommands.writeDelimitedTo(worldStream.outputStream);
     }
     public void handleUFinished(UResponses uResponses)throws IOException {
@@ -243,7 +240,6 @@ public class WorldService {
                 for (int i = 0; i < uResponses.getCompletionsCount(); ++i) {
                     UFinished uFinished = uResponses.getCompletions(i);
                     LOG.info("--- Truck " + uFinished.getTruckid() + " status: " + uFinished.getStatus());
-                    LOG.info("sending world XXXXXXXX" + "XXXXXXXXXX handleUfinish\n");
                     sendAck(uFinished.getSeqnum());
                     if(ackSet.contains(uFinished.getSeqnum())){
                         continue;
@@ -277,7 +273,7 @@ public class WorldService {
                 e.printStackTrace();
             }
         }).start();
-        
+
     }
     public void trackingTruckInfo(Integer truckID)throws IOException {
         long seqNum = seq.incrementAndGet();
@@ -291,12 +287,12 @@ public class WorldService {
                 uQueryB.setTruckid(truckID).setSeqnum(seqNum);
                 uCommandB.addQueries(uQueryB.build()).setDisconnect(false);
                 UCommands commands = uCommandB.build();
-                
+
                 //putting in the map
                 QueryCommandSender queryCommandSender = new QueryCommandSender(seqNum, truckID, this);
                 //LOG.info("start listen to query " + seqNum);
                 seqSenderMap.put(seqNum, queryCommandSender);
-        
+
                 //sending
                 //LOG.info("sending world -------- " + commands + "-----------\n");
                 commands.writeDelimitedTo(worldStream.outputStream);
@@ -347,7 +343,7 @@ public class WorldService {
                 seqSenderMap.put(seqNum, pickUpCommandSender);
 
                 UCommands commands = uCommandB.build();
-                LOG.info("sending world -------- " + commands + "-----------\n");
+                //LOG.info("sending world -------- " + commands + "-----------\n");
                 commands.writeDelimitedTo(worldStream.outputStream);
                 // update truck status
                 truckDao.updateStatus(truckID, Truck.Status.TRAVELING.getText());
@@ -357,7 +353,7 @@ public class WorldService {
                 e.printStackTrace();
             }
         }).start();
-        
+
     }
 
     public void goDeliver(int truckID ,long packageID, int x, int y) throws IOException{
@@ -377,15 +373,15 @@ public class WorldService {
                 //build uCommand
                 uGoDeliverB.setSeqnum(seqNum).addAllPackages(locations).setTruckid(truckID);
                 uCommandB.addDeliveries(uGoDeliverB.build()).setDisconnect(false);
-        
+
                 //putting in the map
                 DeliveryCommandSender deliveryCommandSender = new DeliveryCommandSender(seqNum,truckID,this,packageID,desX,desY);
                 deliveryCommandSender.setTimerAndTask();
                 LOG.info("send UGoDeliver to world " + seqNum);
                 seqSenderMap.put(seqNum, deliveryCommandSender);
                 UCommands commands = uCommandB.build();
-        
-                LOG.info("sending world -------- " + commands + "-----------\n");
+
+                //LOG.info("sending world -------- " + commands + "-----------\n");
                 commands.writeDelimitedTo(worldStream.outputStream);
                 worldStream.outputStream.flush();
                 // Update DB
@@ -409,44 +405,44 @@ public class WorldService {
 //        required int32 x = 2;
 //        required int32 y = 3;
 //    }
-    public void RunTest() throws IOException{
-        UConnect.Builder uConnectBuilder = UConnect.newBuilder();
-        truckDao.deleteAll();
-        for (int i = 0; i < TRUCK_CNT; ++i) {
-            UInitTruck.Builder uInitBuilder = UInitTruck.newBuilder();
-            uInitBuilder.setId(i).setX(TRUCK_X).setY(TRUCK_Y);
-            uConnectBuilder.addTrucks(uInitBuilder.build());
-            Truck truck = new Truck();
-            truck.setPosX(TRUCK_X);
-            truck.setPosY(TRUCK_Y);
-            truck.setStatus(Truck.Status.IDLE.getText());
-            truck.setTruckID(i);
-            truckDao.save(truck);
-        }
-        uConnectBuilder.setIsAmazon(false);
-        UConnect request = uConnectBuilder.build();
-        LOG.info("sending world -------- " + request + "-----------\n");
-        request.writeDelimitedTo(worldStream.outputStream);
+    // public void RunTest() throws IOException{
+    //     UConnect.Builder uConnectBuilder = UConnect.newBuilder();
+    //     truckDao.deleteAll();
+    //     for (int i = 0; i < TRUCK_CNT; ++i) {
+    //         UInitTruck.Builder uInitBuilder = UInitTruck.newBuilder();
+    //         uInitBuilder.setId(i).setX(TRUCK_X).setY(TRUCK_Y);
+    //         uConnectBuilder.addTrucks(uInitBuilder.build());
+    //         Truck truck = new Truck();
+    //         truck.setPosX(TRUCK_X);
+    //         truck.setPosY(TRUCK_Y);
+    //         truck.setStatus(Truck.Status.IDLE.getText());
+    //         truck.setTruckID(i);
+    //         truckDao.save(truck);
+    //     }
+    //     uConnectBuilder.setIsAmazon(false);
+    //     UConnect request = uConnectBuilder.build();
+    //     LOG.info("sending world -------- " + request + "-----------\n");
+    //     request.writeDelimitedTo(worldStream.outputStream);
 
-        receiveConnectedFromWorld();
-        new Thread(()->{            
-            while (true) {
-            try {
-                receiveUResponses();
-            } catch (IOException e) {
-                LOG.error("world listener error:" + e.getMessage());
-                System.exit(1);
-            }
-        }}).start();
-        goDeliver(1,0,4,5);
-        // goDeliver(2,3,1,8);
-        // trackingTruckInfo(0);
-        // trackingTruckInfo(1);
-        // trackingTruckInfo(2);
-        // trackingTruckInfo(3);
-        // pickup(0, 7, 6);
-        // pickup(4, 2, 5);
- 
+    //     receiveConnectedFromWorld();
+    //     new Thread(()->{
+    //         while (true) {
+    //         try {
+    //             receiveUResponses();
+    //         } catch (IOException e) {
+    //             LOG.error("world listener error:" + e.getMessage());
+    //             System.exit(1);
+    //         }
+    //     }}).start();
+    //     goDeliver(1,0,4,5);
+    //     // goDeliver(2,3,1,8);
+    //     // trackingTruckInfo(0);
+    //     // trackingTruckInfo(1);
+    //     // trackingTruckInfo(2);
+    //     // trackingTruckInfo(3);
+    //     // pickup(0, 7, 6);
+    //     // pickup(4, 2, 5);
 
-    }
+
+    // }
 }
