@@ -35,7 +35,7 @@ public class WorldService {
     private UserService userService;
     private EmailService emailService;
     private long worldId;
-    final int TRUCK_CNT = 100;
+    final int TRUCK_CNT = 1000;
     final int TRUCK_X = 10;
     final int TRUCK_Y = 10;
     private AtomicInteger truck_alloc = new AtomicInteger(0);
