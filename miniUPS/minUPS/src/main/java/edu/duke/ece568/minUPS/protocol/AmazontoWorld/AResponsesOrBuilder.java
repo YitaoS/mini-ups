@@ -81,12 +81,10 @@ public interface AResponsesOrBuilder extends
 
   /**
    * <code>optional bool finished = 4;</code>
-   * @return Whether the finished field is set.
    */
   boolean hasFinished();
   /**
    * <code>optional bool finished = 4;</code>
-   * @return The finished.
    */
   boolean getFinished();
 
@@ -116,18 +114,14 @@ public interface AResponsesOrBuilder extends
 
   /**
    * <code>repeated int64 acks = 6;</code>
-   * @return A list containing the acks.
    */
   java.util.List<java.lang.Long> getAcksList();
   /**
    * <code>repeated int64 acks = 6;</code>
-   * @return The count of acks.
    */
   int getAcksCount();
   /**
    * <code>repeated int64 acks = 6;</code>
-   * @param index The index of the element to return.
-   * @return The acks at the given index.
    */
   long getAcks(int index);
 

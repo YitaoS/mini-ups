@@ -83,10 +83,18 @@ public final class WithAmazon {
       " \001(\003B1\n+edu.duke.ece568.minUPS.protocol." +
       "UPStoAmazonH\002P\001"
     };
-    descriptor = com.google.protobuf.Descriptors.FileDescriptor
+    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
+    com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        });
+        }, assigner);
     internal_static_tutorial_AInformWorld_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_tutorial_AInformWorld_fieldAccessorTable = new

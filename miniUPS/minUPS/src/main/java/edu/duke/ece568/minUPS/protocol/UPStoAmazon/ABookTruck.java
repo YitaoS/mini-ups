@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.UPStoAmazon;
 /**
  * Protobuf type {@code tutorial.ABookTruck}
  */
-public final class ABookTruck extends
+public  final class ABookTruck extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:tutorial.ABookTruck)
     ABookTruckOrBuilder {
@@ -16,17 +16,22 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ABookTruck() {
+    packageid_ = 0L;
+    warehouseid_ = 0;
+    warehousex_ = 0;
+    warehousey_ = 0;
+    destinationx_ = 0;
+    destinationy_ = 0;
     upsid_ = "";
+    seqnum_ = 0L;
     detail_ = "";
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new ABookTruck();
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
   }
-
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.UPStoAmazon.WithAmazon.internal_static_tutorial_ABookTruck_descriptor;
@@ -42,135 +47,106 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int PACKAGEID_FIELD_NUMBER = 1;
-  private long packageid_ = 0L;
+  private long packageid_;
   /**
    * <code>required int64 packageid = 1;</code>
-   * @return Whether the packageid field is set.
    */
-  @java.lang.Override
   public boolean hasPackageid() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000001) == 0x00000001);
   }
   /**
    * <code>required int64 packageid = 1;</code>
-   * @return The packageid.
    */
-  @java.lang.Override
   public long getPackageid() {
     return packageid_;
   }
 
   public static final int WAREHOUSEID_FIELD_NUMBER = 2;
-  private int warehouseid_ = 0;
+  private int warehouseid_;
   /**
    * <code>required int32 warehouseid = 2;</code>
-   * @return Whether the warehouseid field is set.
    */
-  @java.lang.Override
   public boolean hasWarehouseid() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000002) == 0x00000002);
   }
   /**
    * <code>required int32 warehouseid = 2;</code>
-   * @return The warehouseid.
    */
-  @java.lang.Override
   public int getWarehouseid() {
     return warehouseid_;
   }
 
   public static final int WAREHOUSEX_FIELD_NUMBER = 3;
-  private int warehousex_ = 0;
+  private int warehousex_;
   /**
    * <code>required int32 warehousex = 3;</code>
-   * @return Whether the warehousex field is set.
    */
-  @java.lang.Override
   public boolean hasWarehousex() {
-    return ((bitField0_ & 0x00000004) != 0);
+    return ((bitField0_ & 0x00000004) == 0x00000004);
   }
   /**
    * <code>required int32 warehousex = 3;</code>
-   * @return The warehousex.
    */
-  @java.lang.Override
   public int getWarehousex() {
     return warehousex_;
   }
 
   public static final int WAREHOUSEY_FIELD_NUMBER = 4;
-  private int warehousey_ = 0;
+  private int warehousey_;
   /**
    * <code>required int32 warehousey = 4;</code>
-   * @return Whether the warehousey field is set.
    */
-  @java.lang.Override
   public boolean hasWarehousey() {
-    return ((bitField0_ & 0x00000008) != 0);
+    return ((bitField0_ & 0x00000008) == 0x00000008);
   }
   /**
    * <code>required int32 warehousey = 4;</code>
-   * @return The warehousey.
    */
-  @java.lang.Override
   public int getWarehousey() {
     return warehousey_;
   }
 
   public static final int DESTINATIONX_FIELD_NUMBER = 5;
-  private int destinationx_ = 0;
+  private int destinationx_;
   /**
    * <code>required int32 destinationx = 5;</code>
-   * @return Whether the destinationx field is set.
    */
-  @java.lang.Override
   public boolean hasDestinationx() {
-    return ((bitField0_ & 0x00000010) != 0);
+    return ((bitField0_ & 0x00000010) == 0x00000010);
   }
   /**
    * <code>required int32 destinationx = 5;</code>
-   * @return The destinationx.
    */
-  @java.lang.Override
   public int getDestinationx() {
     return destinationx_;
   }
 
   public static final int DESTINATIONY_FIELD_NUMBER = 6;
-  private int destinationy_ = 0;
+  private int destinationy_;
   /**
    * <code>required int32 destinationy = 6;</code>
-   * @return Whether the destinationy field is set.
    */
-  @java.lang.Override
   public boolean hasDestinationy() {
-    return ((bitField0_ & 0x00000020) != 0);
+    return ((bitField0_ & 0x00000020) == 0x00000020);
   }
   /**
    * <code>required int32 destinationy = 6;</code>
-   * @return The destinationy.
    */
-  @java.lang.Override
   public int getDestinationy() {
     return destinationy_;
   }
 
   public static final int UPSID_FIELD_NUMBER = 7;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object upsid_ = "";
+  private volatile java.lang.Object upsid_;
   /**
    * <code>optional string upsid = 7;</code>
-   * @return Whether the upsid field is set.
    */
-  @java.lang.Override
   public boolean hasUpsid() {
-    return ((bitField0_ & 0x00000040) != 0);
+    return ((bitField0_ & 0x00000040) == 0x00000040);
   }
   /**
    * <code>optional string upsid = 7;</code>
-   * @return The upsid.
    */
-  @java.lang.Override
   public java.lang.String getUpsid() {
     java.lang.Object ref = upsid_;
     if (ref instanceof java.lang.String) {
@@ -187,9 +163,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <code>optional string upsid = 7;</code>
-   * @return The bytes for upsid.
    */
-  @java.lang.Override
   public com.google.protobuf.ByteString
       getUpsidBytes() {
     java.lang.Object ref = upsid_;
@@ -205,40 +179,31 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int SEQNUM_FIELD_NUMBER = 8;
-  private long seqnum_ = 0L;
+  private long seqnum_;
   /**
    * <code>optional int64 seqnum = 8;</code>
-   * @return Whether the seqnum field is set.
    */
-  @java.lang.Override
   public boolean hasSeqnum() {
-    return ((bitField0_ & 0x00000080) != 0);
+    return ((bitField0_ & 0x00000080) == 0x00000080);
   }
   /**
    * <code>optional int64 seqnum = 8;</code>
-   * @return The seqnum.
    */
-  @java.lang.Override
   public long getSeqnum() {
     return seqnum_;
   }
 
   public static final int DETAIL_FIELD_NUMBER = 9;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object detail_ = "";
+  private volatile java.lang.Object detail_;
   /**
    * <code>optional string detail = 9;</code>
-   * @return Whether the detail field is set.
    */
-  @java.lang.Override
   public boolean hasDetail() {
-    return ((bitField0_ & 0x00000100) != 0);
+    return ((bitField0_ & 0x00000100) == 0x00000100);
   }
   /**
    * <code>optional string detail = 9;</code>
-   * @return The detail.
    */
-  @java.lang.Override
   public java.lang.String getDetail() {
     java.lang.Object ref = detail_;
     if (ref instanceof java.lang.String) {
@@ -255,9 +220,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <code>optional string detail = 9;</code>
-   * @return The bytes for detail.
    */
-  @java.lang.Override
   public com.google.protobuf.ByteString
       getDetailBytes() {
     java.lang.Object ref = detail_;
@@ -384,27 +347,40 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bitField0_ = 0;
       packageid_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000001);
       warehouseid_ = 0;
+      bitField0_ = (bitField0_ & ~0x00000002);
       warehousex_ = 0;
+      bitField0_ = (bitField0_ & ~0x00000004);
       warehousey_ = 0;
+      bitField0_ = (bitField0_ & ~0x00000008);
       destinationx_ = 0;
+      bitField0_ = (bitField0_ & ~0x00000010);
       destinationy_ = 0;
+      bitField0_ = (bitField0_ & ~0x00000020);
       upsid_ = "";
+      bitField0_ = (bitField0_ & ~0x00000040);
       seqnum_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000080);
       detail_ = "";
+      bitField0_ = (bitField0_ & ~0x00000100);
       return this;
     }
 
@@ -431,87 +407,107 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck buildPartial() {
       edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck result = new edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck(this);
-      if (bitField0_ != 0) { buildPartial0(result); }
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        to_bitField0_ |= 0x00000001;
+      }
+      result.packageid_ = packageid_;
+      if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        to_bitField0_ |= 0x00000002;
+      }
+      result.warehouseid_ = warehouseid_;
+      if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+        to_bitField0_ |= 0x00000004;
+      }
+      result.warehousex_ = warehousex_;
+      if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+        to_bitField0_ |= 0x00000008;
+      }
+      result.warehousey_ = warehousey_;
+      if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+        to_bitField0_ |= 0x00000010;
+      }
+      result.destinationx_ = destinationx_;
+      if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+        to_bitField0_ |= 0x00000020;
+      }
+      result.destinationy_ = destinationy_;
+      if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+        to_bitField0_ |= 0x00000040;
+      }
+      result.upsid_ = upsid_;
+      if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        to_bitField0_ |= 0x00000080;
+      }
+      result.seqnum_ = seqnum_;
+      if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        to_bitField0_ |= 0x00000100;
+      }
+      result.detail_ = detail_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.packageid_ = packageid_;
-        to_bitField0_ |= 0x00000001;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.warehouseid_ = warehouseid_;
-        to_bitField0_ |= 0x00000002;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.warehousex_ = warehousex_;
-        to_bitField0_ |= 0x00000004;
-      }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.warehousey_ = warehousey_;
-        to_bitField0_ |= 0x00000008;
-      }
-      if (((from_bitField0_ & 0x00000010) != 0)) {
-        result.destinationx_ = destinationx_;
-        to_bitField0_ |= 0x00000010;
-      }
-      if (((from_bitField0_ & 0x00000020) != 0)) {
-        result.destinationy_ = destinationy_;
-        to_bitField0_ |= 0x00000020;
-      }
-      if (((from_bitField0_ & 0x00000040) != 0)) {
-        result.upsid_ = upsid_;
-        to_bitField0_ |= 0x00000040;
-      }
-      if (((from_bitField0_ & 0x00000080) != 0)) {
-        result.seqnum_ = seqnum_;
-        to_bitField0_ |= 0x00000080;
-      }
-      if (((from_bitField0_ & 0x00000100) != 0)) {
-        result.detail_ = detail_;
-        to_bitField0_ |= 0x00000100;
-      }
-      result.bitField0_ |= to_bitField0_;
+    @java.lang.Override
+    public Builder clone() {
+      return (Builder) super.clone();
     }
-
+    @java.lang.Override
+    public Builder setField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
+    }
+    @java.lang.Override
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
+    }
+    @java.lang.Override
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
+    }
+    @java.lang.Override
+    public Builder setRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
+    }
+    @java.lang.Override
+    public Builder addRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
+    }
     private int bitField0_;
 
     private long packageid_ ;
     /**
      * <code>required int64 packageid = 1;</code>
-     * @return Whether the packageid field is set.
      */
-    @java.lang.Override
     public boolean hasPackageid() {
-      return ((bitField0_ & 0x00000001) != 0);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>required int64 packageid = 1;</code>
-     * @return The packageid.
      */
-    @java.lang.Override
     public long getPackageid() {
       return packageid_;
     }
     /**
      * <code>required int64 packageid = 1;</code>
-     * @param value The packageid to set.
-     * @return This builder for chaining.
      */
     public Builder setPackageid(long value) {
-
-      packageid_ = value;
       bitField0_ |= 0x00000001;
+      packageid_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 packageid = 1;</code>
-     * @return This builder for chaining.
      */
     public Builder clearPackageid() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -523,35 +519,27 @@ private static final long serialVersionUID = 0L;
     private int warehouseid_ ;
     /**
      * <code>required int32 warehouseid = 2;</code>
-     * @return Whether the warehouseid field is set.
      */
-    @java.lang.Override
     public boolean hasWarehouseid() {
-      return ((bitField0_ & 0x00000002) != 0);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>required int32 warehouseid = 2;</code>
-     * @return The warehouseid.
      */
-    @java.lang.Override
     public int getWarehouseid() {
       return warehouseid_;
     }
     /**
      * <code>required int32 warehouseid = 2;</code>
-     * @param value The warehouseid to set.
-     * @return This builder for chaining.
      */
     public Builder setWarehouseid(int value) {
-
-      warehouseid_ = value;
       bitField0_ |= 0x00000002;
+      warehouseid_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int32 warehouseid = 2;</code>
-     * @return This builder for chaining.
      */
     public Builder clearWarehouseid() {
       bitField0_ = (bitField0_ & ~0x00000002);
@@ -563,35 +551,27 @@ private static final long serialVersionUID = 0L;
     private int warehousex_ ;
     /**
      * <code>required int32 warehousex = 3;</code>
-     * @return Whether the warehousex field is set.
      */
-    @java.lang.Override
     public boolean hasWarehousex() {
-      return ((bitField0_ & 0x00000004) != 0);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>required int32 warehousex = 3;</code>
-     * @return The warehousex.
      */
-    @java.lang.Override
     public int getWarehousex() {
       return warehousex_;
     }
     /**
      * <code>required int32 warehousex = 3;</code>
-     * @param value The warehousex to set.
-     * @return This builder for chaining.
      */
     public Builder setWarehousex(int value) {
-
-      warehousex_ = value;
       bitField0_ |= 0x00000004;
+      warehousex_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int32 warehousex = 3;</code>
-     * @return This builder for chaining.
      */
     public Builder clearWarehousex() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -603,35 +583,27 @@ private static final long serialVersionUID = 0L;
     private int warehousey_ ;
     /**
      * <code>required int32 warehousey = 4;</code>
-     * @return Whether the warehousey field is set.
      */
-    @java.lang.Override
     public boolean hasWarehousey() {
-      return ((bitField0_ & 0x00000008) != 0);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>required int32 warehousey = 4;</code>
-     * @return The warehousey.
      */
-    @java.lang.Override
     public int getWarehousey() {
       return warehousey_;
     }
     /**
      * <code>required int32 warehousey = 4;</code>
-     * @param value The warehousey to set.
-     * @return This builder for chaining.
      */
     public Builder setWarehousey(int value) {
-
-      warehousey_ = value;
       bitField0_ |= 0x00000008;
+      warehousey_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int32 warehousey = 4;</code>
-     * @return This builder for chaining.
      */
     public Builder clearWarehousey() {
       bitField0_ = (bitField0_ & ~0x00000008);
@@ -643,35 +615,27 @@ private static final long serialVersionUID = 0L;
     private int destinationx_ ;
     /**
      * <code>required int32 destinationx = 5;</code>
-     * @return Whether the destinationx field is set.
      */
-    @java.lang.Override
     public boolean hasDestinationx() {
-      return ((bitField0_ & 0x00000010) != 0);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>required int32 destinationx = 5;</code>
-     * @return The destinationx.
      */
-    @java.lang.Override
     public int getDestinationx() {
       return destinationx_;
     }
     /**
      * <code>required int32 destinationx = 5;</code>
-     * @param value The destinationx to set.
-     * @return This builder for chaining.
      */
     public Builder setDestinationx(int value) {
-
-      destinationx_ = value;
       bitField0_ |= 0x00000010;
+      destinationx_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int32 destinationx = 5;</code>
-     * @return This builder for chaining.
      */
     public Builder clearDestinationx() {
       bitField0_ = (bitField0_ & ~0x00000010);
@@ -683,35 +647,27 @@ private static final long serialVersionUID = 0L;
     private int destinationy_ ;
     /**
      * <code>required int32 destinationy = 6;</code>
-     * @return Whether the destinationy field is set.
      */
-    @java.lang.Override
     public boolean hasDestinationy() {
-      return ((bitField0_ & 0x00000020) != 0);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>required int32 destinationy = 6;</code>
-     * @return The destinationy.
      */
-    @java.lang.Override
     public int getDestinationy() {
       return destinationy_;
     }
     /**
      * <code>required int32 destinationy = 6;</code>
-     * @param value The destinationy to set.
-     * @return This builder for chaining.
      */
     public Builder setDestinationy(int value) {
-
-      destinationy_ = value;
       bitField0_ |= 0x00000020;
+      destinationy_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int32 destinationy = 6;</code>
-     * @return This builder for chaining.
      */
     public Builder clearDestinationy() {
       bitField0_ = (bitField0_ & ~0x00000020);
@@ -723,14 +679,12 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object upsid_ = "";
     /**
      * <code>optional string upsid = 7;</code>
-     * @return Whether the upsid field is set.
      */
     public boolean hasUpsid() {
-      return ((bitField0_ & 0x00000040) != 0);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional string upsid = 7;</code>
-     * @return The upsid.
      */
     public java.lang.String getUpsid() {
       java.lang.Object ref = upsid_;
@@ -748,7 +702,6 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string upsid = 7;</code>
-     * @return The bytes for upsid.
      */
     public com.google.protobuf.ByteString
         getUpsidBytes() {
@@ -765,37 +718,36 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string upsid = 7;</code>
-     * @param value The upsid to set.
-     * @return This builder for chaining.
      */
     public Builder setUpsid(
         java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
       upsid_ = value;
-      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
     /**
      * <code>optional string upsid = 7;</code>
-     * @return This builder for chaining.
      */
     public Builder clearUpsid() {
-      upsid_ = getDefaultInstance().getUpsid();
       bitField0_ = (bitField0_ & ~0x00000040);
+      upsid_ = getDefaultInstance().getUpsid();
       onChanged();
       return this;
     }
     /**
      * <code>optional string upsid = 7;</code>
-     * @param value The bytes for upsid to set.
-     * @return This builder for chaining.
      */
     public Builder setUpsidBytes(
         com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
       upsid_ = value;
-      bitField0_ |= 0x00000040;
       onChanged();
       return this;
     }
@@ -803,35 +755,27 @@ private static final long serialVersionUID = 0L;
     private long seqnum_ ;
     /**
      * <code>optional int64 seqnum = 8;</code>
-     * @return Whether the seqnum field is set.
      */
-    @java.lang.Override
     public boolean hasSeqnum() {
-      return ((bitField0_ & 0x00000080) != 0);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional int64 seqnum = 8;</code>
-     * @return The seqnum.
      */
-    @java.lang.Override
     public long getSeqnum() {
       return seqnum_;
     }
     /**
      * <code>optional int64 seqnum = 8;</code>
-     * @param value The seqnum to set.
-     * @return This builder for chaining.
      */
     public Builder setSeqnum(long value) {
-
-      seqnum_ = value;
       bitField0_ |= 0x00000080;
+      seqnum_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>optional int64 seqnum = 8;</code>
-     * @return This builder for chaining.
      */
     public Builder clearSeqnum() {
       bitField0_ = (bitField0_ & ~0x00000080);
@@ -843,14 +787,12 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object detail_ = "";
     /**
      * <code>optional string detail = 9;</code>
-     * @return Whether the detail field is set.
      */
     public boolean hasDetail() {
-      return ((bitField0_ & 0x00000100) != 0);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
      * <code>optional string detail = 9;</code>
-     * @return The detail.
      */
     public java.lang.String getDetail() {
       java.lang.Object ref = detail_;
@@ -868,7 +810,6 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string detail = 9;</code>
-     * @return The bytes for detail.
      */
     public com.google.protobuf.ByteString
         getDetailBytes() {
@@ -885,37 +826,36 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string detail = 9;</code>
-     * @param value The detail to set.
-     * @return This builder for chaining.
      */
     public Builder setDetail(
         java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
       detail_ = value;
-      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
     /**
      * <code>optional string detail = 9;</code>
-     * @return This builder for chaining.
      */
     public Builder clearDetail() {
-      detail_ = getDefaultInstance().getDetail();
       bitField0_ = (bitField0_ & ~0x00000100);
+      detail_ = getDefaultInstance().getDetail();
       onChanged();
       return this;
     }
     /**
      * <code>optional string detail = 9;</code>
-     * @param value The bytes for detail to set.
-     * @return This builder for chaining.
      */
     public Builder setDetailBytes(
         com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
       detail_ = value;
-      bitField0_ |= 0x00000100;
       onChanged();
       return this;
     }
@@ -957,11 +897,10 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
-            .setUnfinishedMessage(builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(
+                builder.buildPartial());
       }
       return builder.buildPartial();
     }

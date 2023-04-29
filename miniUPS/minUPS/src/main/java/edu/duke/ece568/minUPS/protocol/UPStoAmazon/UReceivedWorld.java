@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.UPStoAmazon;
 /**
  * Protobuf type {@code tutorial.UReceivedWorld}
  */
-public final class UReceivedWorld extends
+public  final class UReceivedWorld extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:tutorial.UReceivedWorld)
     UReceivedWorldOrBuilder {
@@ -16,15 +16,14 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private UReceivedWorld() {
+    worldid_ = 0L;
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new UReceivedWorld();
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
   }
-
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.UPStoAmazon.WithAmazon.internal_static_tutorial_UReceivedWorld_descriptor;
@@ -40,20 +39,16 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int WORLDID_FIELD_NUMBER = 1;
-  private long worldid_ = 0L;
+  private long worldid_;
   /**
    * <code>required int64 worldid = 1;</code>
-   * @return Whether the worldid field is set.
    */
-  @java.lang.Override
   public boolean hasWorldid() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000001) == 0x00000001);
   }
   /**
    * <code>required int64 worldid = 1;</code>
-   * @return The worldid.
    */
-  @java.lang.Override
   public long getWorldid() {
     return worldid_;
   }
@@ -170,19 +165,24 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bitField0_ = 0;
       worldid_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
 
@@ -209,55 +209,75 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld buildPartial() {
       edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld result = new edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld(this);
-      if (bitField0_ != 0) { buildPartial0(result); }
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        to_bitField0_ |= 0x00000001;
+      }
+      result.worldid_ = worldid_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(edu.duke.ece568.minUPS.protocol.UPStoAmazon.UReceivedWorld result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.worldid_ = worldid_;
-        to_bitField0_ |= 0x00000001;
-      }
-      result.bitField0_ |= to_bitField0_;
+    @java.lang.Override
+    public Builder clone() {
+      return (Builder) super.clone();
     }
-
+    @java.lang.Override
+    public Builder setField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
+    }
+    @java.lang.Override
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
+    }
+    @java.lang.Override
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
+    }
+    @java.lang.Override
+    public Builder setRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
+    }
+    @java.lang.Override
+    public Builder addRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
+    }
     private int bitField0_;
 
     private long worldid_ ;
     /**
      * <code>required int64 worldid = 1;</code>
-     * @return Whether the worldid field is set.
      */
-    @java.lang.Override
     public boolean hasWorldid() {
-      return ((bitField0_ & 0x00000001) != 0);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>required int64 worldid = 1;</code>
-     * @return The worldid.
      */
-    @java.lang.Override
     public long getWorldid() {
       return worldid_;
     }
     /**
      * <code>required int64 worldid = 1;</code>
-     * @param value The worldid to set.
-     * @return This builder for chaining.
      */
     public Builder setWorldid(long value) {
-
-      worldid_ = value;
       bitField0_ |= 0x00000001;
+      worldid_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 worldid = 1;</code>
-     * @return This builder for chaining.
      */
     public Builder clearWorldid() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -303,11 +323,10 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
-            .setUnfinishedMessage(builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(
+                builder.buildPartial());
       }
       return builder.buildPartial();
     }

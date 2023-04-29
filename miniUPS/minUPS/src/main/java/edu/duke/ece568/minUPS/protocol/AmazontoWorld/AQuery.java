@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.AmazontoWorld;
 /**
  * Protobuf type {@code AQuery}
  */
-public final class AQuery extends
+public  final class AQuery extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:AQuery)
     AQueryOrBuilder {
@@ -16,15 +16,15 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private AQuery() {
+    packageid_ = 0L;
+    seqnum_ = 0L;
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new AQuery();
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
   }
-
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.AmazontoWorld.AmazontoWorld.internal_static_AQuery_descriptor;
@@ -40,39 +40,31 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int PACKAGEID_FIELD_NUMBER = 1;
-  private long packageid_ = 0L;
+  private long packageid_;
   /**
    * <code>required int64 packageid = 1;</code>
-   * @return Whether the packageid field is set.
    */
-  @java.lang.Override
   public boolean hasPackageid() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000001) == 0x00000001);
   }
   /**
    * <code>required int64 packageid = 1;</code>
-   * @return The packageid.
    */
-  @java.lang.Override
   public long getPackageid() {
     return packageid_;
   }
 
   public static final int SEQNUM_FIELD_NUMBER = 2;
-  private long seqnum_ = 0L;
+  private long seqnum_;
   /**
    * <code>required int64 seqnum = 2;</code>
-   * @return Whether the seqnum field is set.
    */
-  @java.lang.Override
   public boolean hasSeqnum() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000002) == 0x00000002);
   }
   /**
    * <code>required int64 seqnum = 2;</code>
-   * @return The seqnum.
    */
-  @java.lang.Override
   public long getSeqnum() {
     return seqnum_;
   }
@@ -189,20 +181,26 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bitField0_ = 0;
       packageid_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000001);
       seqnum_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000002);
       return this;
     }
 
@@ -229,59 +227,79 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery buildPartial() {
       edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery result = new edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery(this);
-      if (bitField0_ != 0) { buildPartial0(result); }
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        to_bitField0_ |= 0x00000001;
+      }
+      result.packageid_ = packageid_;
+      if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        to_bitField0_ |= 0x00000002;
+      }
+      result.seqnum_ = seqnum_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(edu.duke.ece568.minUPS.protocol.AmazontoWorld.AQuery result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.packageid_ = packageid_;
-        to_bitField0_ |= 0x00000001;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.seqnum_ = seqnum_;
-        to_bitField0_ |= 0x00000002;
-      }
-      result.bitField0_ |= to_bitField0_;
+    @java.lang.Override
+    public Builder clone() {
+      return (Builder) super.clone();
     }
-
+    @java.lang.Override
+    public Builder setField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
+    }
+    @java.lang.Override
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
+    }
+    @java.lang.Override
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
+    }
+    @java.lang.Override
+    public Builder setRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
+    }
+    @java.lang.Override
+    public Builder addRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
+    }
     private int bitField0_;
 
     private long packageid_ ;
     /**
      * <code>required int64 packageid = 1;</code>
-     * @return Whether the packageid field is set.
      */
-    @java.lang.Override
     public boolean hasPackageid() {
-      return ((bitField0_ & 0x00000001) != 0);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>required int64 packageid = 1;</code>
-     * @return The packageid.
      */
-    @java.lang.Override
     public long getPackageid() {
       return packageid_;
     }
     /**
      * <code>required int64 packageid = 1;</code>
-     * @param value The packageid to set.
-     * @return This builder for chaining.
      */
     public Builder setPackageid(long value) {
-
-      packageid_ = value;
       bitField0_ |= 0x00000001;
+      packageid_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 packageid = 1;</code>
-     * @return This builder for chaining.
      */
     public Builder clearPackageid() {
       bitField0_ = (bitField0_ & ~0x00000001);
@@ -293,35 +311,27 @@ private static final long serialVersionUID = 0L;
     private long seqnum_ ;
     /**
      * <code>required int64 seqnum = 2;</code>
-     * @return Whether the seqnum field is set.
      */
-    @java.lang.Override
     public boolean hasSeqnum() {
-      return ((bitField0_ & 0x00000002) != 0);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>required int64 seqnum = 2;</code>
-     * @return The seqnum.
      */
-    @java.lang.Override
     public long getSeqnum() {
       return seqnum_;
     }
     /**
      * <code>required int64 seqnum = 2;</code>
-     * @param value The seqnum to set.
-     * @return This builder for chaining.
      */
     public Builder setSeqnum(long value) {
-
-      seqnum_ = value;
       bitField0_ |= 0x00000002;
+      seqnum_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 seqnum = 2;</code>
-     * @return This builder for chaining.
      */
     public Builder clearSeqnum() {
       bitField0_ = (bitField0_ & ~0x00000002);
@@ -367,11 +377,10 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
-            .setUnfinishedMessage(builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(
+                builder.buildPartial());
       }
       return builder.buildPartial();
     }

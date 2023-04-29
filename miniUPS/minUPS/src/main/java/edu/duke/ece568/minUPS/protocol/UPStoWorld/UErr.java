@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.UPStoWorld;
 /**
  * Protobuf type {@code protocol.UErr}
  */
-public final class UErr extends
+public  final class UErr extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:protocol.UErr)
     UErrOrBuilder {
@@ -17,15 +17,15 @@ private static final long serialVersionUID = 0L;
   }
   private UErr() {
     err_ = "";
+    originseqnum_ = 0L;
+    seqnum_ = 0L;
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new UErr();
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
   }
-
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.UPStoWorld.WorldUps.internal_static_protocol_UErr_descriptor;
@@ -41,21 +41,16 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int ERR_FIELD_NUMBER = 1;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object err_ = "";
+  private volatile java.lang.Object err_;
   /**
    * <code>required string err = 1;</code>
-   * @return Whether the err field is set.
    */
-  @java.lang.Override
   public boolean hasErr() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000001) == 0x00000001);
   }
   /**
    * <code>required string err = 1;</code>
-   * @return The err.
    */
-  @java.lang.Override
   public java.lang.String getErr() {
     java.lang.Object ref = err_;
     if (ref instanceof java.lang.String) {
@@ -72,9 +67,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <code>required string err = 1;</code>
-   * @return The bytes for err.
    */
-  @java.lang.Override
   public com.google.protobuf.ByteString
       getErrBytes() {
     java.lang.Object ref = err_;
@@ -90,39 +83,31 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int ORIGINSEQNUM_FIELD_NUMBER = 2;
-  private long originseqnum_ = 0L;
+  private long originseqnum_;
   /**
    * <code>required int64 originseqnum = 2;</code>
-   * @return Whether the originseqnum field is set.
    */
-  @java.lang.Override
   public boolean hasOriginseqnum() {
-    return ((bitField0_ & 0x00000002) != 0);
+    return ((bitField0_ & 0x00000002) == 0x00000002);
   }
   /**
    * <code>required int64 originseqnum = 2;</code>
-   * @return The originseqnum.
    */
-  @java.lang.Override
   public long getOriginseqnum() {
     return originseqnum_;
   }
 
   public static final int SEQNUM_FIELD_NUMBER = 3;
-  private long seqnum_ = 0L;
+  private long seqnum_;
   /**
    * <code>required int64 seqnum = 3;</code>
-   * @return Whether the seqnum field is set.
    */
-  @java.lang.Override
   public boolean hasSeqnum() {
-    return ((bitField0_ & 0x00000004) != 0);
+    return ((bitField0_ & 0x00000004) == 0x00000004);
   }
   /**
    * <code>required int64 seqnum = 3;</code>
-   * @return The seqnum.
    */
-  @java.lang.Override
   public long getSeqnum() {
     return seqnum_;
   }
@@ -239,21 +224,28 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.UPStoWorld.UErr.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bitField0_ = 0;
       err_ = "";
+      bitField0_ = (bitField0_ & ~0x00000001);
       originseqnum_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000002);
       seqnum_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -280,42 +272,68 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.UPStoWorld.UErr buildPartial() {
       edu.duke.ece568.minUPS.protocol.UPStoWorld.UErr result = new edu.duke.ece568.minUPS.protocol.UPStoWorld.UErr(this);
-      if (bitField0_ != 0) { buildPartial0(result); }
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+        to_bitField0_ |= 0x00000001;
+      }
+      result.err_ = err_;
+      if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+        to_bitField0_ |= 0x00000002;
+      }
+      result.originseqnum_ = originseqnum_;
+      if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+        to_bitField0_ |= 0x00000004;
+      }
+      result.seqnum_ = seqnum_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(edu.duke.ece568.minUPS.protocol.UPStoWorld.UErr result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.err_ = err_;
-        to_bitField0_ |= 0x00000001;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.originseqnum_ = originseqnum_;
-        to_bitField0_ |= 0x00000002;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.seqnum_ = seqnum_;
-        to_bitField0_ |= 0x00000004;
-      }
-      result.bitField0_ |= to_bitField0_;
+    @java.lang.Override
+    public Builder clone() {
+      return (Builder) super.clone();
     }
-
+    @java.lang.Override
+    public Builder setField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
+    }
+    @java.lang.Override
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
+    }
+    @java.lang.Override
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
+    }
+    @java.lang.Override
+    public Builder setRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
+    }
+    @java.lang.Override
+    public Builder addRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
+    }
     private int bitField0_;
 
     private java.lang.Object err_ = "";
     /**
      * <code>required string err = 1;</code>
-     * @return Whether the err field is set.
      */
     public boolean hasErr() {
-      return ((bitField0_ & 0x00000001) != 0);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>required string err = 1;</code>
-     * @return The err.
      */
     public java.lang.String getErr() {
       java.lang.Object ref = err_;
@@ -333,7 +351,6 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>required string err = 1;</code>
-     * @return The bytes for err.
      */
     public com.google.protobuf.ByteString
         getErrBytes() {
@@ -350,37 +367,36 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>required string err = 1;</code>
-     * @param value The err to set.
-     * @return This builder for chaining.
      */
     public Builder setErr(
         java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
       err_ = value;
-      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
      * <code>required string err = 1;</code>
-     * @return This builder for chaining.
      */
     public Builder clearErr() {
-      err_ = getDefaultInstance().getErr();
       bitField0_ = (bitField0_ & ~0x00000001);
+      err_ = getDefaultInstance().getErr();
       onChanged();
       return this;
     }
     /**
      * <code>required string err = 1;</code>
-     * @param value The bytes for err to set.
-     * @return This builder for chaining.
      */
     public Builder setErrBytes(
         com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
       err_ = value;
-      bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
@@ -388,35 +404,27 @@ private static final long serialVersionUID = 0L;
     private long originseqnum_ ;
     /**
      * <code>required int64 originseqnum = 2;</code>
-     * @return Whether the originseqnum field is set.
      */
-    @java.lang.Override
     public boolean hasOriginseqnum() {
-      return ((bitField0_ & 0x00000002) != 0);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <code>required int64 originseqnum = 2;</code>
-     * @return The originseqnum.
      */
-    @java.lang.Override
     public long getOriginseqnum() {
       return originseqnum_;
     }
     /**
      * <code>required int64 originseqnum = 2;</code>
-     * @param value The originseqnum to set.
-     * @return This builder for chaining.
      */
     public Builder setOriginseqnum(long value) {
-
-      originseqnum_ = value;
       bitField0_ |= 0x00000002;
+      originseqnum_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 originseqnum = 2;</code>
-     * @return This builder for chaining.
      */
     public Builder clearOriginseqnum() {
       bitField0_ = (bitField0_ & ~0x00000002);
@@ -428,35 +436,27 @@ private static final long serialVersionUID = 0L;
     private long seqnum_ ;
     /**
      * <code>required int64 seqnum = 3;</code>
-     * @return Whether the seqnum field is set.
      */
-    @java.lang.Override
     public boolean hasSeqnum() {
-      return ((bitField0_ & 0x00000004) != 0);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>required int64 seqnum = 3;</code>
-     * @return The seqnum.
      */
-    @java.lang.Override
     public long getSeqnum() {
       return seqnum_;
     }
     /**
      * <code>required int64 seqnum = 3;</code>
-     * @param value The seqnum to set.
-     * @return This builder for chaining.
      */
     public Builder setSeqnum(long value) {
-
-      seqnum_ = value;
       bitField0_ |= 0x00000004;
+      seqnum_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>required int64 seqnum = 3;</code>
-     * @return This builder for chaining.
      */
     public Builder clearSeqnum() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -502,11 +502,10 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
-            .setUnfinishedMessage(builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(
+                builder.buildPartial());
       }
       return builder.buildPartial();
     }

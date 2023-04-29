@@ -57,12 +57,10 @@ public interface UACommunicationOrBuilder extends
 
   /**
    * <code>optional int64 acks = 3;</code>
-   * @return Whether the acks field is set.
    */
   boolean hasAcks();
   /**
    * <code>optional int64 acks = 3;</code>
-   * @return The acks.
    */
   long getAcks();
 }

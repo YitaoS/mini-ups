@@ -6,7 +6,7 @@ package edu.duke.ece568.minUPS.protocol.UPStoAmazon;
 /**
  * Protobuf type {@code tutorial.AUCommunication}
  */
-public final class AUCommunication extends
+public  final class AUCommunication extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:tutorial.AUCommunication)
     AUCommunicationOrBuilder {
@@ -18,15 +18,14 @@ private static final long serialVersionUID = 0L;
   private AUCommunication() {
     bookings_ = java.util.Collections.emptyList();
     delivers_ = java.util.Collections.emptyList();
+    acks_ = 0L;
   }
 
   @java.lang.Override
-  @SuppressWarnings({"unused"})
-  protected java.lang.Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new AUCommunication();
+  public final com.google.protobuf.UnknownFieldSet
+  getUnknownFields() {
+    return this.unknownFields;
   }
-
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
     return edu.duke.ece568.minUPS.protocol.UPStoAmazon.WithAmazon.internal_static_tutorial_AUCommunication_descriptor;
@@ -42,19 +41,16 @@ private static final long serialVersionUID = 0L;
 
   private int bitField0_;
   public static final int BOOKINGS_FIELD_NUMBER = 1;
-  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck> bookings_;
   /**
    * <code>repeated .tutorial.ABookTruck bookings = 1;</code>
    */
-  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck> getBookingsList() {
     return bookings_;
   }
   /**
    * <code>repeated .tutorial.ABookTruck bookings = 1;</code>
    */
-  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruckOrBuilder> 
       getBookingsOrBuilderList() {
     return bookings_;
@@ -62,40 +58,34 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .tutorial.ABookTruck bookings = 1;</code>
    */
-  @java.lang.Override
   public int getBookingsCount() {
     return bookings_.size();
   }
   /**
    * <code>repeated .tutorial.ABookTruck bookings = 1;</code>
    */
-  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck getBookings(int index) {
     return bookings_.get(index);
   }
   /**
    * <code>repeated .tutorial.ABookTruck bookings = 1;</code>
    */
-  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruckOrBuilder getBookingsOrBuilder(
       int index) {
     return bookings_.get(index);
   }
 
   public static final int DELIVERS_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
   private java.util.List<edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliver> delivers_;
   /**
    * <code>repeated .tutorial.AStartDeliver delivers = 2;</code>
    */
-  @java.lang.Override
   public java.util.List<edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliver> getDeliversList() {
     return delivers_;
   }
   /**
    * <code>repeated .tutorial.AStartDeliver delivers = 2;</code>
    */
-  @java.lang.Override
   public java.util.List<? extends edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliverOrBuilder> 
       getDeliversOrBuilderList() {
     return delivers_;
@@ -103,41 +93,34 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .tutorial.AStartDeliver delivers = 2;</code>
    */
-  @java.lang.Override
   public int getDeliversCount() {
     return delivers_.size();
   }
   /**
    * <code>repeated .tutorial.AStartDeliver delivers = 2;</code>
    */
-  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliver getDelivers(int index) {
     return delivers_.get(index);
   }
   /**
    * <code>repeated .tutorial.AStartDeliver delivers = 2;</code>
    */
-  @java.lang.Override
   public edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliverOrBuilder getDeliversOrBuilder(
       int index) {
     return delivers_.get(index);
   }
 
   public static final int ACKS_FIELD_NUMBER = 3;
-  private long acks_ = 0L;
+  private long acks_;
   /**
    * <code>optional int64 acks = 3;</code>
-   * @return Whether the acks field is set.
    */
-  @java.lang.Override
   public boolean hasAcks() {
-    return ((bitField0_ & 0x00000001) != 0);
+    return ((bitField0_ & 0x00000001) == 0x00000001);
   }
   /**
    * <code>optional int64 acks = 3;</code>
-   * @return The acks.
    */
-  @java.lang.Override
   public long getAcks() {
     return acks_;
   }
@@ -254,33 +237,38 @@ private static final long serialVersionUID = 0L;
 
     // Construct using edu.duke.ece568.minUPS.protocol.UPStoAmazon.AUCommunication.newBuilder()
     private Builder() {
-
+      maybeForceBuilderInitialization();
     }
 
     private Builder(
         com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
-
+      maybeForceBuilderInitialization();
+    }
+    private void maybeForceBuilderInitialization() {
+      if (com.google.protobuf.GeneratedMessageV3
+              .alwaysUseFieldBuilders) {
+        getBookingsFieldBuilder();
+        getDeliversFieldBuilder();
+      }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bitField0_ = 0;
       if (bookingsBuilder_ == null) {
         bookings_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
       } else {
-        bookings_ = null;
         bookingsBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000001);
       if (deliversBuilder_ == null) {
         delivers_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
       } else {
-        delivers_ = null;
         deliversBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000002);
       acks_ = 0L;
+      bitField0_ = (bitField0_ & ~0x00000004);
       return this;
     }
 
@@ -307,15 +295,10 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public edu.duke.ece568.minUPS.protocol.UPStoAmazon.AUCommunication buildPartial() {
       edu.duke.ece568.minUPS.protocol.UPStoAmazon.AUCommunication result = new edu.duke.ece568.minUPS.protocol.UPStoAmazon.AUCommunication(this);
-      buildPartialRepeatedFields(result);
-      if (bitField0_ != 0) { buildPartial0(result); }
-      onBuilt();
-      return result;
-    }
-
-    private void buildPartialRepeatedFields(edu.duke.ece568.minUPS.protocol.UPStoAmazon.AUCommunication result) {
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       if (bookingsBuilder_ == null) {
-        if (((bitField0_ & 0x00000001) != 0)) {
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
           bookings_ = java.util.Collections.unmodifiableList(bookings_);
           bitField0_ = (bitField0_ & ~0x00000001);
         }
@@ -324,7 +307,7 @@ private static final long serialVersionUID = 0L;
         result.bookings_ = bookingsBuilder_.build();
       }
       if (deliversBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) != 0)) {
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
           delivers_ = java.util.Collections.unmodifiableList(delivers_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
@@ -332,24 +315,53 @@ private static final long serialVersionUID = 0L;
       } else {
         result.delivers_ = deliversBuilder_.build();
       }
-    }
-
-    private void buildPartial0(edu.duke.ece568.minUPS.protocol.UPStoAmazon.AUCommunication result) {
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.acks_ = acks_;
+      if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
         to_bitField0_ |= 0x00000001;
       }
-      result.bitField0_ |= to_bitField0_;
+      result.acks_ = acks_;
+      result.bitField0_ = to_bitField0_;
+      onBuilt();
+      return result;
     }
 
+    @java.lang.Override
+    public Builder clone() {
+      return (Builder) super.clone();
+    }
+    @java.lang.Override
+    public Builder setField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.setField(field, value);
+    }
+    @java.lang.Override
+    public Builder clearField(
+        com.google.protobuf.Descriptors.FieldDescriptor field) {
+      return (Builder) super.clearField(field);
+    }
+    @java.lang.Override
+    public Builder clearOneof(
+        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+      return (Builder) super.clearOneof(oneof);
+    }
+    @java.lang.Override
+    public Builder setRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        int index, java.lang.Object value) {
+      return (Builder) super.setRepeatedField(field, index, value);
+    }
+    @java.lang.Override
+    public Builder addRepeatedField(
+        com.google.protobuf.Descriptors.FieldDescriptor field,
+        java.lang.Object value) {
+      return (Builder) super.addRepeatedField(field, value);
+    }
     private int bitField0_;
 
     private java.util.List<edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck> bookings_ =
       java.util.Collections.emptyList();
     private void ensureBookingsIsMutable() {
-      if (!((bitField0_ & 0x00000001) != 0)) {
+      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
         bookings_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck>(bookings_);
         bitField0_ |= 0x00000001;
        }
@@ -578,7 +590,7 @@ private static final long serialVersionUID = 0L;
         bookingsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck, edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruck.Builder, edu.duke.ece568.minUPS.protocol.UPStoAmazon.ABookTruckOrBuilder>(
                 bookings_,
-                ((bitField0_ & 0x00000001) != 0),
+                ((bitField0_ & 0x00000001) == 0x00000001),
                 getParentForChildren(),
                 isClean());
         bookings_ = null;
@@ -589,7 +601,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliver> delivers_ =
       java.util.Collections.emptyList();
     private void ensureDeliversIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
+      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
         delivers_ = new java.util.ArrayList<edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliver>(delivers_);
         bitField0_ |= 0x00000002;
        }
@@ -818,7 +830,7 @@ private static final long serialVersionUID = 0L;
         deliversBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliver, edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliver.Builder, edu.duke.ece568.minUPS.protocol.UPStoAmazon.AStartDeliverOrBuilder>(
                 delivers_,
-                ((bitField0_ & 0x00000002) != 0),
+                ((bitField0_ & 0x00000002) == 0x00000002),
                 getParentForChildren(),
                 isClean());
         delivers_ = null;
@@ -829,35 +841,27 @@ private static final long serialVersionUID = 0L;
     private long acks_ ;
     /**
      * <code>optional int64 acks = 3;</code>
-     * @return Whether the acks field is set.
      */
-    @java.lang.Override
     public boolean hasAcks() {
-      return ((bitField0_ & 0x00000004) != 0);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional int64 acks = 3;</code>
-     * @return The acks.
      */
-    @java.lang.Override
     public long getAcks() {
       return acks_;
     }
     /**
      * <code>optional int64 acks = 3;</code>
-     * @param value The acks to set.
-     * @return This builder for chaining.
      */
     public Builder setAcks(long value) {
-
-      acks_ = value;
       bitField0_ |= 0x00000004;
+      acks_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>optional int64 acks = 3;</code>
-     * @return This builder for chaining.
      */
     public Builder clearAcks() {
       bitField0_ = (bitField0_ & ~0x00000004);
@@ -903,11 +907,10 @@ private static final long serialVersionUID = 0L;
         builder.mergeFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
-      } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
-            .setUnfinishedMessage(builder.buildPartial());
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(
+                builder.buildPartial());
       }
       return builder.buildPartial();
     }
