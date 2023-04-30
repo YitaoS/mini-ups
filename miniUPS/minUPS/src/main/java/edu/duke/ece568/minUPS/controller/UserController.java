@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.persistence.PersistenceException;
@@ -155,15 +156,39 @@ public class UserController {
         return "changedest";
     }
 
+//    @PostMapping("/changedest/{id}")
+//    public String changeDestination(@PathVariable("id") Long packageID,
+//                                    @RequestParam("destinationX") Integer destinationX,
+//                                    @RequestParam("destinationY") Integer destinationY,
+//                                    RedirectAttributes redirectAttributes) {
+//        Package aPackage = userService.findPackageById(packageID);
+//
+//        if (aPackage != null && !Package.Status.DELIVERED.getText().equals(aPackage.getStatus()) && !Package.Status.DELIVERING.getText().equals(aPackage.getStatus())) {
+//            packageService.updateDestination(packageID, destinationX, destinationY);
+//            redirectAttributes.addFlashAttribute("message", "Destination updated successfully!");
+//        } else {
+//            redirectAttributes.addFlashAttribute("errorMessage", "Sorry, the package is out for delivery, you cannot change its destination now!");
+//        }
+//        return "redirect:/userPackages";
+//    }
     @PostMapping("/changedest/{id}")
-    public String changeDestination(@PathVariable("id") Long packageID,
-                                    @RequestParam("destinationX") Integer destinationX,
-                                    @RequestParam("destinationY") Integer destinationY,
-                                    RedirectAttributes redirectAttributes) {
-        packageService.updateDestination(packageID, destinationX, destinationY);
-        redirectAttributes.addFlashAttribute("message", "Destination updated successfully!");
-        return "redirect:/userPackages";
-    }
+    public ModelAndView changeDestination(@PathVariable("id") Long packageID,
+                                          @RequestParam("destinationX") Integer destinationX,
+                                          @RequestParam("destinationY") Integer destinationY) {
+        Package foundPackage = userService.findPackageById(packageID);
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (foundPackage != null && (foundPackage.getStatus().equals(Package.Status.DELIVERED.getText()) || foundPackage.getStatus().equals(Package.Status.DELIVERING.getText()))) {
+            modelAndView.addObject("errorMessage", "Sorry, the package is out for delivery, you cannot change its destination now!");
+            modelAndView.setViewName("changedest");
+        } else {
+            packageService.updateDestination(packageID, destinationX, destinationY);
+            modelAndView.setViewName("redirect:/userPackages");
+        }
+
+        return modelAndView;
+}
+
 
     @GetMapping("/userProfile")
     public String showUserProfile(Model model, Principal principal) {
